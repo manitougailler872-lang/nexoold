@@ -49,7 +49,7 @@ final class DashboardController extends AbstractController
         $filteredData = $customer->getTransactions()->toArray();
         usort(
             $filteredData,
-            fn($a, $b) => $b->getDate() <=> $a->getDate()
+            fn($a, $b) => $b->getTransDate() <=> $a->getTransDate()
         );
         $transactions = [];
         foreach($filteredData as $transaction){
