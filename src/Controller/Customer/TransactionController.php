@@ -34,13 +34,16 @@ final class TransactionController extends AbstractController
         if(empty($principalAccount)){
             return $this->redirectToRoute('app_logout');
         }
-        
         $range = (int) $request->query->get('range', 30);
         $range = \in_array($range, [7, 30, 90, 365], true) ? $range : 30;
         $customer = $connectedUser->getCustomer();
-
-         $transactions = [];
-        foreach($customer->getTransactions() as $transaction){
+        $filteredData = $customer->getTransactions()->toArray();
+        usort(
+            $filteredData,
+            fn($a, $b) => $b->getDate() <=> $a->getDate()
+        );
+        $transactions = [];
+        foreach($filteredData as $transaction){
                 $transactions[] =[
                     'date' => $transaction->getTransDate(),
                     'devise' => $transaction->getDevise()->getSymbol(),

@@ -93,7 +93,7 @@ final class TestController extends AbstractController
         //     $manager->flush();
         // }
         $fiveTransTypes = [
-            'TXN_006' => 'VIREMENT|200000.00|CREDIT',
+            'TXN_006' => 'VIREMENT|200000.00|DEBIT',
         ];
         //Principal Account
         $principalAccount = $manager->getRepository(Account::class)->findOneBy([
@@ -120,7 +120,7 @@ final class TestController extends AbstractController
             $trans->setTransType($findTransType);
             $trans->setCategory($categoryExpense);
             $trans->setCustomer($customer);
-            $trans->setOperation(OperationTypeEnum::CREDIT);
+            $trans->setOperation(OperationTypeEnum::DEBIT);
             $trans->setTransDate(new \DateTime('now'));
             $trans->setReference(Common::generateReference('TR-'));
             $trans->setStatus(TransactionStatusEnum::VALIDATED);
@@ -132,7 +132,7 @@ final class TestController extends AbstractController
             $manager->flush();
         }
        
-        $principalAccount->setAmount('375050.00');
+        //$principalAccount->setAmount('375050.00');
         $manager->persist($principalAccount);
         $manager->flush();
 

@@ -46,9 +46,13 @@ final class DashboardController extends AbstractController
         $range = (int) $request->query->get('range', 30);
         $range = \in_array($range, [7, 30, 90, 365], true) ? $range : 30;
         $customer = $connectedUser->getCustomer();
-
+        $filteredData = $customer->getTransactions()->toArray();
+        usort(
+            $filteredData,
+            fn($a, $b) => $b->getDate() <=> $a->getDate()
+        );
         $transactions = [];
-        foreach($customer->getTransactions() as $transaction){
+        foreach($filteredData as $transaction){
                 $transactions[] =[
                     'date' => $transaction->getTransDate(),
                     'devise' => $transaction->getDevise()->getSymbol(),
