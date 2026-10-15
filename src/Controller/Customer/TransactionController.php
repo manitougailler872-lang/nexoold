@@ -52,7 +52,7 @@ final class TransactionController extends AbstractController
                     'label' => $transaction->getTransType()->getLabel(),
                     'bgColor' => $transaction->getTransType()->getBgIconColor(),
                     'textColor' => $transaction->getTransType()->getTextIconColor(),
-                    'category' => $transaction->getCategory()->getLabel(),
+                    'category' => $transaction->getCategory()?->getLabel(),
                     'iconSvg' => $transaction->getTransType()->getIconSvg(),
                     'operation' => $transaction->getOperation()->getLabel(),
                     'amount' => $transaction->getAmount(),

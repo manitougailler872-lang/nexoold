@@ -68,9 +68,12 @@
                                 </div>
                             </div>
                     </td>
-                      <td class="py-3.5 pr-3 text-right tnum font-semibold whitespace-nowrap text-credit-fg">
+                      <td class="py-3.5 pr-3 text-right tnum font-semibold whitespace-nowrap 
+                       {% if transaction['operation'] == 'DEBIT' %}  text-debit-fg {% else %}  text-credit-fg{% endif %}
+                      
+                    ">
                         <div class=" font-semibold"> 
-                             {% if transaction['operation'] == 'DEBIT' %}- {% else %}+ {% endif %}
+                             {% if transaction['operation'] == 'DEBIT' %}-{% else %}+{% endif %}
                              {{ transaction['amount']|number_format(2, ',', ' ') }} {{ transaction['devise']}}
                         </div>
                           <div class="text-[11.5px] text-muted">
