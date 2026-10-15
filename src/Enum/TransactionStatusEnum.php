@@ -12,8 +12,8 @@ enum TransactionStatusEnum: string
      public function label() : string {
         return match($this){
             self::CANCELED => 'Annulé',
-            self::PENDING => 'En attente',
-            self::VALIDATED => 'Validé'
+            self::PENDING => 'PENDING',
+            self::VALIDATED => 'VALIDATED'
         };
      }
 
