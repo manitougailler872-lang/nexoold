@@ -21,11 +21,11 @@ enum OperationTypeEnum: string
         };
     }
 
-    public function getLabel3(): OperationTypeEnum
+    public function getLabel3(): string
     {
         return match ($this) {
-            self::DEBIT => OperationTypeEnum::DEBIT,
-            self::CREDIT => OperationTypeEnum::CREDIT
+            self::DEBIT => 'DEBIT',
+            self::CREDIT => 'CREDIT'
         };
     }
 
