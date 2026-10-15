@@ -1,0 +1,121 @@
+{% extends 'layout/dashboard.html.twig' %}
+
+{% block title %}Validation du virement — NexoTrade{% endblock %}
+
+{% block content %}
+
+<div class="max-w-[560px] mx-auto">
+
+    {# ---------- Retour ---------- #}
+    <a href="{{ path('app_transfers') }}"
+       class="inline-flex items-center gap-2 text-sm font-semibold text-ink-2
+              hover:text-nexo-700 transition-colors mb-5">
+        {{ include('partials/_icon.html.twig', {name: 'chevron-left', class: 'w-4 h-4'}, with_context = false) }}
+        Modifier le virement
+    </a>
+
+    <div class="card p-6 sm:p-8">
+
+        {# ---------- En-tête ---------- #}
+        <div class="text-center">
+            <span class="inline-flex w-14 h-14 rounded-full bg-nexo-50 text-nexo-700
+                         items-center justify-center mx-auto">
+                {{ include('partials/_icon.html.twig', {name: 'shield', class: 'w-7 h-7'}, with_context = false) }}
+            </span>
+
+            <h1 class="text-xl font-extrabold mt-4">Validation du virement</h1>
+
+            <p class="text-sm text-ink-3 mt-2 leading-relaxed">
+                Un code à {{ codeLength }} chiffres vient d'être envoyé au
+                <strong class="text-ink-2 tnum">{{ maskedPhone }}</strong>.
+                Saisissez-le pour exécuter votre virement.
+            </p>
+        </div>
+
+        {# ---------- Récapitulatif ---------- #}
+        <dl class="mt-6 rounded-xl bg-canvas border border-line p-5">
+            {% for row in [
+                {label: 'Bénéficiaire', value: transfer.beneficiaryName},
+                {label: 'IBAN',         value: transfer.beneficiaryIban, mono: true},
+                {label: 'Montant',      value: transfer.amount|format_currency(transfer.currency, locale: 'fr_FR'), mono: true, accent: true},
+                {label: 'Depuis',       value: transfer.debitAccountLabel},
+                {label: 'Exécution',    value: transfer.executionLabel}
+            ] %}
+                <div class="flex items-baseline justify-between gap-4 py-2 border-b border-line last:border-b-0">
+                    <dt class="text-[13px] text-ink-3 shrink-0">{{ row.label }}</dt>
+                    <dd class="text-[13px] font-bold text-right break-all
+                               {{ row.mono ?? false ? 'tnum' : '' }}
+                               {{ row.accent ?? false ? 'text-nexo-700 text-base' : '' }}">
+                        {{ row.value }}
+                    </dd>
+                </div>
+            {% endfor %}
+        </dl>
+
+        {# ---------- Saisie du code ---------- #}
+        <form method="post" action="{{ path('app_transfer_verify_submit') }}" class="mt-6">
+            <input type="hidden" name="_token" value="{{ csrf_token('transfer-verify') }}">
+            <input type="hidden" name="code" value="" data-otp-value>
+
+            <fieldset data-otp>
+                <legend class="field-label text-center w-full mb-3">Code de validation</legend>
+
+                {#
+                    Six champs d'un caractère plutôt qu'un seul champ de six.
+
+                    `autocomplete="one-time-code"` sur le premier permet à iOS et
+                    Android de proposer le code reçu par SMS ; `inputmode` fait
+                    apparaître le pavé numérique.
+                #}
+                <div class="flex items-center justify-center gap-2 sm:gap-3">
+                    {% for i in 1..codeLength %}
+                        <input type="text" data-otp-digit
+                               inputmode="numeric" maxlength="1"
+                               autocomplete="{{ loop.first ? 'one-time-code' : 'off' }}"
+                               aria-label="Chiffre {{ i }} sur {{ codeLength }}"
+                               class="otp-input">
+                    {% endfor %}
+                </div>
+            </fieldset>
+
+            {% for label, messages in app.flashes(['error']) %}
+                {% for message in messages %}
+                    <p class="field-error text-center mt-4">{{ message }}</p>
+                {% endfor %}
+            {% endfor %}
+
+            <p class="field-error text-center mt-4" data-otp-expired hidden>
+                Le code a expiré. Demandez-en un nouveau pour continuer.
+            </p>
+
+            <p class="text-center text-sm text-ink-3 mt-5">
+                Ce code expire dans
+                <span class="tnum font-bold text-ink" data-otp-countdown="{{ codeTtl }}">—</span>
+            </p>
+
+            <button type="submit" data-otp-submit disabled
+                    class="btn-primary w-full justify-center h-12 mt-5
+                           disabled:opacity-50 disabled:pointer-events-none">
+                Valider et exécuter le virement
+                {{ include('partials/_icon.html.twig', {name: 'arrow-right', class: 'w-[18px] h-[18px]'}, with_context = false) }}
+            </button>
+        </form>
+
+        {# ---------- Renvoi ---------- #}
+        <form method="post" action="{{ path('app_transfer_verify_resend') }}" class="mt-4 text-center">
+            <input type="hidden" name="_token" value="{{ csrf_token('transfer-resend') }}">
+            <button type="submit" data-otp-resend class="btn-link mx-auto text-sm">
+                {{ include('partials/_icon.html.twig', {name: 'refresh', class: 'w-4 h-4'}, with_context = false) }}
+                Renvoyer le code
+            </button>
+        </form>
+
+        <p class="text-xs text-ink-3 text-center mt-6 leading-relaxed">
+            Aucun conseiller NexoTrade ne vous demandera jamais ce code.
+            Si vous n'êtes pas à l'origine de ce virement, contactez immédiatement
+            le service client.
+        </p>
+    </div>
+</div>
+
+{% endblock %}

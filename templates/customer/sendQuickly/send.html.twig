@@ -1,0 +1,270 @@
+{% extends 'shared/_base.html.twig' %}
+
+{% block title %}Virements — NexoTrade{% endblock %}
+
+{% set statusStyles = {
+    'executed':  {label: 'Exécuté',    class: 'badge-credit'},
+    'pending':   {label: 'En attente', class: 'badge bg-amber-100 text-amber-700'},
+    'scheduled': {label: 'Programmé',  class: 'badge bg-blue-100 text-blue-700'},
+    'rejected':  {label: 'Rejeté',     class: 'badge-debit'}
+} %}
+
+{% set typeStyles = {
+    'immediate': {label: 'Immédiat',  icon: 'bolt'},
+    'scheduled': {label: 'Différé',   icon: 'calendar'},
+    'recurring': {label: 'Récurrent', icon: 'refresh'}
+} %}
+
+{# Filtres actifs, reconduits dans l'export et la pagination. #}
+{% set filters = {q: query, status: statusFilter, type: typeFilter, period: periodFilter} %}
+{% set hasFilters = query or statusFilter or typeFilter or periodFilter %}
+
+{% block content %}
+
+    {# ---------- En-tête ---------- #}
+    <div class="flex flex-wrap items-start justify-between gap-4 mb-6">
+        <div>
+            <h1 class="text-[22px] font-extrabold tracking-tight">Virements</h1>
+            <p class="text-sm text-ink-3 mt-1">
+                Retrouvez l'ensemble de vos virements émis et leur statut.
+            </p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3 w-full sm:w-auto">
+            <a href="   " class="btn-ghost flex-1 sm:flex-none justify-center">
+                {{ include('shared/_icon.html.twig', {name: 'export', class: 'w-[18px] h-[18px] rotate-180'}, with_context = false) }}
+                Exporter
+            </a>
+            <a href="{{ path('app_transfer_new') }}" class="btn-primary flex-1 sm:flex-none justify-center">
+                {{ include('shared/_icon.html.twig', {name: 'add', class: 'w-[18px] h-[18px]'}, with_context = false) }}
+                Nouveau virement
+            </a>
+        </div>
+    </div>
+
+    {# ---------- Synthèse ----------
+       Les totaux portent sur le résultat FILTRÉ : afficher un cumul global
+       sous une liste filtrée induirait en erreur. #}
+    <div class="card grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-line mb-5">
+        {% for tile in [
+            {label: 'Total exécuté', value: executedAmount|format_currency('EUR', locale: 'fr_FR'),
+             caption: executedCount ~ ' virement' ~ (executedCount > 1 ? 's' : ''), icon: 'exchange', solid: true},
+            {label: 'En attente', value: pendingCount ~ '',
+             caption: 'À valider ou en cours', icon: 'clock', solid: false},
+            {label: 'Programmés', value: scheduledCount ~ '',
+             caption: 'Échéances à venir', icon: 'calendar', solid: false}
+        ] %}
+            <div class="stat-tile">
+                <span class="stat-icon {{ tile.solid ? 'stat-icon--solid' : 'stat-icon--tint' }}">
+                    {{ include('shared/_icon.html.twig', {name: tile.icon, class: 'w-5 h-5'}, with_context = false) }}
+                </span>
+                <div class="min-w-0">
+                    <p class="card-title">{{ tile.label }}</p>
+                    <p class="tnum text-[22px] font-extrabold mt-1.5 leading-none break-words">{{ tile.value }}</p>
+                    <p class="text-xs text-ink-3 mt-1.5">{{ tile.caption }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    {# ---------- Filtres ----------
+       Un seul formulaire en GET : chaque critère reste dans l'URL, la vue est
+       partageable et le retour navigateur la restitue à l'identique. #}
+    <form action="" method="get" class="card p-4 sm:p-5 mb-5">
+        <div class="grid gap-3 md:grid-cols-2 xl:grid-cols-[1fr_190px_190px_190px]">
+            <div class="relative">
+                <label for="transfer-search" class="sr-only">Rechercher un virement</label>
+                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-ink-4 pointer-events-none">
+                    {{ include('shared/_icon.html.twig', {name: 'search', class: 'w-[18px] h-[18px]'}, with_context = false) }}
+                </span>
+                <input id="transfer-search" type="search" name="q" value="{{ query }}"
+                       placeholder="Bénéficiaire, IBAN, référence, motif..."
+                       class="w-full h-11 pl-11 pr-4 rounded-lg border border-line bg-white text-sm
+                              placeholder:text-ink-4 focus:outline-none focus:border-nexo-600 transition-colors">
+            </div>
+
+            {% for select in [
+                {name: 'status', label: 'Statut',  current: statusFilter,
+                 options: {'': 'Tous les statuts', 'executed': 'Exécutés', 'pending': 'En attente', 'scheduled': 'Programmés', 'rejected': 'Rejetés'}},
+                {name: 'type', label: 'Type', current: typeFilter,
+                 options: {'': 'Tous les types', 'immediate': 'Immédiats', 'scheduled': 'Différés', 'recurring': 'Récurrents'}},
+                {name: 'period', label: 'Période', current: periodFilter,
+                 options: {'': 'Toute la période', '7': '7 derniers jours', '30': '30 derniers jours', '90': '90 derniers jours', '365': '12 derniers mois'}}
+            ] %}
+                <div>
+                    <label for="filter-{{ select.name }}" class="sr-only">{{ select.label }}</label>
+                    <select id="filter-{{ select.name }}" name="{{ select.name }}"
+                            class="w-full h-11 pl-4 pr-9 rounded-lg border border-line bg-white text-sm font-medium
+                                   focus:outline-none focus:border-nexo-600 transition-colors">
+                        {% for value, label in select.options %}
+                            <option value="{{ value }}" {{ select.current == value ? 'selected' : '' }}>{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="flex flex-wrap items-center gap-4 mt-3">
+            <button type="submit" class="btn-primary h-10 text-sm">Filtrer</button>
+            {% if hasFilters %}
+                <a href="{{ path('app_customer_send_money') }}" class="btn-link text-sm">Réinitialiser</a>
+            {% endif %}
+        </div>
+    </form>
+
+    {# ---------- Liste ---------- #}
+    {% if transfers|length > 0 %}
+        <div class="card">
+
+            {# Sous xl : liste empilée. Huit colonnes ne tiennent pas dans les
+               648 px disponibles à 1024, la navigation latérale en consommant 272. #}
+            <ul class="xl:hidden divide-y divide-line">
+                {% for transfer in transfers %}
+                    {% set status = statusStyles[transfer.status] %}
+                    {% set type = typeStyles[transfer.type] %}
+
+                    <li>
+                        <button type="button" data-modal-open="transfer-detail-modal"
+                                {{ include('components/customer/sendQuickly/_detail_attributes.html.twig', {transfer: transfer, status: status, type: type}, with_context = false) }}
+                                class="w-full text-left p-5 flex items-start gap-3.5 hover:bg-canvas transition-colors">
+                            <span class="direction-out">
+                                {{ include('shared/_icon.html.twig', {name: 'arrow-up', class: 'w-[18px] h-[18px]'}, with_context = false) }}
+                            </span>
+
+                            <span class="min-w-0 flex-1">
+                                <span class="block text-sm font-bold break-words">{{ transfer.beneficiaryName }}</span>
+                                <span class="block text-xs text-ink-3 mt-0.5 break-words">{{ transfer.reason }}</span>
+                                <span class="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-ink-3 mt-2">
+                                    <span class="tnum">{{ transfer.date|date('d/m/Y') }}</span>
+                                    <span aria-hidden="true">•</span>
+                                    <span>{{ type.label }}</span>
+                                    <span aria-hidden="true">•</span>
+                                    <span class="tnum">{{ transfer.reference }}</span>
+                                </span>
+                            </span>
+
+                            <span class="text-right shrink-0">
+                                <span class="block tnum text-sm font-bold whitespace-nowrap
+                                             {{ transfer.status == 'rejected' ? 'text-ink-3 line-through' : '' }}">
+                                    − {{ transfer.amount|format_currency(transfer.currency, locale: 'fr_FR') }}
+                                </span>
+                                <span class="{{ status.class }} mt-2">{{ status.label }}</span>
+                            </span>
+                        </button>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            {# À partir de xl : tableau complet. #}
+            <table class="hidden xl:table w-full text-sm">
+                <caption class="sr-only">Virements émis</caption>
+                <thead>
+                    <tr class="table-head text-left border-b border-line">
+                        <th scope="col" class="px-5 py-4 font-bold">Date</th>
+                        <th scope="col" class="px-5 py-4 font-bold">Bénéficiaire</th>
+                        <th scope="col" class="px-5 py-4 font-bold">Motif</th>
+                        <th scope="col" class="px-5 py-4 font-bold">Type</th>
+                        <th scope="col" class="px-5 py-4 font-bold text-right">Montant</th>
+                        <th scope="col" class="px-5 py-4 font-bold text-center">Statut</th>
+                        <th scope="col" class="px-5 py-4 font-bold">Référence</th>
+                        <th scope="col" class="px-5 py-4"><span class="sr-only">Détail</span></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for transfer in transfers %}
+                        {% set status = statusStyles[transfer.status] %}
+                        {% set type = typeStyles[transfer.type] %}
+
+                        <tr class="table-row">
+                            <td class="px-5 py-4 tnum text-ink-2 whitespace-nowrap">{{ transfer.date|date('d/m/Y') }}</td>
+
+                            <td class="px-5 py-4">
+                                <div class="flex items-center gap-3">
+                                    <span class="w-9 h-9 rounded-full bg-nexo-900 text-white text-2xs font-bold
+                                                 flex items-center justify-center shrink-0">
+                                        {{ transfer.beneficiaryInitials }}
+                                    </span>
+                                    <div class="min-w-0">
+                                        <p class="font-bold">{{ transfer.beneficiaryName }}</p>
+                                        <p class="text-xs text-ink-3 tnum mt-0.5">•••• {{ transfer.beneficiaryIban|slice(-4) }}</p>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td class="px-5 py-4 text-ink-2">{{ transfer.reason }}</td>
+
+                            <td class="px-5 py-4">
+                                <span class="inline-flex items-center gap-1.5 text-ink-2 whitespace-nowrap">
+                                    {{ include('shared/_icon.html.twig', {name: type.icon, class: 'w-4 h-4 text-ink-3'}, with_context = false) }}
+                                    {{ type.label }}
+                                </span>
+                            </td>
+
+                            <td class="px-5 py-4 text-right tnum font-bold whitespace-nowrap
+                                       {{ transfer.status == 'rejected' ? 'text-ink-3 line-through' : '' }}">
+                                − {{ transfer.amount|format_currency(transfer.currency, locale: 'fr_FR') }}
+                            </td>
+
+                            <td class="px-5 py-4 text-center">
+                                <span class="{{ status.class }}">{{ status.label }}</span>
+                            </td>
+
+                            <td class="px-5 py-4 tnum text-ink-3 whitespace-nowrap">{{ transfer.reference }}</td>
+
+                            <td class="px-5 py-4 text-right">
+                                <button type="button" data-modal-open="transfer-detail-modal"
+                                        {{ include('components/customer/sendQuickly/_detail_attributes.html.twig', {transfer: transfer, status: status, type: type}, with_context = false) }}
+                                        class="w-8 h-8 rounded-lg inline-flex items-center justify-center text-ink-4
+                                               hover:bg-canvas hover:text-ink-2 transition-colors">
+                                    <span class="sr-only">Détail du virement {{ transfer.reference }}</span>
+                                    {{ include('shared/_icon.html.twig', {name: 'chevron-right', class: 'w-4 h-4'}, with_context = false) }}
+                                </button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="flex flex-wrap items-center justify-between gap-4 px-5 py-4 border-t border-line">
+                <p class="text-sm text-ink-3">
+                    Affichage {{ rangeStart }} à {{ rangeEnd }} sur {{ totalItems }} virements
+                </p>
+
+                {{ include('shared/_pagination.html.twig', {
+                    currentPage: currentPage,
+                    totalPages: totalPages,
+                    route: 'app_home',
+                    routeParams: filters
+                }, with_context = false) }}
+            </div>
+        </div>
+    {% else %}
+        <div class="card p-12 text-center">
+            <span class="inline-flex w-14 h-14 rounded-full bg-nexo-50 text-nexo-700 items-center justify-center mx-auto">
+                {{ include('shared/_icon.html.twig', {name: 'exchange', class: 'w-6 h-6'}, with_context = false) }}
+            </span>
+
+            <p class="text-base font-extrabold mt-4">Aucun virement</p>
+            <p class="text-sm text-ink-3 mt-2 max-w-sm mx-auto">
+                {% if hasFilters %}
+                    Aucun virement ne correspond à ces critères. Essayez d'élargir la recherche.
+                {% else %}
+                    Vos virements apparaîtront ici dès le premier ordre émis.
+                {% endif %}
+            </p>
+
+            {% if hasFilters %}
+                <a href="{{ path('app_transfers') }}" class="btn-ghost mt-6">Réinitialiser les filtres</a>
+            {% else %}
+                <a href="{{ path('app_transfer_new') }}" class="btn-primary mt-6">
+                    {{ include('shared/_icon.html.twig', {name: 'add', class: 'w-[18px] h-[18px]'}, with_context = false) }}
+                    Nouveau virement
+                </a>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    {% include 'components/customer/sendQuickly/_modal_detail.html.twig' %}
+
+{% endblock %}

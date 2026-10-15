@@ -1,0 +1,59 @@
+# yaml-language-server: $schema=../vendor/symfony/dependency-injection/Loader/schema/services.schema.json
+
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+# See also https://symfony.com/doc/current/service_container/import.html
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+parameters:
+    ip.api_key: '%env(IPWHO_API_KEY)%'
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        bind:
+            string $ipApiKey: '%ip.api_key%'
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/'
+
+    App\Twig\NexoTradeExtension:
+        tags:
+            - { name: twig.extension }
+
+    # -----------------------------------------------------------------
+    # Fournisseurs SMS
+    # -----------------------------------------------------------------
+    # L'ordre des priorités définit l'ordre de bascule dans ChainSmsSender.
+    # Twilio est essayé en premier, SMSFactor prend le relais en cas d'échec.
+    App\Service\Sms\SmsFactor\SmsFactorSmsService:
+        arguments:
+            $apiToken: ''
+            $defaultSender: ''
+            
+    # SmsSenderInterface est injecté partout : c'est la chaîne qui répond,
+    # jamais un fournisseur isolé.
+    # -----------------------------------------------------------------
+    # Limiteurs de débit
+    # -----------------------------------------------------------------
+    App\Controller\Auth\AuthController:
+        arguments:
+            $loginLimiter: '@limiter.login'
+            $otpLimiter: '@limiter.otp'
+            $otpResendLimiter: '@limiter.otp_resend'
+
+    App\Service\Exchange\Provider\CachedRateProvider:
+        arguments:
+            $provider: '@App\Service\Exchange\Provider\ExchangeRateProvider'
+            $cache: '@cache.app'
+
+    App\Service\Exchange\Provider\IExchangeRateProvide:
+        alias: App\Service\Exchange\Provider\CachedRateProvider
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones

@@ -1,0 +1,135 @@
+{% extends 'shared/_base.html.twig' %}
+{% block content %}
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+            <div>
+            <h2 class="text-2xl font-semibold mb-1">Actifs crypto</h2>
+            <p class="text-muted text-[14.5px]">Suivez et gérez votre portefeuille de cryptomonnaies</p>
+            </div>
+            <div class="flex gap-3">
+            <button id="openWithdraw" class="px-5 py-3 rounded-lg border border-line text-[14.5px] font-semibold hover:border-brand transition">Retirer</button>
+            <button id="openDeposit" class="inline-flex items-center gap-2 px-5 py-3 rounded-lg  bg-[#1B5E3A] text-white text-[14.5px] font-semibold hover:brightness-110 transition">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+                Déposer
+            </button>
+            </div>
+        </div>
+
+      <!-- SYNTHESE -->
+      <div class="grid xl:grid-cols-2 gap-6 mb-6">
+         {% include 'components/customer/dashboard/_market.html.twig' %}
+        <div class="bg-surface border border-line rounded-xl p-6">
+          <div class="text-[13px] text-muted mb-4">Répartition du portefeuille</div>
+          <div class="relative w-32 h-32 mx-auto mb-4" id="allocDonut">
+            <svg viewBox="0 0 120 120" class="w-full h-full -rotate-90" id="allocSvg"></svg>
+            <div class="absolute inset-0 flex flex-col items-center justify-center"><span class="text-[13px] text-muted">5 actifs</span></div>
+          </div>
+          <div class="space-y-1.5 text-[12.5px]" id="allocLegend"></div>
+        </div>
+      </div>
+
+      <!-- HOLDINGS TABLE -->
+      <div class="bg-surface border border-line rounded-xl overflow-hidden">
+        <div class="px-6 py-5 border-b border-line flex items-center justify-between flex-wrap gap-3">
+          <h3 class="font-medium">Vos actifs</h3>
+          <span class="text-[12.5px] text-muted" id="holdingsUpdate">Chargement…</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse min-w-[820px]">
+            <thead>
+              <tr>
+                <th class="text-left text-[11.5px] uppercase tracking-wider text-muted px-6 py-3.5 border-b border-line font-medium">Actif</th>
+                <th class="text-right text-[11.5px] uppercase tracking-wider text-muted px-6 py-3.5 border-b border-line font-medium">Quantité</th>
+                <th class="text-right text-[11.5px] uppercase tracking-wider text-muted px-6 py-3.5 border-b border-line font-medium">Prix actuel</th>
+                <th class="text-right text-[11.5px] uppercase tracking-wider text-muted px-6 py-3.5 border-b border-line font-medium">Valeur</th>
+                <th class="text-right text-[11.5px] uppercase tracking-wider text-muted px-6 py-3.5 border-b border-line font-medium">24h</th>
+                <th class="text-right text-[11.5px] uppercase tracking-wider text-muted px-6 py-3.5 border-b border-line font-medium">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="holdingsBody"><tr><td colspan="6" class="text-center text-muted text-sm py-10">Chargement des données de marché…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+      {% include 'shared/modal/_withdraw.html.twig' %}
+      {% include 'shared/modal/_add.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+
+<script>
+  const HOLDINGS = [
+    { id: 'bitcoin', qty: 0.842, color: '#F7931A' },
+    { id: 'ethereum', qty: 3.210, color: '#627EEA' },
+    { id: 'solana', qty: 42.5, color: '#14F195' },
+    { id: 'tether', qty: 1200, color: '#26A17B' },
+    { id: 'binancecoin', qty: 8.3, color: '#F0B90B' },
+  ];
+
+  function fmtUSD(n){ return '$' + n.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}); }
+
+  async function loadHoldings(){
+    try{
+      const ids = HOLDINGS.map(h => h.id).join(',');
+      const res = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${ids}&order=market_cap_desc&price_change_percentage=24h`);
+      const data = await res.json();
+
+      let total = 0;
+      const rows = HOLDINGS.map(h => {
+        const coin = data.find(c => c.id === h.id);
+        if(!coin) return null;
+        const value = coin.current_price * h.qty;
+        total += value;
+        return { ...h, coin, value };
+      }).filter(Boolean);
+
+      document.getElementById('portfolioTotal').textContent = fmtUSD(total);
+
+      document.getElementById('holdingsBody').innerHTML = rows.map(r => {
+        const up = r.coin.price_change_percentage_24h >= 0;
+        return `<tr class="hover:bg-surface2 transition">
+          <td class="px-6 py-4"><div class="flex items-center gap-3"><img src="${r.coin.image}" class="w-7 h-7 rounded-full" alt="${r.coin.name}"><div><div class="font-medium">${r.coin.name}</div><div class="text-muted text-xs uppercase">${r.coin.symbol}</div></div></div></td>
+          <td class="px-6 py-4 text-right font-mono">${r.qty.toLocaleString('fr-FR')}</td>
+          <td class="px-6 py-4 text-right font-mono">${fmtUSD(r.coin.current_price)}</td>
+          <td class="px-6 py-4 text-right font-mono font-semibold">${fmtUSD(r.value)}</td>
+          <td class="px-6 py-4 text-right font-mono ${up?'text-up':'text-down'}">${up?'+':''}${(r.coin.price_change_percentage_24h||0).toFixed(2)}%</td>
+          <td class="px-6 py-4 text-right"><button class="text-brand2 text-[13px] hover:underline">Échanger</button></td>
+        </tr>`;
+      }).join('');
+
+      // Donut allocation
+      const svg = document.getElementById('allocSvg');
+      let offset = 0;
+      const circumference = 2 * Math.PI * 50;
+      svg.innerHTML = rows.map(r => {
+        const pct = r.value / total;
+        const dash = pct * circumference;
+        const circle = `<circle cx="60" cy="60" r="50" fill="none" stroke="${r.color}" stroke-width="16" stroke-dasharray="${dash} ${circumference - dash}" stroke-dashoffset="${-offset}"/>`;
+        offset += dash;
+        return circle;
+      }).join('');
+
+      document.getElementById('allocLegend').innerHTML = rows.map(r => {
+        const pct = ((r.value / total) * 100).toFixed(1);
+        return `<div class="flex items-center justify-between"><span class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full" style="background:${r.color}"></span>${r.coin.symbol.toUpperCase()}</span><span class="font-mono text-muted">${pct}%</span></div>`;
+      }).join('');
+
+      document.getElementById('holdingsUpdate').textContent = 'Actualisé à ' + new Date().toLocaleTimeString('fr-FR');
+    }catch(e){
+      document.getElementById('holdingsBody').innerHTML = '<tr><td colspan="6" class="text-center text-muted text-sm py-10">Données indisponibles.</td></tr>';
+    }
+  }
+  loadHoldings();
+  setInterval(loadHoldings, 60000);
+
+  document.getElementById('openDeposit').addEventListener('click', () => { document.getElementById('depositOverlay').classList.remove('hidden'); document.body.style.overflow='hidden'; });
+  document.getElementById('openWithdraw').addEventListener('click', () => { document.getElementById('withdrawOverlay').classList.remove('hidden'); document.body.style.overflow='hidden'; });
+  document.querySelectorAll('.close-modal').forEach(btn => {
+    btn.addEventListener('click', () => { document.getElementById(btn.dataset.modal).classList.add('hidden'); document.body.style.overflow=''; });
+  });
+  [document.getElementById('depositOverlay'), document.getElementById('withdrawOverlay')].forEach(ov => {
+    ov.addEventListener('click', e => { if(e.target === ov){ ov.classList.add('hidden'); document.body.style.overflow=''; } });
+  });
+</script>
+
+
+<script>
+{% endblock %}

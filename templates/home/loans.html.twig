@@ -1,0 +1,539 @@
+
+{% extends 'shared/public/base.html.twig' %}
+{% block body %}
+
+    <section class="pt-16 pb-16 fade-up" style="animation-delay: 0.23s">
+        <div class="max-w-[1180px] mx-auto px-7 grid lg:grid-cols-2 gap-14 items-center">
+            <div>
+                <div
+                    class="inline-flex items-center gap-2 text-[13.5px] uppercase tracking-wider text-brand2 border border-line px-3.5 py-1.5 rounded-full mb-6"
+                >
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand2"></span>Financement
+                </div>
+                <h1 class="text-3xl sm:text-[44px] font-medium leading-tight tracking-tight mb-4">
+                    Financez vos projets en toute confiance
+                </h1>
+                <p class="text-lg sm:text-[18px] text-muted mb-7">
+                    Obtenez le financement dont vous avez besoin grâce à des prêts personnels flexibles, des taux
+                    compétitifs et une demande simple, en quelques minutes.
+                </p>
+                <div class="flex flex-wrap gap-3.5 mb-9">
+                    <a
+                        href="#simulateur"
+                        class="inline-flex items-center justify-center px-6 py-3 rounded text-base font-semibold bg-green text-white from-brand to-brand2 text-bg hover:brightness-110 transition"
+                        >Simuler mon prêt</a
+                    >
+                    <a
+                        href="{{path('app_get_loans')}}"
+                        class="inline-flex items-center justify-center px-6 py-3 rounded text-base font-semibold border border-line hover:border-brand transition"
+                        >Faire ma demande</a
+                    >
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="flex items-center gap-2.5 text-[14.5px] text-muted">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" class="text-brand2 flex-shrink-0">
+                            <path
+                                d="M5 13L9 17L19 7"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            /></svg
+                        >Demande rapide
+                    </div>
+                    <div class="flex items-center gap-2.5 text-[14.5px] text-muted">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" class="text-brand2 flex-shrink-0">
+                            <path
+                                d="M5 13L9 17L19 7"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            /></svg
+                        >Taux compétitifs
+                    </div>
+                    <div class="flex items-center gap-2.5 text-[14.5px] text-muted">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" class="text-brand2 flex-shrink-0">
+                            <path
+                                d="M5 13L9 17L19 7"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            /></svg
+                        >Processus sécurisé
+                    </div>
+                    <div class="flex items-center gap-2.5 text-[14.5px] text-muted">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" class="text-brand2 flex-shrink-0">
+                            <path
+                                d="M5 13L9 17L19 7"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            /></svg
+                        >Remboursement flexible
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="relative rounded-2xl overflow-hidden"
+            >
+            <img
+                src="{{asset('assets/images/loan/demande-de-pret.jpg')}}"
+                alt="Photo"
+                class="w-full h-full object-cover"
+            />
+            </div>
+        </div>
+    </section>
+
+    <section class="pb-[88px] fade-up" style="animation-delay: 0.23s">
+        <div class="max-w-[1180px] mx-auto px-7">
+            <div class="max-w-[600px] mx-auto text-center mb-12">
+                <div class="text-[13.5px] uppercase tracking-wider text-brand mb-3.5">Nos formules</div>
+                <h2 class="text-3xl font-medium mb-3">Tous les types de prêts</h2>
+                <p class="text-muted text-[16.5px]">
+                    Quatre façons de financer vos projets, avec ou sans garantie sur vos actifs numériques.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-px bg-line border border-line rounded-xl overflow-hidden mb-5">
+                <div class="bg-surface  border border-line p-8 flex flex-col">
+                    <div class="flex justify-between items-start mb-2.5">
+                        <div
+                            class="w-[42px] h-[42px] rounded-lg bg-surface2 border border-line flex items-center justify-center text-brand2"
+                        >
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <rect x="2" y="6" width="20" height="13" rx="2" stroke="currentColor" stroke-width="1.8" />
+                                <path d="M2 10H22" stroke="currentColor" stroke-width="1.8" />
+                            </svg>
+                        </div>
+                        <span class=" text-sm text-brand2 bg-green text-white border border-line px-2.5 py-1 rounded-full"
+                            >500 € — 35 000 €</span
+                        >
+                    </div>
+                    <h3 class="text-[20.5px] font-medium mb-1.5">Prêt personnel</h3>
+                    <p class="text-muted text-base mb-4">
+                        Un montant libre, sans justificatif d'usage, remboursable par mensualités fixes sur une durée que
+                        vous choisissez.
+                    </p>
+                    <div class="flex gap-5 text-[13.5px] text-muted border-t border-line pt-4 mt-auto">
+                        <div><b class="block  text-base text-ink">Dès 5,9 % TAEG*</b>Taux fixe</div>
+                        <div><b class="block  text-base text-ink">6 à 84 mois</b>Durée</div>
+                    </div>
+                </div>
+                <div class="bg-surface  border border-line p-8 flex flex-col">
+                    <div class="flex justify-between items-start mb-2.5">
+                        <div
+                            class="w-[42px] h-[42px] rounded-lg bg-surface2 border border-line flex items-center justify-center text-brand2"
+                        >
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M12 2V22M2 12H22"
+                                    stroke="currentColor"
+                                    stroke-width="1.8"
+                                    stroke-linecap="round"
+                                />
+                                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8" />
+                            </svg>
+                        </div>
+                        <span class=" text-sm text-brand2 bg-green text-white border border-line px-2.5 py-1 rounded-full"
+                            >Jusqu'à 6 000 €</span
+                        >
+                    </div>
+                    <h3 class="text-[20.5px] font-medium mb-1.5">Crédit renouvelable</h3>
+                    <p class="text-muted text-base mb-4">
+                        Une réserve d'argent disponible en permanence, que vous utilisez selon vos besoins et qui se
+                        reconstitue au fil des remboursements.
+                    </p>
+                    <div class="flex gap-5 text-[13.5px] text-muted border-t border-line pt-4 mt-auto">
+                        <div><b class="block  text-base text-ink">Dès 8,9 % TAEG*</b>Taux variable</div>
+                        <div><b class="block  text-base text-ink">Sans échéance fixe</b>Durée</div>
+                    </div>
+                </div>
+                <div class="bg-surface  border border-line p-8 flex flex-col">
+                    <div class="flex justify-between items-start mb-2.5">
+                        <div
+                            class="w-[42px] h-[42px] rounded-lg bg-surface2 border border-line flex items-center justify-center text-brand2"
+                        >
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M12 2L20 6V12C20 17 16.5 20.5 12 22C7.5 20.5 4 17 4 12V6L12 2Z"
+                                    stroke="currentColor"
+                                    stroke-width="1.8"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </div>
+                        <span class=" text-sm text-brand2 bg-green text-white border border-line px-2.5 py-1 rounded-full"
+                            >1 000 € — 50 000 €</span
+                        >
+                    </div>
+                    <h3 class="text-[20.5px] font-medium mb-1.5">Prêt garanti par cryptoactifs</h3>
+                    <p class="text-muted text-base mb-4">
+                        Empruntez en devise classique en mettant une partie de votre portefeuille crypto en garantie, sans
+                        avoir à vendre vos positions.
+                    </p>
+                    <div class="flex gap-5 text-[13.5px] text-muted border-t border-line pt-4 mt-auto">
+                        <div><b class="block  text-base text-ink">Dès 4,5 % TAEG*</b>Taux préférentiel</div>
+                        <div><b class="block  text-base text-ink">3 à 36 mois</b>Durée</div>
+                    </div>
+                </div>
+                <div class="bg-surface p-8 flex flex-col">
+                    <div class="flex justify-between items-start mb-2.5">
+                        <div
+                            class="w-[42px] h-[42px] rounded-lg bg-surface2 border border-line flex items-center justify-center text-brand2"
+                        >
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M3 9L12 3L21 9V19C21 20.1 20.1 21 19 21H5C3.9 21 3 20.1 3 19V9Z"
+                                    stroke="currentColor"
+                                    stroke-width="1.8"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </div>
+                        <span class=" text-sm text-brand2 bg-green text-white border border-line px-2.5 py-1 rounded-full"
+                            >100 € — 10 000 €</span
+                        >
+                    </div>
+                    <h3 class="text-[20.5px] font-medium mb-1.5">Financement d'achat</h3>
+                    <p class="text-muted text-base mb-4">
+                        Payez un achat identifié en plusieurs fois directement au moment du paiement, chez nos partenaires
+                        ou depuis votre espace client.
+                    </p>
+                    <div class="flex gap-5 text-[13.5px] text-muted border-t border-line pt-4 mt-auto">
+                        <div><b class="block  text-base text-ink">Dès 0 % TAEG*</b>Selon partenaire</div>
+                        <div><b class="block  text-base text-ink">3 à 24 mois</b>Durée</div>
+                    </div>
+                </div>
+            </div>
+            <p class="text-sm text-muted">
+                *Taux annuel effectif global indicatif, sous réserve d'étude et d'acceptation de votre dossier. Un crédit
+                vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager.
+            </p>
+        </div>
+    </section>
+
+    <section class="pb-[88px] fade-up" style="animation-delay: 0.23s" id="simulateur">
+        <div class="max-w-[1180px] mx-auto px-7">
+            <div class="max-w-[600px] mx-auto text-center mb-12">
+                <div class="text-[13.5px] uppercase tracking-wider text-brand mb-3.5">Simulateur</div>
+                <h2 class="text-3xl font-medium mb-3">Estimez votre mensualité</h2>
+                <p class="text-muted text-[16.5px]">
+                    Ajustez le montant et la durée pour voir immédiatement une estimation, sans engagement.
+                </p>
+            </div>
+
+            <div
+                class="bg-surface border border-line rounded-2xl p-7 sm:p-11 grid lg:grid-cols-[1fr_0.85fr] gap-10 lg:gap-14 items-center mb-8"
+            >
+                <div>
+                    <div class="mb-7">
+                        <div class="text-base mb-3">Type de prêt</div>
+                        <div class="flex gap-2 flex-wrap" id="typeSelect">
+                            <div
+                                class="border border-line rounded-full px-4 py-2 text-[14px] cursor-pointer bg-gradient-to-b from-brand to-brand2 text-bg"
+                                data-rate="5.9"
+                            >
+                                Prêt personnel
+                            </div>
+                            <div
+                                class="border border-line rounded-full px-4 py-2 text-[14px] cursor-pointer bg-surface"
+                                data-rate="8.9"
+                            >
+                                Crédit renouvelable
+                            </div>
+                            <div
+                                class="border border-line rounded-full px-4 py-2 text-[14px] cursor-pointer bg-surface"
+                                data-rate="4.5"
+                            >
+                                Garanti par crypto
+                            </div>
+                            <div
+                                class="border border-line rounded-full px-4 py-2 text-[14px] cursor-pointer bg-surface"
+                                data-rate="2.9"
+                            >
+                                Financement achat
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-7">
+                        <div class="flex justify-between text-base mb-3">
+                            <span>Montant emprunté</span
+                            ><span id="amountLabel" class=" text-brand2 font-semibold">10 000 €</span>
+                        </div>
+                        <input
+                            type="range"
+                            id="amount"
+                            min="500"
+                            max="35000"
+                            step="100"
+                            value="10000"
+                            class="w-full h-1.5 rounded-full bg-green border border-line"
+                        />
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-base mb-3">
+                            <span>Durée de remboursement</span
+                            ><span id="durationLabel" class=" text-brand2 font-semibold">36 mois</span>
+                        </div>
+                        <input
+                            type="range"
+                            id="duration"
+                            min="6"
+                            max="84"
+                            step="1"
+                            value="36"
+                            class="w-full h-1.5 rounded-full bg-surface2 border border-line"
+                        />
+                    </div>
+                </div>
+
+                <div class="bg-green text-white border border-line rounded-xl p-8 text-center">
+                    <div class="text-[13.5px] uppercase tracking-wider  mb-2.5">Mensualité estimée</div>
+                    <div class=" text-[42px] font-semibold text-brand2 mb-1">
+                        <span id="monthly">305</span> €<span class="text-lg"> /mois</span>
+                    </div>
+                    <div id="rateLabel" class="text-[14px]  mb-6">Taux fixe indicatif : 5,9 % TAEG</div>
+                    <div class="flex justify-between text-[14.5px] py-3 border-t border-line">
+                        <span>Montant total dû</span><b id="totalDue" class="">10 980 €</b>
+                    </div>
+                    <div class="flex justify-between text-[14.5px] py-3 border-t border-line">
+                        <span>Coût total du crédit</span><b id="totalCost" class="">980 €</b>
+                    </div>
+                    <div class="text-[12.5px] mt-4 leading-relaxed">
+                        Simulation indicative et non contractuelle, calculée sur la base d'un taux fixe. Le taux définitif
+                        dépend de l'étude de votre dossier.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tableau d'amortissement -->
+            <div class="bg-surface border border-line rounded-2xl overflow-hidden">
+                <div class="flex flex-wrap items-center justify-between gap-3 px-6 sm:px-8 py-5 border-b border-line">
+                    <h3 class="text-lg font-medium">Tableau d'amortissement</h3>
+                    <div class="flex gap-6 text-[13.5px] text-muted">
+                        <span>Intérêts totaux : <b class=" text-brand2" id="amortTotalInterest">—</b></span>
+                        <span>Coût total du crédit : <b class=" text-brand2" id="amortTotalCost">—</b></span>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full border-collapse min-w-[620px]">
+                        <thead>
+                            <tr>
+                                <th
+                                    class="text-left text-[12.5px] uppercase tracking-wider text-muted px-5 py-3.5 border-b border-line font-medium"
+                                >
+                                    Échéance
+                                </th>
+                                <th
+                                    class="text-right text-[12.5px] uppercase tracking-wider text-muted px-5 py-3.5 border-b border-line font-medium"
+                                >
+                                    Mensualité
+                                </th>
+                                <th
+                                    class="text-right text-[12.5px] uppercase tracking-wider text-muted px-5 py-3.5 border-b border-line font-medium"
+                                >
+                                    Capital
+                                </th>
+                                <th
+                                    class="text-right text-[12.5px] uppercase tracking-wider text-muted px-5 py-3.5 border-b border-line font-medium"
+                                >
+                                    Intérêts
+                                </th>
+                                <th
+                                    class="text-right text-[12.5px] uppercase tracking-wider text-muted px-5 py-3.5 border-b border-line font-medium"
+                                >
+                                    Capital restant dû
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="amortBody"></tbody>
+                    </table>
+                </div>
+                <div class="px-6 sm:px-8 py-5 border-t border-line text-center">
+                    <button type="button" id="amortToggle" class="text-brand2 text-[14.5px] font-medium hover:underline">
+                        Voir le tableau complet
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pb-[88px] fade-up" style="animation-delay: 0.23s">
+        <div class="max-w-[1180px]  mx-auto px-7">
+            <div
+                class="relative overflow-hidden rounded-2xl border border-line p-10 sm:p-14 flex flex-col sm:flex-row justify-between items-center gap-8 bg-green"
+            >
+                <div
+                    class="absolute -bottom-36 -left-24 w-[380px] h-[380px] rounded-full bg-[radial-gradient(circle,rgba(10,10,10,0.12),transparent_70%)]"
+                ></div>
+                <div class="relative z-10 text-center sm:text-left">
+                    <h2 class="text-white text-2xl font-medium mb-2">Prêt à financer votre projet ?</h2>
+                    <p class="text-white/60 max-w-[420px]">
+                        Le montant, la durée et la mensualité de votre simulation sont automatiquement repris dans votre
+                        demande.
+                    </p>
+                </div>
+                <a
+                    href="#demande"
+                    class="relative z-10 inline-flex items-center justify-center px-8 py-4 rounded text-base font-semibold bg-white text-bg hover:brightness-110 transition whitespace-nowrap"
+                    >Faire ma demande pour ce prêt</a
+                >
+            </div>
+        </div>
+    </section>
+
+    <section class="pb-[88px] fade-up" style="animation-delay: 0.23s">
+        <div class="max-w-[1180px] mx-auto px-7">
+            <div class="max-w-[600px] mx-auto text-center mb-12">
+                <div class="text-[13.5px] uppercase tracking-wider text-brand mb-3.5">Comment ça marche</div>
+                <h2 class="text-3xl font-medium">Votre demande en 4 étapes</h2>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-line border border-line rounded-xl overflow-hidden">
+                <div class="bg-surface p-7">
+                    <div class=" text-brand text-base mb-4">01</div>
+                    <h3 class="text-[18.5px] font-medium mb-2">Simulez</h3>
+                    <p class="text-muted text-[14.5px]">
+                        Ajustez montant et durée pour connaître votre mensualité estimée.
+                    </p>
+                </div>
+                <div class="bg-surface p-7">
+                    <div class=" text-brand text-base mb-4">02</div>
+                    <h3 class="text-[18.5px] font-medium mb-2">Complétez</h3>
+                    <p class="text-muted text-[14.5px]">
+                        Renseignez vos informations et, si besoin, la garantie crypto associée.
+                    </p>
+                </div>
+                <div class="bg-surface p-7">
+                    <div class=" text-brand text-base mb-4">03</div>
+                    <h3 class="text-[18.5px] font-medium mb-2">Réponse rapide</h3>
+                    <p class="text-muted text-[14.5px]">
+                        Une réponse de principe sous quelques minutes après étude de votre dossier.
+                    </p>
+                </div>
+                <div class="bg-surface p-7">
+                    <div class=" text-brand text-base mb-4">04</div>
+                    <h3 class="text-[18.5px] font-medium mb-2">Recevez les fonds</h3>
+                    <p class="text-muted text-[14.5px]">
+                        Une fois votre dossier validé, les fonds sont versés sur le compte de votre choix.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pb-[88px] fade-up" style="animation-delay: 0.23s">
+        <div class="max-w-[1180px] mx-auto px-7">
+            <div class="max-w-[600px] mx-auto text-center mb-12">
+                <div class="text-[13.5px] uppercase tracking-wider text-brand mb-3.5">Guide du crédit</div>
+                <h2 class="text-3xl font-medium">Comprendre avant d'emprunter</h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-5">
+                <div class="bg-surface border border-line rounded-xl p-[26px]">
+                    <div class="text-[12.5px] uppercase tracking-wide text-brand2 mb-3">Bases</div>
+                    <h3 class="text-[18px] font-medium mb-2">Qu'est-ce que le TAEG ?</h3>
+                    <p class="text-muted text-[14.5px] mb-3.5">
+                        Le taux annuel effectif global inclut tous les frais liés au crédit. C'est le chiffre à comparer
+                        entre deux offres.
+                    </p>
+                    <a class="text-brand2 text-[14px] hover:underline" href="#">Lire l'article →</a>
+                </div>
+                <div class="bg-surface border border-line rounded-xl p-[26px]">
+                    <div class="text-[12.5px] uppercase tracking-wide text-brand2 mb-3">Budget</div>
+                    <h3 class="text-[18px] font-medium mb-2">Calculer sa capacité de remboursement</h3>
+                    <p class="text-muted text-[14.5px] mb-3.5">
+                        Une règle simple pour estimer la mensualité que votre budget peut absorber sans risque de
+                        surendettement.
+                    </p>
+                    <a class="text-brand2 text-[14px] hover:underline" href="#">Lire l'article →</a>
+                </div>
+                <div class="bg-surface border border-line rounded-xl p-[26px]">
+                    <div class="text-[12.5px] uppercase tracking-wide text-brand2 mb-3">Crypto</div>
+                    <h3 class="text-[18px] font-medium mb-2">Emprunter sans vendre ses cryptos</h3>
+                    <p class="text-muted text-[14.5px] mb-3.5">
+                        Le fonctionnement du prêt garanti par cryptoactifs et les risques liés à la variation de la valeur
+                        de la garantie.
+                    </p>
+                    <a class="text-brand2 text-[14px] hover:underline" href="#">Lire l'article →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pb-[88px] fade-up" style="animation-delay: 0.23s">
+        <div class="max-w-[1180px] mx-auto px-7">
+            <div class="max-w-[600px] mx-auto text-center mb-12">
+                <div class="text-[13.5px] uppercase tracking-wider text-brand mb-3.5">Questions fréquentes</div>
+                <h2 class="text-3xl font-medium">Avant de faire votre demande</h2>
+            </div>
+            <div class="max-w-[760px] mx-auto space-y-3">
+                <details class="bg-surface border border-line rounded-lg overflow-hidden group">
+                    <summary
+                        class="px-6 py-5 cursor-pointer text-[16px] font-medium list-none flex justify-between items-center"
+                    >
+                        Quelles sont les conditions pour emprunter ?<span
+                            class="text-brand text-xl group-open:rotate-45 transition"
+                            >+</span
+                        >
+                    </summary>
+                    <p class="px-6 pb-5 text-muted text-base">
+                        Être majeur, résider dans un pays où ScotiaTrade opère et disposer de revenus réguliers suffisants
+                        pour couvrir les mensualités estimées.
+                    </p>
+                </details>
+                <details class="bg-surface border border-line rounded-lg overflow-hidden group">
+                    <summary
+                        class="px-6 py-5 cursor-pointer text-[16px] font-medium list-none flex justify-between items-center"
+                    >
+                        Comment fonctionne le prêt garanti par cryptoactifs ?<span
+                            class="text-brand text-xl group-open:rotate-45 transition"
+                            >+</span
+                        >
+                    </summary>
+                    <p class="px-6 pb-5 text-muted text-base">
+                        Une partie de votre portefeuille crypto est bloquée en garantie le temps du prêt. Si sa valeur chute
+                        fortement, un appel de marge peut vous être demandé.
+                    </p>
+                </details>
+                <details class="bg-surface border border-line rounded-lg overflow-hidden group">
+                    <summary
+                        class="px-6 py-5 cursor-pointer text-[16px] font-medium list-none flex justify-between items-center"
+                    >
+                        Puis-je rembourser par anticipation ?<span
+                            class="text-brand text-xl group-open:rotate-45 transition"
+                            >+</span
+                        >
+                    </summary>
+                    <p class="px-6 pb-5 text-muted text-base">
+                        Oui, un remboursement anticipé partiel ou total est possible à tout moment, selon les conditions
+                        précisées dans votre contrat.
+                    </p>
+                </details>
+                <details class="bg-surface border border-line rounded-lg overflow-hidden group">
+                    <summary
+                        class="px-6 py-5 cursor-pointer text-[16px] font-medium list-none flex justify-between items-center"
+                    >
+                        Combien de temps pour recevoir une réponse ?<span
+                            class="text-brand text-xl group-open:rotate-45 transition"
+                            >+</span
+                        >
+                    </summary>
+                    <p class="px-6 pb-5 text-muted text-base">
+                        Une réponse de principe est généralement communiquée en quelques minutes ; le déblocage des fonds
+                        intervient après validation complète du dossier.
+                    </p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <p class="max-w-[1180px] mx-auto mb-8 px-7 text-sm text-muted text-center max-w-[640px] leading-relaxed">
+        Un crédit vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager. Les
+        simulations présentées sur cette page sont indicatives et non contractuelles.
+    </p>
+
+{% endblock %}

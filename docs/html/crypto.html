@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NexoTrade — Crypto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          bg: '#F7FAF8', surface: '#FFFFFF', surface2: '#EEF4F0', line: '#DCE6E0',
+          brand: '#1F8F5C', brand2: '#0F6B44', ink: '#10201A', muted: '#5C6F66',
+          up: '#5FBE8A', down: '#C4433A', amber: '#F0A93F'
+        },
+        fontFamily: { sans: ['Space Grotesk','sans-serif'], mono: ['JetBrains Mono','monospace'] }
+      }
+    }
+  }
+</script>
+<style>
+  ::-webkit-scrollbar{width:8px;height:8px;} ::-webkit-scrollbar-thumb{background:#DCE6E0;border-radius:100px;}
+  .nav-item.active{background:#EEF4F0;color:#0F6B44;border-color:#1F8F5C;}
+  
+</style>
+</head>
+<body class="bg-bg text-ink font-sans antialiased">
+
+<div class="flex min-h-screen">
+  <aside id="sidebarNav" class="fixed inset-y-0 left-0 z-50 w-64 -translate-x-full lg:translate-x-0 lg:static lg:z-auto flex flex-col border-r border-line bg-surface flex-shrink-0 transition-transform duration-300 ease-out">
+    <div class="px-6 py-5 border-b border-line flex items-center justify-between">
+      <a href="nexotrade.html" class="flex items-center gap-2 text-lg font-semibold">
+        <svg class="w-6 h-6" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13 1L24 7V19L13 25L2 19V7L13 1Z" stroke="#1F8F5C" stroke-width="1.4"/><path d="M13 8L18 11V17L13 20L8 17V11L13 8Z" fill="#1F8F5C"/></svg>
+        NexoTrade
+      </a>
+      <button id="closeSidebarBtn" class="lg:hidden w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface2 text-muted">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6L18 18M6 18L18 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <nav class="flex-1 px-4 py-5 space-y-1 overflow-y-auto">
+      <div class="text-[11px] uppercase tracking-wider text-muted px-3 mb-2">Navigation</div>
+      <a href="nexotrade-dash-dashboard.html" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-[14.5px] font-medium border border-transparent hover:bg-surface2 transition">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7V12L15 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        Tableau de bord
+      </a>
+      <a href="nexotrade-dash-transactions.html" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-[14.5px] font-medium border border-transparent hover:bg-surface2 transition">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 7H17M17 7L13 3M17 7L13 11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 17H7M7 17L11 21M7 17L11 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Transactions
+      </a>
+      <a href="nexotrade-dash-balance.html" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-[14.5px] font-medium border border-transparent hover:bg-surface2 transition">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="13" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M3 10H21" stroke="currentColor" stroke-width="1.8"/></svg>
+        Solde
+      </a>
+      <a href="nexotrade-dash-accounts.html" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-[14.5px] font-medium border border-transparent hover:bg-surface2 transition">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 21V19C4 16.8 5.8 15 8 15H16C18.2 15 20 16.8 20 19V21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="1.8"/></svg>
+        Comptes
+      </a>
+      <a href="nexotrade-dash-cards.html" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-[14.5px] font-medium border border-transparent hover:bg-surface2 transition">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="6" width="20" height="13" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M2 10H22" stroke="currentColor" stroke-width="1.8"/></svg>
+        Cartes
+      </a>
+      <a href="nexotrade-dash-loan-requests.html" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-[14.5px] font-medium border border-transparent hover:bg-surface2 transition">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 12H15M9 16H13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M8 4H14L19 9V19C19 20.1 18.1 21 17 21H8C6.9 21 6 20.1 6 19V6C6 4.9 6.9 4 8 4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        Demandes de prêt
+      </a>
+      <a href="nexotrade-dash-external-accounts.html" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-[14.5px] font-medium border border-transparent hover:bg-surface2 transition">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 21V19C4 16.8 5.8 15 8 15H16C18.2 15 20 16.8 20 19V21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M2 8L4 6M22 8L20 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        Comptes externes
+      </a>
+      <a href="nexotrade-dash-crypto-assets.html" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-[14.5px] font-medium border border-transparent hover:bg-surface2 transition">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M9.5 8.5H13.2C14.2 8.5 15 9.3 15 10.3C15 11.3 14.2 12 13.2 12H9.5M9.5 12H13.5C14.5 12 15.3 12.8 15.3 13.8C15.3 14.8 14.5 15.5 13.5 15.5H9.5M11 8.5V6.5M11 17.5V15.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        Actifs crypto
+      </a>
+    </nav>
+    <div class="px-4 py-5 border-t border-line space-y-1">
+      <div class="text-[11px] uppercase tracking-wider text-muted px-3 mb-2">Plus</div>
+      <a href="nexotrade-dash-payment-methods.html" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-[14.5px] font-medium border border-transparent hover:bg-surface2 transition">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="13" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M3 10H21" stroke="currentColor" stroke-width="1.8"/><path d="M7 15H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        Moyens de paiement
+      </a>
+      <a href="nexotrade-dash-payments.html" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-[14.5px] font-medium border border-transparent hover:bg-surface2 transition">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="1.8"/><circle cx="15" cy="15" r="6" stroke="currentColor" stroke-width="1.8"/></svg>
+        Paiements
+      </a>
+      <a href="nexotrade-dash-products.html" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-[14.5px] font-medium border border-transparent hover:bg-surface2 transition">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 17L9 11L13 15L21 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 7H21V13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Prêts & produits
+      </a>
+      <a href="nexotrade-dash-crypto.html" class="nav-item active flex items-center gap-3 px-3 py-2.5 rounded-lg text-[14.5px] font-medium border border-transparent hover:bg-surface2 transition">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M9.5 8.5H13.2C14.2 8.5 15 9.3 15 10.3C15 11.3 14.2 12 13.2 12H9.5M9.5 12H13.5C14.5 12 15.3 12.8 15.3 13.8C15.3 14.8 14.5 15.5 13.5 15.5H9.5M11 8.5V6.5M11 17.5V15.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        Crypto
+      </a>
+    </div>
+  </aside>
+  <div id="sidebarBackdrop" class="hidden fixed inset-0 z-40 bg-black/40 lg:hidden"></div>
+  <div class="flex-1 flex flex-col min-w-0">
+    <header class="sticky top-0 z-30 bg-surface border-b border-line">
+      <div class="flex items-center justify-between px-5 lg:px-8 py-3.5">
+        <div class="flex items-center gap-3">
+          <button id="mobileSidebarBtn" class="lg:hidden w-9 h-9 flex items-center justify-center rounded-lg hover:bg-surface2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 6H21M3 12H21M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+          <h1 class="text-lg font-medium">Crypto</h1>
+        </div>
+        <div class="flex items-center gap-4">
+          <button class="w-9 h-9 flex items-center justify-center rounded-lg hover:bg-surface2 text-muted"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M21 21L16.5 16.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+          <button class="relative w-9 h-9 flex items-center justify-center rounded-lg hover:bg-surface2 text-muted">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M3 7L12 13L21 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-up"></span>
+          </button>
+          <button class="relative w-9 h-9 flex items-center justify-center rounded-lg hover:bg-surface2 text-muted">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 19H20L18 15V10C18 6.7 15.3 4 12 4C8.7 4 6 6.7 6 10V15L4 19Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9.5 21.5C10.1 22.1 10.9 22.5 12 22.5C13.1 22.5 13.9 22.1 14.5 21.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-down"></span>
+          </button>
+          <div class="flex items-center gap-2.5 pl-3 border-l border-line">
+            <div class="w-8 h-8 rounded-full bg-brand2 text-white flex items-center justify-center text-[13px] font-semibold">BA</div>
+            <span class="text-[14.5px] font-medium hidden sm:inline">Barry Armstrong</span>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="flex-1 px-5 lg:px-8 py-7">
+
+      <div class="bg-surface border border-line rounded-xl overflow-hidden">
+        <div class="flex flex-wrap items-center justify-between gap-3 px-6 py-4 border-b border-line">
+          <div class="relative flex-1 min-w-[240px] max-w-[420px]">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="absolute left-3 top-1/2 -translate-y-1/2 text-muted"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M21 21L16.5 16.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <input type="text" id="cryptoSearch" placeholder="Rechercher une cryptomonnaie..." class="w-full pl-9 pr-3 py-2.5 rounded-lg border border-line bg-surface2 text-[14px]">
+          </div>
+          <span class="px-3 py-2 rounded-lg border border-line text-[13px] font-mono flex items-center gap-1.5"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="13" rx="2" stroke="currentColor" stroke-width="1.6"/></svg>USD</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse min-w-[1020px]">
+            <thead>
+              <tr>
+                <th class="text-left text-[11.5px] uppercase tracking-wider text-muted px-6 py-3.5 border-b border-line font-medium cursor-pointer select-none sort-th" data-key="name"><span class="inline-flex items-center gap-1.5">Nom & symbole <svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="sort-icon"><path d="M8 9L4 5L0 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="translate(2,2)"/><path d="M8 3L4 7L0 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="translate(2,10)"/></svg></span></th>
+                <th class="text-right text-[11.5px] uppercase tracking-wider text-muted px-6 py-3.5 border-b border-line font-medium cursor-pointer select-none sort-th" data-key="current_price"><span class="inline-flex items-center gap-1.5">Prix USD <svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="sort-icon"><path d="M8 9L4 5L0 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="translate(2,2)"/><path d="M8 3L4 7L0 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="translate(2,10)"/></svg></span></th>
+                <th class="text-right text-[11.5px] uppercase tracking-wider text-muted px-6 py-3.5 border-b border-line font-medium cursor-pointer select-none sort-th" data-key="market_cap"><span class="inline-flex items-center gap-1.5">Cap. marché <svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="sort-icon"><path d="M8 9L4 5L0 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="translate(2,2)"/><path d="M8 3L4 7L0 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="translate(2,10)"/></svg></span></th>
+                <th class="text-right text-[11.5px] uppercase tracking-wider text-muted px-6 py-3.5 border-b border-line font-medium cursor-pointer select-none sort-th" data-key="total_volume"><span class="inline-flex items-center gap-1.5">Volume <svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="sort-icon"><path d="M8 9L4 5L0 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="translate(2,2)"/><path d="M8 3L4 7L0 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="translate(2,10)"/></svg></span></th>
+                <th class="text-right text-[11.5px] uppercase tracking-wider text-muted px-6 py-3.5 border-b border-line font-medium cursor-pointer select-none sort-th" data-key="volRatio"><span class="inline-flex items-center gap-1.5">Vol. Total <svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="sort-icon"><path d="M8 9L4 5L0 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="translate(2,2)"/><path d="M8 3L4 7L0 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="translate(2,10)"/></svg></span></th>
+                <th class="text-right text-[11.5px] uppercase tracking-wider text-muted px-6 py-3.5 border-b border-line font-medium cursor-pointer select-none sort-th" data-key="price_change_percentage_24h"><span class="inline-flex items-center gap-1.5">Var. 24h <svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="sort-icon"><path d="M8 9L4 5L0 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="translate(2,2)"/><path d="M8 3L4 7L0 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="translate(2,10)"/></svg></span></th>
+                <th class="text-right text-[11.5px] uppercase tracking-wider text-muted px-6 py-3.5 border-b border-line font-medium cursor-pointer select-none sort-th" data-key="change7d"><span class="inline-flex items-center gap-1.5">Var. 7j <svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="sort-icon"><path d="M8 9L4 5L0 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="translate(2,2)"/><path d="M8 3L4 7L0 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="translate(2,10)"/></svg></span></th>
+              </tr>
+            </thead>
+            <tbody id="cryptoTable"><tr><td colspan="7" class="text-center text-muted text-sm py-10">Chargement des données de marché…</td></tr></tbody>
+          </table>
+        </div>
+        <div class="flex items-center justify-between px-6 py-4 border-t border-line text-[13px]">
+          <span class="text-muted" id="cryptoUpdate"></span>
+          <div class="flex items-center gap-1.5" id="cryptoPagination"></div>
+        </div>
+      </div>
+
+    </main>
+    <footer class="border-t border-line px-5 lg:px-8 py-5 flex flex-wrap justify-between text-[13px] text-muted gap-2">
+      <span>&copy; 2026 NexoTrade. Tous droits réservés.</span>
+      <span>Espace client NexoTrade</span>
+    </footer>
+  </div>
+</div>
+
+
+<script>
+  let CRYPTO_DATA = [];
+  let currentPage = 1;
+  const PER_PAGE = 10;
+  let sortKey = 'market_cap';
+  let sortDir = 'desc';
+
+  function fmtUSD(n){ return n >= 1 ? '$' + n.toLocaleString('en-US') : '$' + n.toFixed(5); }
+  function fmtB(n){ return n >= 1e9 ? '$' + (n/1e9).toFixed(2) + 'B' : '$' + (n/1e6).toFixed(2) + 'M'; }
+
+  async function loadCrypto(){
+    try{
+      const res = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false&price_change_percentage=24h,7d');
+      const data = await res.json();
+      CRYPTO_DATA = data.map(c => ({
+        ...c,
+        change7d: c.price_change_percentage_7d_in_currency || 0,
+        volRatio: c.market_cap ? (c.total_volume / c.market_cap) * 100 : 0
+      }));
+      currentPage = 1;
+      renderTable();
+      document.getElementById('cryptoUpdate').textContent = 'Actualisé à ' + new Date().toLocaleTimeString('fr-FR');
+    }catch(e){
+      document.getElementById('cryptoTable').innerHTML = '<tr><td colspan="7" class="text-center text-muted text-sm py-10">Données indisponibles.</td></tr>';
+    }
+  }
+
+  function sortedData(){
+    const q = (document.getElementById('cryptoSearch').value || '').toLowerCase();
+    let list = CRYPTO_DATA.filter(c => (c.name + ' ' + c.symbol).toLowerCase().includes(q));
+    list.sort((a, b) => {
+      let va = sortKey === 'name' ? a.name.toLowerCase() : a[sortKey];
+      let vb = sortKey === 'name' ? b.name.toLowerCase() : b[sortKey];
+      if(va < vb) return sortDir === 'asc' ? -1 : 1;
+      if(va > vb) return sortDir === 'asc' ? 1 : -1;
+      return 0;
+    });
+    return list;
+  }
+
+  function renderTable(){
+    const list = sortedData();
+    const totalPages = Math.max(1, Math.ceil(list.length / PER_PAGE));
+    if(currentPage > totalPages) currentPage = totalPages;
+    const start = (currentPage - 1) * PER_PAGE;
+    const pageItems = list.slice(start, start + PER_PAGE);
+
+    document.getElementById('cryptoTable').innerHTML = pageItems.length ? pageItems.map(c => {
+      const up24 = c.price_change_percentage_24h >= 0;
+      const up7 = c.change7d >= 0;
+      return `<tr class="hover:bg-surface2 transition">
+        <td class="px-6 py-4"><div class="flex items-center gap-3"><img src="${c.image}" class="w-7 h-7 rounded-full" alt="${c.name}"><div><div class="font-medium">${c.name}</div><div class="text-muted text-xs uppercase">${c.symbol}</div></div></div></td>
+        <td class="px-6 py-4 text-right font-mono">${fmtUSD(c.current_price)}</td>
+        <td class="px-6 py-4 text-right font-mono text-muted">${fmtB(c.market_cap)}</td>
+        <td class="px-6 py-4 text-right font-mono text-muted">${fmtB(c.total_volume)}</td>
+        <td class="px-6 py-4 text-right font-mono text-muted">${c.volRatio.toFixed(2)}%</td>
+        <td class="px-6 py-4 text-right font-mono ${up24?'text-up':'text-down'}">${up24?'+':''}${(c.price_change_percentage_24h||0).toFixed(2)}%</td>
+        <td class="px-6 py-4 text-right font-mono ${up7?'text-up':'text-down'}">${up7?'+':''}${(c.change7d||0).toFixed(2)}%</td>
+      </tr>`;
+    }).join('') : '<tr><td colspan="7" class="text-center text-muted text-sm py-10">Aucune cryptomonnaie ne correspond à votre recherche.</td></tr>';
+
+    renderPagination(totalPages);
+  }
+
+  function renderPagination(totalPages){
+    const wrap = document.getElementById('cryptoPagination');
+    let html = `<button id="pagePrev" class="flex items-center gap-1 px-2 h-8 rounded-lg text-muted hover:text-ink transition ${currentPage===1?'opacity-40 pointer-events-none':''}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M15 6L9 12L15 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Préc.</button>`;
+    for(let p = 1; p <= totalPages; p++){
+      html += `<button class="page-btn w-8 h-8 rounded-lg ${p===currentPage ? 'bg-brand text-white font-medium' : 'border border-line hover:border-brand transition'}" data-page="${p}">${p}</button>`;
+    }
+    html += `<button id="pageNext" class="flex items-center gap-1 px-2 h-8 rounded-lg text-muted hover:text-ink transition ${currentPage===totalPages?'opacity-40 pointer-events-none':''}">Suiv.<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`;
+    wrap.innerHTML = html;
+
+    wrap.querySelectorAll('.page-btn').forEach(btn => {
+      btn.addEventListener('click', () => { currentPage = parseInt(btn.dataset.page); renderTable(); window.scrollTo({top:0,behavior:'smooth'}); });
+    });
+    const prevBtn = document.getElementById('pagePrev');
+    const nextBtn = document.getElementById('pageNext');
+    if(prevBtn) prevBtn.addEventListener('click', () => { if(currentPage>1){ currentPage--; renderTable(); } });
+    if(nextBtn) nextBtn.addEventListener('click', () => { currentPage++; renderTable(); });
+  }
+
+  document.querySelectorAll('.sort-th').forEach(th => {
+    th.addEventListener('click', () => {
+      const key = th.dataset.key;
+      if(sortKey === key){ sortDir = sortDir === 'asc' ? 'desc' : 'asc'; }
+      else { sortKey = key; sortDir = key === 'name' ? 'asc' : 'desc'; }
+      currentPage = 1;
+      renderTable();
+    });
+  });
+
+  document.getElementById('cryptoSearch').addEventListener('input', () => { currentPage = 1; renderTable(); });
+
+  loadCrypto();
+  setInterval(loadCrypto, 60000);
+</script>
+
+
+<script>
+  // Menu mobile (tiroir coulissant)
+  (function(){
+    const sidebar = document.getElementById('sidebarNav');
+    const backdrop = document.getElementById('sidebarBackdrop');
+    const openBtn = document.getElementById('mobileSidebarBtn');
+    const closeBtn = document.getElementById('closeSidebarBtn');
+    if(!sidebar || !backdrop) return;
+
+    function openSidebar(){
+      sidebar.classList.remove('-translate-x-full');
+      backdrop.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeSidebar(){
+      sidebar.classList.add('-translate-x-full');
+      backdrop.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+    if(openBtn) openBtn.addEventListener('click', openSidebar);
+    if(closeBtn) closeBtn.addEventListener('click', closeSidebar);
+    backdrop.addEventListener('click', closeSidebar);
+    // Ferme le menu si on clique un lien de navigation (mobile)
+    sidebar.querySelectorAll('a').forEach(a => a.addEventListener('click', closeSidebar));
+    // Ferme automatiquement si la fenêtre repasse en desktop
+    window.addEventListener('resize', () => { if(window.innerWidth >= 1024) closeSidebar(); });
+  })();
+</script>
+
+</body>
+</html>

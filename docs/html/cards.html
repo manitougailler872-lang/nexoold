@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NexoTrade — Comptes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          bg: '#FFFFFF', surface: '#FFFFFF', surface2: '#F5F5F5', line: '#E2E8E4',
+          brand: '#0A0A0A', brand2: '#171717', ink: '#10201A', muted: '#5C6F66',
+          up: '#5FBE8A', down: '#C4433A', amber: '#F0A93F'
+        },
+        fontFamily: { sans: ['Space Grotesk','sans-serif'], mono: ['JetBrains Mono','monospace'] }
+      }
+    }
+  }
+</script>
+<style>
+  ::-webkit-scrollbar{width:8px;height:8px;} ::-webkit-scrollbar-thumb{background:#E2E8E4;border-radius:100px;}
+  .nav-item.active{background:#F5F5F5;color:#171717;border-color:#0A0A0A;}
+  
+</style>
+</head>
+<body class="bg-bg text-ink font-sans antialiased">
+
+<div class="flex min-h-screen">
+  <aside id="sidebarNav" class="fixed inset-y-0 left-0 z-50 w-64 -translate-x-full lg:translate-x-0 lg:static lg:z-auto flex flex-col border-r border-line bg-surface flex-shrink-0 transition-transform duration-300 ease-out">
+    <div class="px-6 py-5 border-b border-line flex items-center justify-between">
+      <a href="nexotrade.html" class="flex items-center gap-2 text-lg font-semibold">
+        <svg class="w-6 h-6" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13 1L24 7V19L13 25L2 19V7L13 1Z" stroke="#0A0A0A" stroke-width="1.4"/><path d="M13 8L18 11V17L13 20L8 17V11L13 8Z" fill="#0A0A0A"/></svg>
+        NexoTrade
+      </a>
+      <button id="closeSidebarBtn" class="lg:hidden w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface2 text-muted">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6L18 18M6 18L18 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <nav class="flex-1 px-4 py-5 space-y-1 overflow-y-auto">
+      <div class="text-[11px] uppercase tracking-wider text-muted px-3 mb-2">Navigation</div>
+      <a href="nexotrade-dash-dashboard.html" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-[14.5px] font-medium border border-transparent hover:bg-surface2 transition">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7V12L15 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        Tableau de bord
+      </a>
+      <a href="nexotrade-dash-transactions.html" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-[14.5px] font-medium border border-transparent hover:bg-surface2 transition">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 7H17M17 7L13 3M17 7L13 11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 17H7M7 17L11 21M7 17L11 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Transactions
+      </a>
+      <a href="nexotrade-dash-balance.html" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-[14.5px] font-medium border border-transparent hover:bg-surface2 transition">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="13" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M3 10H21" stroke="currentColor" stroke-width="1.8"/></svg>
+        Solde
+      </a>
+      <a href="nexotrade-dash-accounts.html" class="nav-item active flex items-center gap-3 px-3 py-2.5 rounded-lg text-[14.5px] font-medium border border-transparent hover:bg-surface2 transition">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 21V19C4 16.8 5.8 15 8 15H16C18.2 15 20 16.8 20 19V21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="1.8"/></svg>
+        Comptes
+      </a>
+      <a href="nexotrade-dash-cards.html" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-[14.5px] font-medium border border-transparent hover:bg-surface2 transition">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="6" width="20" height="13" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M2 10H22" stroke="currentColor" stroke-width="1.8"/></svg>
+        Cartes
+      </a>
+      <a href="nexotrade-dash-loan-requests.html" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-[14.5px] font-medium border border-transparent hover:bg-surface2 transition">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 12H15M9 16H13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M8 4H14L19 9V19C19 20.1 18.1 21 17 21H8C6.9 21 6 20.1 6 19V6C6 4.9 6.9 4 8 4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        Demandes de prêt
+      </a>
+      <a href="nexotrade-dash-external-accounts.html" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-[14.5px] font-medium border border-transparent hover:bg-surface2 transition">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 21V19C4 16.8 5.8 15 8 15H16C18.2 15 20 16.8 20 19V21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M2 8L4 6M22 8L20 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        Comptes externes
+      </a>
+      <a href="nexotrade-dash-crypto-assets.html" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-[14.5px] font-medium border border-transparent hover:bg-surface2 transition">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M9.5 8.5H13.2C14.2 8.5 15 9.3 15 10.3C15 11.3 14.2 12 13.2 12H9.5M9.5 12H13.5C14.5 12 15.3 12.8 15.3 13.8C15.3 14.8 14.5 15.5 13.5 15.5H9.5M11 8.5V6.5M11 17.5V15.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        Actifs crypto
+      </a>
+    </nav>
+    <div class="px-4 py-5 border-t border-line space-y-1">
+      <div class="text-[11px] uppercase tracking-wider text-muted px-3 mb-2">Plus</div>
+      <a href="nexotrade-dash-payment-methods.html" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-[14.5px] font-medium border border-transparent hover:bg-surface2 transition">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="13" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M3 10H21" stroke="currentColor" stroke-width="1.8"/><path d="M7 15H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        Moyens de paiement
+      </a>
+      <a href="nexotrade-dash-payments.html" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-[14.5px] font-medium border border-transparent hover:bg-surface2 transition">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="1.8"/><circle cx="15" cy="15" r="6" stroke="currentColor" stroke-width="1.8"/></svg>
+        Paiements
+      </a>
+      <a href="nexotrade-dash-products.html" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-[14.5px] font-medium border border-transparent hover:bg-surface2 transition">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 17L9 11L13 15L21 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 7H21V13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Prêts & produits
+      </a>
+      <a href="nexotrade-dash-crypto.html" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-[14.5px] font-medium border border-transparent hover:bg-surface2 transition">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M9.5 8.5H13.2C14.2 8.5 15 9.3 15 10.3C15 11.3 14.2 12 13.2 12H9.5M9.5 12H13.5C14.5 12 15.3 12.8 15.3 13.8C15.3 14.8 14.5 15.5 13.5 15.5H9.5M11 8.5V6.5M11 17.5V15.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        Crypto
+      </a>
+    </div>
+  </aside>
+  <div id="sidebarBackdrop" class="hidden fixed inset-0 z-40 bg-black/40 lg:hidden"></div>
+  <div class="flex-1 flex flex-col min-w-0">
+    <header class="sticky top-0 z-30 bg-surface border-b border-line">
+      <div class="flex items-center justify-between px-5 lg:px-8 py-3.5">
+        <div class="flex items-center gap-3">
+          <button id="mobileSidebarBtn" class="lg:hidden w-9 h-9 flex items-center justify-center rounded-lg hover:bg-surface2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 6H21M3 12H21M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+          <h1 class="text-lg font-medium">Comptes</h1>
+        </div>
+        <div class="flex items-center gap-4">
+          <button class="w-9 h-9 flex items-center justify-center rounded-lg hover:bg-surface2 text-muted"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M21 21L16.5 16.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+          <button class="relative w-9 h-9 flex items-center justify-center rounded-lg hover:bg-surface2 text-muted">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M3 7L12 13L21 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-up"></span>
+          </button>
+          <button class="relative w-9 h-9 flex items-center justify-center rounded-lg hover:bg-surface2 text-muted">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 19H20L18 15V10C18 6.7 15.3 4 12 4C8.7 4 6 6.7 6 10V15L4 19Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9.5 21.5C10.1 22.1 10.9 22.5 12 22.5C13.1 22.5 13.9 22.1 14.5 21.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-down"></span>
+          </button>
+          <div class="flex items-center gap-2.5 pl-3 border-l border-line">
+            <div class="w-8 h-8 rounded-full bg-brand2 text-white flex items-center justify-center text-[13px] font-semibold">BA</div>
+            <span class="text-[14.5px] font-medium hidden sm:inline">Barry Armstrong</span>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="flex-1 px-5 lg:px-8 py-7">
+
+      <div class="mb-8">
+        <h3 class="font-medium mb-4">Cartes de débit</h3>
+        <div class="grid md:grid-cols-3 gap-6">
+
+          <div class="bg-surface border border-line rounded-xl p-6">
+            <div class="flex items-center justify-between mb-6">
+              <div class="w-11 h-8 rounded bg-[#1A1F71] flex items-center justify-center text-white text-[10px] font-bold italic">VISA</div>
+              <button class="text-muted text-lg">⋯</button>
+            </div>
+            <div class="font-mono text-lg mb-1">3210 **** **** 4008</div>
+            <div class="text-[12px] text-muted mb-6">Numéro de carte</div>
+            <div class="flex items-end justify-between">
+              <div>
+                <div class="font-mono text-2xl font-semibold mb-1">88 200,00 €</div>
+                <div class="text-[12px] text-muted mb-3">Solde disponible</div>
+                <div class="text-[13px] font-mono">06/28<div class="text-[11px] text-muted">Valide</div></div>
+              </div>
+              <div class="relative w-20 h-20 flex-shrink-0">
+                <svg viewBox="0 0 80 80" class="w-full h-full -rotate-90">
+                  <circle cx="40" cy="40" r="34" fill="none" stroke="#F6E4C8" stroke-width="9"/>
+                  <circle cx="40" cy="40" r="34" fill="none" stroke="#F0A93F" stroke-width="9" stroke-dasharray="213.6" stroke-dashoffset="75" stroke-linecap="round"/>
+                </svg>
+                <div class="absolute inset-0 flex flex-col items-center justify-center"><span class="font-semibold text-[15px]">65%</span><span class="text-[9px] text-muted">Part</span></div>
+              </div>
+            </div>
+            <button class="w-full mt-5 py-2.5 rounded-lg border border-line text-[13px] font-medium hover:border-brand transition flex items-center justify-center gap-2">Télécharger le relevé <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 3V15M12 15L7 10M12 15L17 10M4 19H20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+
+          <div class="bg-surface border border-line rounded-xl p-6">
+            <div class="flex items-center justify-between mb-6">
+              <div class="w-11 h-8 rounded bg-gradient-to-br from-[#EB001B] to-[#F79E1B] flex items-center justify-center text-white text-[9px] font-bold">MC</div>
+              <button class="text-muted text-lg">⋯</button>
+            </div>
+            <div class="font-mono text-lg mb-1">4008 **** **** 9464</div>
+            <div class="text-[12px] text-muted mb-6">Numéro de carte</div>
+            <div class="flex items-end justify-between">
+              <div>
+                <div class="font-mono text-2xl font-semibold mb-1">64 120,00 €</div>
+                <div class="text-[12px] text-muted mb-3">Solde disponible</div>
+                <div class="text-[13px] font-mono">07/28<div class="text-[11px] text-muted">Valide</div></div>
+              </div>
+              <div class="relative w-20 h-20 flex-shrink-0">
+                <svg viewBox="0 0 80 80" class="w-full h-full -rotate-90">
+                  <circle cx="40" cy="40" r="34" fill="none" stroke="#DCF3E6" stroke-width="9"/>
+                  <circle cx="40" cy="40" r="34" fill="none" stroke="#0A0A0A" stroke-width="9" stroke-dasharray="213.6" stroke-dashoffset="139" stroke-linecap="round"/>
+                </svg>
+                <div class="absolute inset-0 flex flex-col items-center justify-center"><span class="font-semibold text-[15px]">35%</span><span class="text-[9px] text-muted">Part</span></div>
+              </div>
+            </div>
+            <button class="w-full mt-5 py-2.5 rounded-lg border border-line text-[13px] font-medium hover:border-brand transition flex items-center justify-center gap-2">Télécharger le relevé <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 3V15M12 15L7 10M12 15L17 10M4 19H20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+
+          <div class="bg-surface border border-line rounded-xl p-6">
+            <div class="flex items-center justify-between mb-6">
+              <div class="w-11 h-8 rounded bg-[#1A1F71] flex items-center justify-center text-white text-[10px] font-bold italic">VISA</div>
+              <button class="text-muted text-lg">⋯</button>
+            </div>
+            <div class="font-mono text-lg mb-1 flex items-center gap-1.5">5018 **** **** 6790 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" class="text-muted"><rect x="5" y="11" width="14" height="9" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 11V8C8 5.8 9.8 4 12 4C14.2 4 16 5.8 16 8V11" stroke="currentColor" stroke-width="1.6"/></svg></div>
+            <div class="text-[12px] text-muted mb-6">Numéro de carte</div>
+            <div class="flex items-end justify-between">
+              <div>
+                <div class="font-mono text-2xl font-semibold mb-1 text-muted">0,00 €</div>
+                <div class="text-[12px] text-muted mb-3">Solde disponible</div>
+                <div class="text-[13px] font-mono">07/24<div class="text-[11px] text-muted">Valide</div></div>
+              </div>
+              <div class="relative w-20 h-20 flex-shrink-0">
+                <svg viewBox="0 0 80 80" class="w-full h-full -rotate-90">
+                  <circle cx="40" cy="40" r="34" fill="none" stroke="#F5F5F5" stroke-width="9"/>
+                </svg>
+                <div class="absolute inset-0 flex flex-col items-center justify-center"><span class="font-semibold text-[15px] text-muted">0%</span><span class="text-[9px] text-muted">Part</span></div>
+              </div>
+            </div>
+            <button class="w-full mt-5 py-2.5 rounded-lg border border-line text-[13px] font-medium hover:border-brand transition flex items-center justify-center gap-2">Télécharger le relevé <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 3V15M12 15L7 10M12 15L17 10M4 19H20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-surface border border-line rounded-xl overflow-hidden">
+        <div class="px-6 py-5 border-b border-line font-medium">Comptes</div>
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse min-w-[820px]">
+            <thead>
+              <tr>
+                <th class="text-left text-[11.5px] uppercase tracking-wider text-muted px-6 py-3.5 border-b border-line font-medium">IBAN</th>
+                <th class="text-left text-[11.5px] uppercase tracking-wider text-muted px-6 py-3.5 border-b border-line font-medium">Devise</th>
+                <th class="text-right text-[11.5px] uppercase tracking-wider text-muted px-6 py-3.5 border-b border-line font-medium">Solde</th>
+                <th class="text-right text-[11.5px] uppercase tracking-wider text-muted px-6 py-3.5 border-b border-line font-medium">Bloqué</th>
+                <th class="text-left text-[11.5px] uppercase tracking-wider text-muted px-6 py-3.5 border-b border-line font-medium w-[160px]">Usage</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-line">
+              <tr class="hover:bg-surface2 transition">
+                <td class="px-6 py-4 font-mono text-[13.5px]"><span class="w-8 h-8 rounded-lg bg-surface2 border border-line inline-flex items-center justify-center text-brand2 font-mono text-[13px] mr-3">$</span>FR76 3000 0000 0000 0100 3456</td>
+                <td class="px-6 py-4">USD</td>
+                <td class="px-6 py-4 text-right font-mono font-semibold">56 400,00 €</td>
+                <td class="px-6 py-4 text-right font-mono text-muted">1 400,00 €</td>
+                <td class="px-6 py-4"><div class="h-1.5 rounded-full bg-surface2 overflow-hidden"><div class="h-full bg-brand" style="width:12%"></div></div></td>
+              </tr>
+              <tr class="hover:bg-surface2 transition">
+                <td class="px-6 py-4 font-mono text-[13.5px]"><span class="w-8 h-8 rounded-lg bg-surface2 border border-line inline-flex items-center justify-center text-brand2 font-mono text-[13px] mr-3">€</span>FR76 3000 0000 0000 0100 3457</td>
+                <td class="px-6 py-4">EUR</td>
+                <td class="px-6 py-4 text-right font-mono font-semibold">92 500,00 €</td>
+                <td class="px-6 py-4 text-right font-mono text-muted">670,00 €</td>
+                <td class="px-6 py-4"><div class="h-1.5 rounded-full bg-surface2 overflow-hidden"><div class="h-full bg-amber" style="width:38%"></div></div></td>
+              </tr>
+              <tr class="hover:bg-surface2 transition">
+                <td class="px-6 py-4 font-mono text-[13.5px]"><span class="w-8 h-8 rounded-lg bg-surface2 border border-line inline-flex items-center justify-center text-brand2 font-mono text-[13px] mr-3">£</span>FR76 3000 0000 0000 0100 3458</td>
+                <td class="px-6 py-4">GBP</td>
+                <td class="px-6 py-4 text-right font-mono font-semibold">6 700,00 €</td>
+                <td class="px-6 py-4 text-right font-mono text-muted">0,00 €</td>
+                <td class="px-6 py-4"><div class="h-1.5 rounded-full bg-surface2 overflow-hidden"><div class="h-full bg-down" style="width:2%"></div></div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+    <footer class="border-t border-line px-5 lg:px-8 py-5 flex flex-wrap justify-between text-[13px] text-muted gap-2">
+      <span>&copy; 2026 NexoTrade. Tous droits réservés.</span>
+      <span>Espace client NexoTrade</span>
+    </footer>
+  </div>
+</div>
+
+
+
+<script>
+  // Menu mobile (tiroir coulissant)
+  (function(){
+    const sidebar = document.getElementById('sidebarNav');
+    const backdrop = document.getElementById('sidebarBackdrop');
+    const openBtn = document.getElementById('mobileSidebarBtn');
+    const closeBtn = document.getElementById('closeSidebarBtn');
+    if(!sidebar || !backdrop) return;
+
+    function openSidebar(){
+      sidebar.classList.remove('-translate-x-full');
+      backdrop.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeSidebar(){
+      sidebar.classList.add('-translate-x-full');
+      backdrop.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+    if(openBtn) openBtn.addEventListener('click', openSidebar);
+    if(closeBtn) closeBtn.addEventListener('click', closeSidebar);
+    backdrop.addEventListener('click', closeSidebar);
+    // Ferme le menu si on clique un lien de navigation (mobile)
+    sidebar.querySelectorAll('a').forEach(a => a.addEventListener('click', closeSidebar));
+    // Ferme automatiquement si la fenêtre repasse en desktop
+    window.addEventListener('resize', () => { if(window.innerWidth >= 1024) closeSidebar(); });
+  })();
+</script>
+
+</body>
+</html>

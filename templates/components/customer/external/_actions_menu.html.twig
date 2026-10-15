@@ -1,0 +1,58 @@
+{#
+    Menu d'actions d'un bénéficiaire.
+
+    Réutilise le contrôleur générique de menus déroulants (data-dropdown) :
+    fermeture à Échap, au clic extérieur, aria-expanded géré.
+
+    Les données du bénéficiaire voyagent en data-* sur les déclencheurs :
+    le JS remplit la modale à partir de là, sans requête supplémentaire ni
+    duplication d'une modale par ligne.
+#}
+{% set payload = {
+    'data-b-name': beneficiary.name,
+    'data-b-iban': beneficiary.iban,
+    'data-b-bic': beneficiary.bic|default('—'),
+    'data-b-bank': beneficiary.bank,
+    'data-b-country': beneficiary.country|default('France'),
+    'data-b-status': beneficiary.verified ? 'Vérifié' : 'En attente',
+    'data-b-created': beneficiary.createdAt|default(null) ? beneficiary.createdAt|date('d/m/Y') : '—'
+} %}
+
+<div class="relative shrink-0" data-dropdown>
+    <button type="button" data-dropdown-trigger
+            class="w-8 h-8 rounded-lg inline-flex items-center justify-center text-ink-4
+                   hover:bg-canvas hover:text-ink-2 transition-colors">
+        <span class="sr-only">Actions sur {{ beneficiary.name }}</span>
+        {{ include('shared/_icon.html.twig', {name: 'dots-v', class: 'w-4 h-4'}, with_context = false) }}
+    </button>
+
+    <div data-dropdown-panel
+         class="dropdown-panel sm:w-[220px] py-1.5" hidden>
+
+        {# ---------- Visualiser ---------- #}
+        <button type="button" data-beneficiary-view data-dropdown-close
+                {% for key, value in payload %}{{ key }}="{{ value }}" {% endfor %}
+                data-b-edit-url="{{ path('app_beneficiary_edit', {id: beneficiary.id}) }}"
+                class="menu-link w-full text-left">
+            {{ include('shared/_icon.html.twig', {name: 'eye', class: 'w-[18px] h-[18px]'}, with_context = false) }}
+            Visualiser
+        </button>
+
+        {# ---------- Éditer ---------- #}
+        <a href="{{ path('app_beneficiary_edit', {id: beneficiary.id}) }}" class="menu-link">
+            {{ include('shared/_icon.html.twig', {name: 'pencil', class: 'w-[18px] h-[18px]'}, with_context = false) }}
+            Éditer
+        </a>
+
+        {# ---------- Supprimer ---------- #}
+        <button type="button" data-beneficiary-delete data-dropdown-close
+                data-b-name="{{ beneficiary.name }}"
+                data-b-iban="{{ beneficiary.iban }}"
+                data-b-delete-url="{{ path('app_beneficiary_delete', {id: beneficiary.id}) }}"
+                data-b-token="{{ csrf_token('delete-beneficiary-' ~ beneficiary.id) }}"
+                class="menu-link menu-link--danger w-full text-left border-t border-line mt-1.5 pt-3">
+            {{ include('shared/_icon.html.twig', {name: 'trash', class: 'w-[18px] h-[18px]'}, with_context = false) }}
+            Supprimer
+        </button>
+    </div>
+</div>

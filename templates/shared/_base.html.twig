@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="min-h-screen lg:flex">
+    {% include 'shared/_sidebar.html.twig' %}
+    <div class="flex-1 min-w-0 lg:ml-sidebar">
+        {% include 'shared/_topbar.html.twig' %}
+        <main class="px-5 lg:px-8 py-7">
+            {% for label, messages in app.flashes(['success', 'error', 'info']) %}
+                {% for message in messages %}
+                    <div class="mb-5 rounded-card px-5 py-4 text-sm {{ label == 'error'
+                        ? 'bg-debit-bg text-debit-fg'
+                        : 'bg-nexo-50 text-nexo-800' }}" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+</div>
+{% endblock %}
+
+

@@ -1,0 +1,53 @@
+<div class="card p-5 sm:p-6">
+    <div class="flex items-center justify-between gap-3">
+    <span class="card-title">Paiements à venir</span>
+    <a href="#" class="btn-link text-xs">Voir tous <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+    <ul class="mt-4 divide-y divide-line">
+    <li class="py-4 first:pt-0 last:pb-0">
+        <div class="flex items-start gap-3">
+        <span class="account-avatar" style="background:#0F7B3D">N</span>
+        <div class="min-w-0 flex-1">
+            <p class="text-sm font-bold break-words">Compte Nexo</p>
+            <p class="text-xs text-ink-3 tnum mt-0.5 truncate">{{principalAccount.ibanFormatted}} </p>
+            <p class="sm:hidden flex items-baseline gap-2 mt-2"><span class="tnum text-sm font-bold">{{principalAccount.amount}} €</span><span class="text-xs text-Scotia-600 font-medium">A venir</span></p>
+        </div>
+        <div class="hidden sm:block text-right shrink-0">
+            <p class="tnum text-sm font-bold whitespace-nowrap">0,00 €</p>
+            <p class="text-xs text-Scotia-600 font-medium mt-0.5">A venir</p>
+        </div>
+        <button class="w-8 h-8 rounded-lg flex items-center justify-center text-ink-4 hover:bg-canvas transition-colors shrink-0"><span class="sr-only">Actions sur Compte ScotiaBanque</span><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="5.5" r="1.6" fill="currentColor"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/><circle cx="12" cy="18.5" r="1.6" fill="currentColor"/></svg></button>
+        </div>
+    </li>
+  {#   <li class="py-4 first:pt-0 last:pb-0">
+        <div class="flex items-start gap-3">
+        <span class="account-avatar" style="background:#F0B429">P</span>
+        <div class="min-w-0 flex-1">
+            <p class="text-sm font-bold break-words">Prêt hypothécaire</p>
+            <p class="text-xs text-ink-3 tnum mt-0.5 truncate">Demande #NXP-2026-0142</p>
+            <p class="sm:hidden flex items-baseline gap-2 mt-2"><span class="tnum text-sm font-bold">32 230,30 €</span><span class="text-xs text-Scotia-600 font-medium">A venir</span></p>
+        </div>
+        <div class="hidden sm:block text-right shrink-0">
+            <p class="tnum text-sm font-bold whitespace-nowrap">32 230,30 €</p>
+            <p class="text-xs text-Scotia-600 font-medium mt-0.5">A venir</p>
+        </div>
+        <button class="w-8 h-8 rounded-lg flex items-center justify-center text-ink-4 hover:bg-canvas transition-colors shrink-0"><span class="sr-only">Actions sur Compte Épargne+</span><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="5.5" r="1.6" fill="currentColor"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/><circle cx="12" cy="18.5" r="1.6" fill="currentColor"/></svg></button>
+        </div>
+    </li> #}
+     <li class="py-4 first:pt-0 last:pb-0">
+        <div class="flex items-start gap-3">
+        <span class="account-avatar" style="background:#F0B429">P</span>
+        <div class="min-w-0 flex-1">
+            <p class="text-sm font-bold break-words">Portefeuille Invest..</p>
+            <p class="text-xs text-ink-3 tnum mt-0.5 truncate">Gains à venir</p>
+            <p class="sm:hidden flex items-baseline gap-2 mt-2"><span class="tnum text-sm font-bold">12,30 €</span><span class="text-xs text-Scotia-600 font-medium">A venir</span></p>
+        </div>
+        <div class="hidden sm:block text-right shrink-0">
+            <p class="tnum text-sm font-bold whitespace-nowrap">0,30 €</p>
+            <p class="text-xs text-Scotia-600 font-medium mt-0.5">A venir</p>
+        </div>
+        <button class="w-8 h-8 rounded-lg flex items-center justify-center text-ink-4 hover:bg-canvas transition-colors shrink-0"><span class="sr-only">Actions sur Compte Épargne+</span><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="5.5" r="1.6" fill="currentColor"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/><circle cx="12" cy="18.5" r="1.6" fill="currentColor"/></svg></button>
+        </div>
+    </li>
+    </ul>
+</div>

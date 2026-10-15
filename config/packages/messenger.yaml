@@ -1,0 +1,15 @@
+framework:
+    messenger:
+        transports:
+            async:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                retry_strategy:
+                    max_retries: 3
+                    delay: 2000
+                    multiplier: 2
+
+        routing:
+            # L'e-mail part en asynchrone : le client ne doit pas attendre le SMTP.
+            # Le SMS, lui, reste synchrone dans OtpService pour pouvoir signaler
+            # immédiatement un échec d'acheminement à l'utilisateur.
+            Symfony\Component\Mailer\Messenger\SendEmailMessage: async

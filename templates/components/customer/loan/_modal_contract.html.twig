@@ -1,0 +1,152 @@
+{#
+    Contrat de prêt affiché à l'écran.
+
+    Les clauses sont statiques ; les données propres au prêt sont injectées
+    par le JS depuis les data-* du bouton, comme pour la modale de signature.
+    Une seule instance sert toutes les demandes de la page.
+#}
+<div id="loan-contract-modal" class="modal" hidden
+     role="dialog" aria-modal="true" aria-labelledby="contract-modal-title">
+
+    <div class="modal-backdrop" data-modal-close></div>
+
+    <div class="modal-panel sm:max-w-[720px]">
+
+        <div class="modal-header">
+            <div class="min-w-0">
+                <h2 id="contract-modal-title" class="text-base font-extrabold">Contrat de prêt</h2>
+                <p class="text-xs text-ink-3 mt-1 tnum" data-contract="reference">—</p>
+            </div>
+
+            <button type="button" data-modal-close
+                    class="w-8 h-8 rounded-lg flex items-center justify-center text-ink-3
+                           hover:bg-canvas transition-colors shrink-0">
+                <span class="sr-only">Fermer</span>
+                {{ include('shared/_icon.html.twig', {name: 'close', class: 'w-4 h-4'}, with_context = false) }}
+            </button>
+        </div>
+
+        <div class="modal-body bg-canvas">
+            <article class="contract-sheet">
+
+                {# ---------- En-tête du document ---------- #}
+                <header class="flex flex-wrap items-start justify-between gap-4 pb-5 border-b border-line">
+                    <div class="flex items-center gap-2.5">
+                        <svg width="26" height="26" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                            <path d="M16 2l6 6-6 6-6-6 6-6z" fill="#16A34A"/>
+                            <path d="M16 18l6 6-6 6-6-6 6-6z" fill="#0B3B24"/>
+                            <path d="M16 10l6 6-6 6-6-6 6-6z" fill="#0F7B3D"/>
+                        </svg>
+                        <span class="text-base font-extrabold text-ink tracking-tight">
+                            Nexo<span class="text-nexo-600">Trade</span>
+                        </span>
+                    </div>
+
+                    <div class="text-right">
+                        <p class="text-[11px] font-bold uppercase tracking-[0.08em] text-ink-3">
+                            Offre de contrat de crédit
+                        </p>
+                        <p class="tnum text-[13px] font-bold text-ink mt-1" data-contract="reference">—</p>
+                    </div>
+                </header>
+
+                {# ---------- Parties ---------- #}
+                <h4>Article 1 — Parties au contrat</h4>
+                <p>
+                    <strong>Le prêteur :</strong> NexoTrade SA, établissement de crédit agréé,
+                    dont le siège social est sis 12 avenue de la Finance, 75008 Paris.
+                </p>
+                <p>
+                    <strong>L'emprunteur :</strong>
+                    <span data-contract="borrower">—</span>, titulaire du compte
+                    <span class="tnum" data-contract="account">—</span>.
+                </p>
+
+                {# ---------- Caractéristiques ---------- #}
+                <h4>Article 2 — Caractéristiques du crédit</h4>
+
+                <dl class="grid sm:grid-cols-2 gap-x-8 gap-y-3 mt-3">
+                    {% for row in [
+                        {key: 'type',     label: 'Nature du crédit'},
+                        {key: 'amount',   label: 'Montant emprunté', mono: true},
+                        {key: 'duration', label: 'Durée de remboursement', mono: true},
+                        {key: 'monthly',  label: 'Mensualité', mono: true},
+                        {key: 'rate',     label: 'Taux annuel débiteur fixe', mono: true},
+                        {key: 'cost',     label: 'Coût total du crédit', mono: true}
+                    ] %}
+                        <div class="flex items-baseline justify-between gap-4 border-b border-line pb-2">
+                            <dt class="text-[12px] text-ink-3 shrink-0">{{ row.label }}</dt>
+                            <dd class="text-[13px] font-bold text-ink text-right {{ row.mono ?? false ? 'tnum' : '' }}"
+                                data-contract="{{ row.key }}">—</dd>
+                        </div>
+                    {% endfor %}
+                </dl>
+
+                {# ---------- Clauses ---------- #}
+                <h4>Article 3 — Remboursement</h4>
+                <p>
+                    L'emprunteur s'engage à rembourser le capital emprunté, majoré des intérêts,
+                    par mensualités constantes prélevées sur le compte désigné ci-dessus. Le détail
+                    échéance par échéance figure au tableau d'amortissement annexé au présent contrat.
+                </p>
+
+                 <h4>Article 4 — Paiement</h4>
+                <p>
+                    En signant le présent contrat, l'emprunteur s'engage à payer 10% du montant de la première échéance avant que les sous ne soit définitivement disponible sur son compte.
+                </p>
+
+                <h4>Article 4 — Remboursement anticipé</h4>
+                <p>
+                    L'emprunteur peut rembourser par anticipation, en totalité ou en partie, à tout
+                    moment. Une indemnité peut être due dans les limites fixées par la réglementation
+                    applicable aux crédits aux particuliers.
+                </p>
+
+                <h4>Article 5 — Droit de rétractation</h4>
+                <p>
+                    L'emprunteur dispose d'un délai légal de rétractation de quatorze jours calendaires
+                    à compter de la signature, sans avoir à motiver sa décision ni à supporter de pénalité.
+                </p>
+
+                <h4>Article 6 — Défaut de paiement</h4>
+                <p>
+                    En cas d'échéance impayée, le prêteur peut exiger le remboursement immédiat du
+                    capital restant dû, majoré des intérêts échus et non payés. L'incident est
+                    susceptible d'être déclaré aux fichiers réglementaires.
+                </p>
+
+                {# ---------- Signature ---------- #}
+                <div class="mt-8 pt-5 border-t border-line grid sm:grid-cols-2 gap-6">
+                    <div>
+                        <p class="text-[11px] font-bold uppercase tracking-[0.08em] text-ink-3">Le prêteur</p>
+                        <p class="text-[13px] font-semibold text-ink mt-2">NexoTrade SA</p>
+                        <p class="text-[12px] text-ink-3">Signé électroniquement</p>
+                    </div>
+
+                    <div>
+                        <p class="text-[11px] font-bold uppercase tracking-[0.08em] text-ink-3">L'emprunteur</p>
+                        <div class="mt-2 min-h-[52px] flex items-end border-b border-line"
+                             data-contract-signature>
+                            <span class="text-[12px] text-ink-4" data-contract-signature-empty>
+                                En attente de signature
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <div class="modal-footer">
+            {# Le PDF est produit et servi par le serveur : c'est lui qui fait foi,
+               pas le rendu HTML affiché ci-dessus. #}
+            <a href="#" data-contract-download class="btn-primary flex-1 sm:flex-none justify-center">
+                {{ include('shared/_icon.html.twig', {name: 'export', class: 'w-[18px] h-[18px] rotate-180'}, with_context = false) }}
+                Télécharger le PDF
+            </a>
+
+            <button type="button" data-modal-close class="btn-ghost flex-1 sm:flex-none justify-center">
+                Fermer
+            </button>
+        </div>
+    </div>
+</div>

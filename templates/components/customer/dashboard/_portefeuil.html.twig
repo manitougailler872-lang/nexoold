@@ -1,0 +1,56 @@
+<div class="bg-surface border border-line rounded-[22px] p-6 fade-up" style="animation-delay: 0.26s">
+    <div class="flex items-center justify-between mb-1">
+        <h3 class="font-semibold text-[15.5px]">Portefeuille d'investissement</h3>
+        <span class="text-[10.5px] px-2 py-0.5 rounded-full bg-slate-100 text-muted">{{'now'|date('d/m')}}</span>
+    </div>
+    <div class="flex items-baseline gap-3 my-3">
+        <span class="text-2xl font-bold ">0,00 €</span>
+        <span class="text-up text-[13.5px] font-medium">+0%</span>
+    </div>
+    <svg viewBox="0 0 300 70" class="w-full h-[60px] mb-4">
+        <polyline
+            points="0,55 30,48 60,52 90,35 120,42 150,22 180,32 210,15 240,25 270,10 300,18"
+            fill="none"
+            stroke="#171717"
+            stroke-width="2.2"
+        />
+    </svg>
+    <div class="grid grid-cols-3 gap-2 text-center mb-5">
+        <div class="bg-panel rounded-lg py-2">
+            <div class=" font-semibold text-[13px]">0%</div>
+            <div class="text-[10.5px] text-muted">Actions</div>
+        </div>
+        <div class="bg-panel rounded-lg py-2">
+            <div class=" font-semibold text-[13px]">0%</div>
+            <div class="text-[10.5px] text-muted">ETF</div>
+        </div>
+        <div class="bg-panel rounded-lg py-2">
+            <div class=" font-semibold text-[13px]">0%</div>
+            <div class="text-[10.5px] text-muted">Crypto</div>
+        </div>
+    </div>
+    <div class="space-y-2 mb-5">
+        <div class="flex items-center justify-between text-[13px]">
+            <span>
+                <div class="flex items-center gap-2.5">
+                    <span class="asset-mark" style="background-color: #f7931a" aria-hidden="true">₿</span>
+                    <h3 class="text-sm font-bold">Bitcoin (BTC)</h3>
+                </div>
+             <span class="text-muted"></span></span><span class=" text-up">+2,1%</span>
+        </div>
+        <div class="flex items-center justify-between text-[13px]">
+            <span> <div class="flex items-center gap-2.5">
+                                <span class="asset-mark" style="background-color: #627eea" aria-hidden="true">Ξ</span>
+                                <h3 class="text-sm font-bold">Ethereum (ETH)</h3>
+                            </div> <span class="text-muted"></span></span><span class=" text-up">+1,4%</span>
+        </div>
+     
+      
+    </div>
+    <a
+        href="Scotiatrade-investissement.html"
+        class="inline-block text-nblue text-[13.5px] font-medium hover:underline mb-2"
+        >Voir mon portefeuille →</a
+    >
+    <p class="text-[11.5px] text-muted">Investir comporte un risque de perte en capital.</p>
+</div>

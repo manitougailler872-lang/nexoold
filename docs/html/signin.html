@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NexoTrade — Connexion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          bg: '#FFFFFF', surface: '#FFFFFF', surface2: '#F5F5F5', line: '#E2E8E4',
+          brand: '#0A0A0A', brand2: '#171717', ink: '#10201A', muted: '#5C6F66',
+          amber: '#F0A93F'
+        },
+        fontFamily: { sans: ['Space Grotesk','sans-serif'], mono: ['JetBrains Mono','monospace'] },
+        keyframes: { shake: { '0%,100%': { transform: 'translateX(0)' }, '25%': { transform: 'translateX(-6px)' }, '75%': { transform: 'translateX(6px)' } } },
+        animation: { shake: 'shake .35s' }
+      }
+    }
+  }
+</script>
+</head>
+<body class="bg-bg text-ink font-sans antialiased">
+
+<div class="h-1 bg-gradient-to-r from-brand to-brand2"></div>
+
+<header class="py-[22px] border-b border-line">
+  <div class="max-w-[1080px] mx-auto px-6">
+    <a href="nexotrade.html" class="flex items-center gap-2 text-[20.5px] font-semibold">
+      <svg class="w-6 h-6" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13 1L24 7V19L13 25L2 19V7L13 1Z" stroke="#0A0A0A" stroke-width="1.4"/><path d="M13 8L18 11V17L13 20L8 17V11L13 8Z" fill="#0A0A0A"/></svg>
+      NexoTrade
+    </a>
+  </div>
+</header>
+
+<div class="max-w-[1080px] mx-auto px-6">
+
+  <div class="bg-amber/10 border border-amber/35 rounded-xl px-6 py-5 flex gap-4 items-start my-9">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" class="flex-shrink-0 mt-0.5 text-amber"><path d="M12 3L2 20H22L12 3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 10V14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="17" r="0.8" fill="currentColor"/></svg>
+    <div>
+      <h3 class="text-[16px] font-semibold mb-1.5" style="color:#5C3B0C;">Vigilance hameçonnage (phishing)</h3>
+      <p class="text-[14.5px] leading-relaxed" style="color:#6B4A16;">NexoTrade ne vous demande jamais votre mot de passe ou vos codes de sécurité par e-mail, SMS ou téléphone. En cas de doute sur un message reçu, ne cliquez sur aucun lien et contactez directement notre support depuis votre espace client.</p>
+    </div>
+  </div>
+
+  <div class="grid lg:grid-cols-[1.3fr_1fr] gap-[22px] mb-16">
+
+    <div class="bg-surface border border-line rounded-2xl p-9">
+      <h2 class="text-xl font-medium text-brand2 mb-[26px]">Accédez à votre compte et à l'ensemble de vos services</h2>
+      <form id="loginForm" onsubmit="event.preventDefault(); alert('Formulaire de démonstration — aucune donnée n\'est envoyée.');">
+        <div class="mb-5">
+          <label for="identifiant" class="block text-[14.5px] text-muted mb-2">Identifiant client</label>
+          <input type="text" id="identifiant" autocomplete="username" required class="w-full bg-surface2 border border-line rounded-lg px-3.5 py-3 text-[15.5px]">
+        </div>
+
+        <div class="mb-5">
+          <label class="block text-[14.5px] text-muted mb-2">Code secret (5 chiffres)</label>
+          <div class="flex gap-3.5 justify-center mb-[22px]" id="pinDots">
+            <div class="w-11 h-[52px] border-[1.5px] border-line rounded-lg bg-surface2 flex items-center justify-center font-mono text-[22px] font-semibold transition-all pin-dot" data-i="0"></div>
+            <div class="w-11 h-[52px] border-[1.5px] border-line rounded-lg bg-surface2 flex items-center justify-center font-mono text-[22px] font-semibold transition-all pin-dot" data-i="1"></div>
+            <div class="w-11 h-[52px] border-[1.5px] border-line rounded-lg bg-surface2 flex items-center justify-center font-mono text-[22px] font-semibold transition-all pin-dot" data-i="2"></div>
+            <div class="w-11 h-[52px] border-[1.5px] border-line rounded-lg bg-surface2 flex items-center justify-center font-mono text-[22px] font-semibold transition-all pin-dot" data-i="3"></div>
+            <div class="w-11 h-[52px] border-[1.5px] border-line rounded-lg bg-surface2 flex items-center justify-center font-mono text-[22px] font-semibold transition-all pin-dot" data-i="4"></div>
+          </div>
+          <div class="grid grid-cols-3 gap-3 max-w-[260px] mx-auto" id="pinPad">
+            <button type="button" class="pin-key bg-surface2 border border-line rounded-[10px] py-4 text-[20.5px] font-semibold hover:border-brand transition">1</button>
+            <button type="button" class="pin-key bg-surface2 border border-line rounded-[10px] py-4 text-[20.5px] font-semibold hover:border-brand transition">2</button>
+            <button type="button" class="pin-key bg-surface2 border border-line rounded-[10px] py-4 text-[20.5px] font-semibold hover:border-brand transition">3</button>
+            <button type="button" class="pin-key bg-surface2 border border-line rounded-[10px] py-4 text-[20.5px] font-semibold hover:border-brand transition">4</button>
+            <button type="button" class="pin-key bg-surface2 border border-line rounded-[10px] py-4 text-[20.5px] font-semibold hover:border-brand transition">5</button>
+            <button type="button" class="pin-key bg-surface2 border border-line rounded-[10px] py-4 text-[20.5px] font-semibold hover:border-brand transition">6</button>
+            <button type="button" class="pin-key bg-surface2 border border-line rounded-[10px] py-4 text-[20.5px] font-semibold hover:border-brand transition">7</button>
+            <button type="button" class="pin-key bg-surface2 border border-line rounded-[10px] py-4 text-[20.5px] font-semibold hover:border-brand transition">8</button>
+            <button type="button" class="pin-key bg-surface2 border border-line rounded-[10px] py-4 text-[20.5px] font-semibold hover:border-brand transition">9</button>
+            <button type="button" id="pinClearBtn" class="col-span-3 bg-transparent text-[14px] text-muted hover:text-red-500 py-2">Effacer le code</button>
+          </div>
+          <input type="hidden" id="password" required>
+        </div>
+
+        <button type="submit" class="w-full py-3.5 rounded-lg text-[16px] font-semibold bg-gradient-to-b from-brand to-brand2 text-bg hover:brightness-110 transition">Se connecter</button>
+      </form>
+      <div class="flex flex-wrap gap-[18px] justify-center mt-[22px] text-[14px]">
+        <a href="#" class="text-brand2 hover:underline">Identifiant oublié ?</a>
+        <a href="#" class="text-brand2 hover:underline">Mot de passe oublié ?</a>
+        <a href="#" class="text-brand2 hover:underline">Accès bloqué ?</a>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-[22px]">
+      <div class="bg-surface border border-line rounded-2xl p-9 text-center">
+        <h2 class="text-xl font-medium text-brand2 mb-3">Première connexion ?</h2>
+        <p class="text-base text-muted mb-[22px] leading-relaxed">Créez votre espace client en quelques minutes pour accéder à vos comptes, vos contrats et vos services NexoTrade.</p>
+        <a href="nexotrade-signup.html" class="inline-flex px-[22px] py-3 rounded-lg text-[15.5px] font-semibold bg-gradient-to-b from-brand to-brand2 text-bg hover:brightness-110 transition">Créer mon espace client</a>
+      </div>
+
+      <div class="bg-surface border border-line rounded-2xl p-9">
+        <h2 class="text-xl font-medium text-brand2 mb-1">Sécurité renforcée</h2>
+        <div class="text-[14.5px] font-semibold mb-[18px]">Confirmation via l'application mobile</div>
+        <div class="flex justify-between items-center gap-4 flex-wrap sm:flex-nowrap">
+          <div class="flex flex-col gap-2">
+            <div class="flex items-center gap-2 bg-ink text-white rounded-lg px-3 py-2 text-[12px] leading-tight">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 3L20 12L4 21V3Z" fill="currentColor"/></svg>
+              <span>Disponible sur<b class="block text-[14px]">Google Play</b></span>
+            </div>
+            <div class="flex items-center gap-2 bg-ink text-white rounded-lg px-3 py-2 text-[12px] leading-tight">
+              <svg width="14" height="16" viewBox="0 0 24 28" fill="none"><path d="M18.5 14.5C18.4 12.1 20.4 10.9 20.5 10.8C19.4 9.2 17.6 9 17 8.9C15.5 8.8 14.1 9.8 13.3 9.8C12.5 9.8 11.4 8.9 10.1 8.9C8.5 8.9 7 9.9 6.2 11.4C4.5 14.3 5.7 18.6 7.3 21C8.1 22.2 9 23.5 10.3 23.4C11.5 23.4 12 22.6 13.5 22.6C15 22.6 15.4 23.4 16.7 23.4C18 23.3 18.8 22.1 19.6 20.9C20.4 19.6 20.8 18.3 20.8 18.2C20.7 18.2 18.6 17.4 18.5 14.5Z" fill="currentColor"/><path d="M16 7C16.6 6.2 17 5.1 16.9 4C15.9 4 14.7 4.6 14 5.4C13.4 6.1 12.9 7.2 13.1 8.3C14.2 8.4 15.3 7.7 16 7Z" fill="currentColor"/></svg>
+              <span>Disponible sur<b class="block text-[14px]">l'App Store</b></span>
+            </div>
+          </div>
+          <div class="text-[14px] text-muted max-w-[150px]">
+            <b class="text-ink block mb-1">Sécurisez vos opérations</b>
+            en téléchargeant l'application mobile NexoTrade.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer class="border-t border-line pt-16 pb-8">
+  <div class="max-w-[1180px] mx-auto px-7">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr] gap-10 mb-12">
+      <div>
+        <a href="nexotrade.html" class="flex items-center gap-2 text-xl font-semibold">
+          <svg class="w-6 h-6" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13 1L24 7V19L13 25L2 19V7L13 1Z" stroke="#0A0A0A" stroke-width="1.4"/>
+            <path d="M13 8L18 11V17L13 20L8 17V11L13 8Z" fill="#0A0A0A"/>
+          </svg>
+          NexoTrade
+        </a>
+        <p class="text-muted text-base mt-3.5 max-w-[280px]">Plateforme bancaire, de financement et d'investissement crypto, conçue pour la clarté, la sécurité et la rapidité d'exécution.</p>
+      </div>
+      <div>
+        <h4 class="text-[14px] uppercase tracking-wider text-muted mb-4">Services</h4>
+        <a href="nexotrade-services.html#banking" class="block text-base mb-2.5 hover:text-brand2">Comptes & cartes</a>
+        <a href="nexotrade-pret.html" class="block text-base mb-2.5 hover:text-brand2">Prêts personnels</a>
+        <a href="nexotrade-pret.html" class="block text-base mb-2.5 hover:text-brand2">Prêts immobiliers</a>
+        <a href="nexotrade-investissement.html" class="block text-base mb-2.5 hover:text-brand2">Investissements</a>
+        <a href="nexotrade-services.html#crypto-services" class="block text-base mb-2.5 hover:text-brand2">Services Crypto</a>
+      </div>
+      <div>
+        <h4 class="text-[14px] uppercase tracking-wider text-muted mb-4">Liens utiles</h4>
+        <a href="#" class="block text-base mb-2.5 hover:text-brand2">À propos</a>
+        <a href="mailto:contact@nexotrade.example" class="block text-base mb-2.5 hover:text-brand2">Contact</a>
+        <a href="#" class="block text-base mb-2.5 hover:text-brand2">Centre d'aide</a>
+        <a href="#" class="block text-base mb-2.5 hover:text-brand2">FAQ</a>
+        <a href="#" class="block text-base mb-2.5 hover:text-brand2">Sécurité</a>
+        <a href="#" class="block text-base mb-2.5 hover:text-brand2">Conditions générales</a>
+        <a href="#" class="block text-base mb-2.5 hover:text-brand2">Politique de confidentialité</a>
+      </div>
+      <div>
+        <h4 class="text-[14px] uppercase tracking-wider text-muted mb-4">Support</h4>
+        <a href="mailto:contact@nexotrade.example" class="block text-base mb-2.5 hover:text-brand2">Support client</a>
+        <a href="#" class="block text-base mb-2.5 hover:text-brand2">Assistance 24/7</a>
+        <a href="mailto:contact@nexotrade.example" class="block text-base mb-2.5 hover:text-brand2">Nous contacter</a>
+      </div>
+    </div>
+    <div class="flex flex-wrap justify-between items-center border-t border-line pt-6 text-[13px] text-muted gap-3 mb-3">
+      <span>© <span id="footYear">2026</span> NexoTrade. Tous droits réservés.</span>
+      <span class="flex flex-wrap gap-4">
+        <a href="#" class="hover:text-brand2">Politique de confidentialité</a>
+        <a href="#" class="hover:text-brand2">Conditions d'utilisation</a>
+        <a href="#" class="hover:text-brand2">Cookies</a>
+        <a href="#" class="hover:text-brand2">Sécurité</a>
+      </span>
+    </div>
+    <div class="text-center text-[12px] text-muted/80 tracking-wide">Plateforme sécurisée · Transactions chiffrées · Données protégées</div>
+  </div>
+</footer>
+
+<script>
+  var fy = document.getElementById('footYear');
+  if(fy){ fy.textContent = new Date().getFullYear(); }
+</script>
+
+<style>
+  .pin-dot.filled{border-color:#0A0A0A;transform:translateY(-2px);}
+  .pin-key:active{background:#0A0A0A;color:#FFFFFF;transform:scale(0.94);}
+  .pin-key.pressed{background:#0A0A0A;color:#FFFFFF;transform:scale(0.94);}
+</style>
+
+<script>
+  // Bip sonore façon guichet automatique, généré via Web Audio (pas de fichier externe)
+  let audioCtx;
+  function beep(freq = 880, duration = 0.09){
+    try{
+      audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'square';
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + duration);
+    }catch(e){ /* audio indisponible, on ignore silencieusement */ }
+  }
+
+  const CODE_LENGTH = 5;
+  let code = '';
+  const dots = document.querySelectorAll('.pin-dot');
+  const hiddenPw = document.getElementById('password');
+  const pinPad = document.getElementById('pinPad');
+  const pinClearBtn = document.getElementById('pinClearBtn');
+  const pinKeys = Array.from(pinPad.querySelectorAll('.pin-key'));
+
+  function shuffleKeys(){
+    const digits = ['1','2','3','4','5','6','7','8','9'];
+    for(let i = digits.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i + 1));
+      [digits[i], digits[j]] = [digits[j], digits[i]];
+    }
+    pinKeys.forEach((key, i) => {
+      key.style.transition = 'opacity .15s';
+      key.style.opacity = '0';
+      setTimeout(() => { key.textContent = digits[i]; key.style.opacity = '1'; }, 120);
+    });
+  }
+
+  function renderCode(){
+    dots.forEach((dot, i) => {
+      dot.textContent = i < code.length ? code[i] : '';
+      dot.classList.toggle('filled', i < code.length);
+    });
+    hiddenPw.value = code;
+  }
+
+  pinKeys.forEach(key => {
+    key.addEventListener('click', () => {
+      if(code.length >= CODE_LENGTH){
+        dots.forEach(d => { d.classList.add('animate-shake'); setTimeout(() => d.classList.remove('animate-shake'), 350); });
+        beep(320, 0.12);
+        return;
+      }
+      code += key.textContent.trim();
+      key.classList.add('pressed');
+      setTimeout(() => key.classList.remove('pressed'), 120);
+      beep(880 + Math.random() * 60, 0.08);
+      renderCode();
+      if(code.length >= CODE_LENGTH){ setTimeout(shuffleKeys, 250); }
+    });
+  });
+
+  pinClearBtn.addEventListener('click', () => {
+    code = '';
+    renderCode();
+    beep(440, 0.1);
+    shuffleKeys();
+  });
+
+  shuffleKeys();
+</script>
+
+</body>
+</html>

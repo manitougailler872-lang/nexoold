@@ -1,0 +1,221 @@
+{% extends 'shared/_base.html.twig' %}
+{% block content %}
+
+        {% include 'components/customer/dashboard/_top_header.html.twig' %}
+        {% include 'components/customer/dashboard/_alert.html.twig' %}
+        <!-- Bandeau synthèse -->
+
+        <div class="grid xl:grid-cols-3 gap-6 mb-6"> 
+
+            <!-- Snapshort -->
+            {% include 'components/customer/dashboard/_snapshort.html.twig' %}
+            {% include 'components/customer/dashboard/_card.html.twig' %}
+            {% include 'components/customer/dashboard/_accounts.html.twig' %}
+     {#        {% include 'components/customer/dashboard/_summary_account.html.twig' %}
+ #}
+            <!-- TRANSFERT RAPIDE -->
+        </div>
+         <!-- ================= INVESTISSEMENT + CRYPTO ================= -->
+        <div class="grid xl:grid-cols-3 gap-6 mb-6"> 
+            {% include 'components/customer/dashboard/_portefeuil.html.twig' %}
+            {% include 'components/customer/dashboard/_market.html.twig' %}
+            {% include 'components/customer/dashboard/_sendamount.html.twig' %}
+            {% include 'components/customer/dashboard/_category_spend.html.twig' %}
+            {% include 'components/customer/transaction/_transactions_v2.html.twig' %}
+        </div>
+        {% include 'shared/modal/_withdraw.html.twig' %}
+        {% include 'shared/modal/_add.html.twig' %}
+        {% include 'shared/modal/_rib.html.twig' %}
+        
+        <!-- Comptes + transactions -->
+{% endblock %}
+{% block javascripts %}
+ <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.js"></script>
+<script>
+        document.getElementById('openDeposit').addEventListener('click', () => { document.getElementById('depositOverlay').classList.remove('hidden'); document.body.style.overflow='hidden'; });
+        document.getElementById('showRib').addEventListener('click', () => { document.getElementById('ribOverlay').classList.remove('hidden'); document.body.style.overflow='hidden'; });
+     
+        document.querySelectorAll('.close-modal').forEach(btn => {
+            btn.addEventListener('click', () => { 
+                document.getElementById(btn.dataset.modal).classList.add('hidden'); 
+                document.body.style.overflow='';
+            });
+        });
+        [
+            document.getElementById('depositOverlay'),
+         document.getElementById('withdrawOverlay')].forEach(ov => {
+            ov.addEventListener('click', e => { if(e.target === ov){ ov.classList.add('hidden'); document.body.style.overflow=''; } });
+        });
+</script>
+    <script>
+        const euro = new Intl.NumberFormat("fr-FR", {
+            style: "currency",
+            currency: "EUR",
+            minimumFractionDigits: 2,
+        });
+        Chart.defaults.font.family = "Space Grotesk, system-ui, sans-serif";
+        Chart.defaults.font.size = 11;
+        Chart.defaults.font.weight = 600;
+        Chart.defaults.color = "#6B7280";
+
+        const labels = [
+            "16 avr.",
+            "19 avr.",
+            "22 avr.",
+            "25 avr.",
+            "28 avr.",
+            "1 mai",
+            "4 mai",
+            "7 mai",
+            "10 mai",
+            "13 mai",
+            "16 mai",
+        ];
+        const values = [118000, 121500, 119800, 127400, 124900, 133200, 131000, 139800, 143500, 149200, 156780.5];
+
+     {#    const ctx = document.getElementById("balance-chart").getContext("2d");
+        const g = ctx.createLinearGradient(0, 0, 0, 260);
+        g.addColorStop(0, "rgba(22,163,74,0.22)");
+        g.addColorStop(1, "rgba(22,163,74,0)");
+
+        new Chart(ctx, {
+            type: "line",
+            data: {
+                labels,
+                datasets: [
+                    {
+                        data: values,
+                        borderColor: "#16A34A",
+                        borderWidth: 2,
+                        backgroundColor: g,
+                        fill: true,
+                        tension: 0.35,
+                        pointRadius: 0,
+                        pointHoverRadius: 5,
+                        pointHoverBackgroundColor: "#16A34A",
+                        pointHoverBorderColor: "#fff",
+                        pointHoverBorderWidth: 2,
+                    },
+                ],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: "index", intersect: false },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: "#0F1512",
+                        padding: 12,
+                        displayColors: false,
+                        cornerRadius: 8,
+                        callbacks: { label: (c) => euro.format(c.parsed.y) },
+                    },
+                },
+                scales: {
+                    x: { grid: { display: false }, border: { display: false }, ticks: { maxTicksLimit: 7 } },
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: "#F1F4F2" },
+                        border: { display: false },
+                        ticks: { maxTicksLimit: 5, callback: (v) => (v >= 1000 ? v / 1000 + "K" : v) },
+                    },
+                },
+            },
+        }); #}
+
+    {#  
+            type: "doughnut",
+            data: {
+                labels: ["Comptes", "Cartes", "Investissements", "Crypto-actifs", "Autres"],
+                datasets: [
+                    {
+                        data: [112650.3, 18230.2, 26900, 1000, 0],
+                        backgroundColor: ["#0F7B3D", "#F0B429", "#3B82F6", "#8B5CF6", "#9CA3AF"],
+                        borderWidth: 0,
+                        spacing: 2,
+                    },
+                ],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: "72%",
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: "#0F1512",
+                        padding: 10,
+                        cornerRadius: 8,
+                        callbacks: { label: (c) => c.label + " : " + euro.format(c.parsed) },
+                    },
+                },
+            },
+        }); #}
+
+         // ----- Cloche notifications -> scroll vers la section -----
+{#    document.getElementById('notifBellBtn').addEventListener('click', () => {
+    document.getElementById('notifications').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }); #}
+
+  // ----- Crypto (widget + marchés + portefeuille détaillé) — données réelles CoinGecko -----
+  function miniSpark(prices, color){
+    if(!prices || prices.length < 2) return '';
+    const w = 70, h = 28, pad = 2;
+    const min = Math.min(...prices), max = Math.max(...prices);
+    const range = (max - min) || 1;
+    const step = (w - pad*2) / (prices.length - 1);
+    const pts = prices.map((p,i) => {
+      const x = pad + i*step;
+      const y = pad + (h - pad*2) * (1 - (p - min)/range);
+      return `${x.toFixed(1)},${y.toFixed(1)}`;
+    }).join(' ');
+    return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><polyline points="${pts}" fill="none" stroke="${color}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+  }
+
+  // Quantités détenues — données de démonstration (à brancher sur le portefeuille réel de l'utilisateur)
+  const CRYPTO_HOLDINGS = {
+    bitcoin: 0.042,
+    ethereum: 0.85,
+    solana: 12,
+    tether: 500,
+    ripple: 800
+  };
+  const CRYPTO_IDS = Object.keys(CRYPTO_HOLDINGS).join(',');
+  const CRYPTO_COLORS = { bitcoin: '#F7931A', ethereum: '#627EEA', solana: '#14F195', tether: '#26A17B', ripple: '#0B0B0B' };
+
+  function fmtEUR(n){ return n.toLocaleString('fr-FR', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' €'; }
+
+  async function loadCryptoOverview(){
+    try{
+      const res = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&ids=${CRYPTO_IDS}&order=market_cap_desc&sparkline=true&price_change_percentage=24h`);
+      const data = await res.json();
+
+      // ----- Résumé compact (widget dans la grille 2 colonnes) -----
+      let total = 0;
+      data.forEach(c => { total += (CRYPTO_HOLDINGS[c.id] || 0) * c.current_price; });
+      const globalUp = data.reduce((s,c) => s + (c.price_change_percentage_24h||0), 0) / data.length >= 0;
+
+      // ----- Tableau détaillé (section pleine largeur) -----
+
+      // ----- Widget Marchés (réutilise les mêmes données) -----
+      document.getElementById('marketsCryptoRows').innerHTML = data.map(c => {
+        const up = c.price_change_percentage_24h >= 0;
+        const spark = c.sparkline_in_7d ? c.sparkline_in_7d.price.slice(-30) : [];
+        return `<div class="flex items-center justify-between">
+          <div class="flex items-center gap-3"><div class="w-8 h-8 rounded-lg bg-panel flex items-center justify-center overflow-hidden"><img src="${c.image}" class="w-5 h-5" alt="${c.symbol}"></div><span class="font-medium text-[13.5px] uppercase">${c.symbol}</span></div>
+          ${miniSpark(spark, up ? '#16A34A' : '#DC2626').replace('width="70" height="28"','width="60" height="24"')}
+          <span class="font-mono text-[13px] ${up?'text-up':'text-down'}">${up?'+':''}${(c.price_change_percentage_24h||0).toFixed(2)}%</span>
+        </div>`;
+      }).join('');
+    }catch(e){
+      document.getElementById('cryptoOvList').innerHTML = '<div class="text-center text-muted text-[13px] py-4">Données de marché momentanément indisponibles.</div>';
+      document.getElementById('cryptoHoldingsTable').innerHTML = '<tr><td colspan="5" class="text-center text-muted text-sm py-8">Données momentanément indisponibles.</td></tr>';
+      document.getElementById('cryptoOvUpdate').textContent = '';
+    }
+  }
+  loadCryptoOverview();
+  setInterval(loadCryptoOverview, 60000);
+    </script>
+    
+{% endblock %}

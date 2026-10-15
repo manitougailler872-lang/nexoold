@@ -1,0 +1,78 @@
+{#
+    Tableau d'amortissement d'un prêt, déplié sous la carte.
+    Les lignes déjà échues sont grisées : le client repère d'un coup d'œil où
+    il en est dans son remboursement.
+#}
+{% if loan.amortization|length > 0 %}
+    {% set paidCount = loan.amortization|filter(r => r.paid)|length %}
+    
+    <div class="flex flex-wrap items-baseline justify-between gap-3 mb-4">
+        <h3 class="text-sm font-extrabold">Tableau d'amortissement</h3>
+        <p class="text-xs text-ink-3 tnum">
+            {{ paidCount }} / {{ loan.amortization|length }} échéances réglées
+        </p>
+    </div>
+
+    <div class="amort-scroll">
+        <table class="amort-table">
+            <caption class="sr-only">
+                Échéancier du prêt {{ loan.reference }}
+            </caption>
+            <thead>
+                <tr>
+                    <th scope="col" class="text-left">N°</th>
+                    <th scope="col" class="text-left">Échéance</th>
+                    <th scope="col" class="text-right">Mensualité</th>
+                    <th scope="col" class="text-right">Capital</th>
+                    <th scope="col" class="text-right">Intérêts</th>
+                    <th scope="col" class="text-right">Restant dû</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in loan.amortization %}
+                    <tr class="{{ row.paid ? 'is-paid' : '' }}">
+                        <td class="tnum">{{ row.number }}</td>
+                        <td class="tnum whitespace-nowrap">
+                            {{ row.dueDate|format_datetime(pattern: 'MMM y', locale: 'fr') }}
+                            {% if row.paid %}
+                                <span class="sr-only">— réglée</span>
+                            {% endif %}
+                        </td>
+                        <td class="tnum text-right font-semibold whitespace-nowrap">
+                            {{ row.payment|format_currency(loan.currency, locale: 'fr_FR') }}
+                        </td>
+                        <td class="tnum text-right whitespace-nowrap">
+                            {{ row.principal|format_currency(loan.currency, locale: 'fr_FR') }}
+                        </td>
+                        <td class="tnum text-right whitespace-nowrap">
+                            {{ row.interest|format_currency(loan.currency, locale: 'fr_FR') }}
+                        </td>
+                        <td class="tnum text-right font-semibold whitespace-nowrap">
+                            {{ row.balance|format_currency(loan.currency, locale: 'fr_FR') }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <dl class="grid sm:grid-cols-3 gap-4 mt-4">
+        {% for row in [
+            {label: 'Total remboursé', value: (loan.amount + loan.totalCost)|format_currency(loan.currency, locale: 'fr_FR')},
+            {label: 'Dont intérêts',   value: loan.totalCost|format_currency(loan.currency, locale: 'fr_FR')},
+            {label: 'Dernière échéance', value: loan.amortization|last.dueDate|format_datetime(pattern: 'MMMM y', locale: 'fr')}
+        ] %}
+            <div class="rounded-xl bg-canvas px-4 py-3">
+                <dt class="text-xs font-bold text-ink-3">{{ row.label }}</dt>
+                <dd class="tnum text-sm font-extrabold mt-1">{{ row.value }}</dd>
+            </div>
+        {% endfor %}
+    </dl>
+{% else %}
+    <p class="text-sm text-ink-3">
+        Aucun échéancier disponible pour cette demande.
+        {% if loan.status == 'refused' %}
+            La demande n'a pas abouti.
+        {% endif %}
+    </p>
+{% endif %}

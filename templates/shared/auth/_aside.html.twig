@@ -1,0 +1,90 @@
+<div class="flex-1 grid lg:grid-cols-2">
+                <aside
+                    class="login-hero min-h-[520px]"
+                    style="
+                        background-image: url(&quot;https://images.unsplash.com/photo-1543269865-cbf427effbad?w=1200&amp;q=70&quot;);
+                        background-size: cover;
+                        background-position: center;
+                    "
+                >
+                    <h1 class="text-[42px] leading-[1.12] font-extrabold text-white max-w-[520px]">
+                        La banque qui vous accompagne au quotidien
+                    </h1>
+                    <p class="text-lg text-white/85 mt-5 max-w-[420px] leading-relaxed">
+                        Des solutions simples, sécurisées et adaptées à vos besoins.
+                    </p>
+                    <ul class="mt-10 space-y-6 max-w-[420px]">
+                        <li class="login-feature">
+                            <span class="login-feature-icon"
+                                ><svg class="w-6 h-6" viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M12 3l7.2 3v6c0 4.5-3.1 8-7.2 9.2C7.9 20 4.8 16.5 4.8 12V6L12 3z"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                        stroke-linejoin="round"
+                                    />
+                                    <path
+                                        d="M9.2 12.2l2 2 3.6-3.9"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    /></svg
+                            ></span>
+                            <div>
+                                <p class="text-base font-bold text-white">Sécurité maximale</p>
+                                <p class="text-sm text-white/80 leading-relaxed mt-1">
+                                    Vos données sont protégées par les meilleurs standards.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="login-feature">
+                            <span class="login-feature-icon"
+                                ><svg class="w-6 h-6" viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M4 17l5-5 3.5 3.5L20 8"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                    <path
+                                        d="M15 8h5v5"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    /></svg
+                            ></span>
+                            <div>
+                                <p class="text-base font-bold text-white">Gestion simplifiée</p>
+                                <p class="text-sm text-white/80 leading-relaxed mt-1">
+                                    Accédez à tous vos comptes et services en un seul endroit.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="login-feature">
+                            <span class="login-feature-icon"
+                                ><svg class="w-6 h-6" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.8" />
+                                    <path
+                                        d="M9.7 9.4a2.4 2.4 0 113.8 2.2c-.85.6-1.5 1-1.5 2"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                        stroke-linecap="round"
+                                    />
+                                    <circle cx="12" cy="16.6" r="1" fill="currentColor" /></svg
+                            ></span>
+                            <div>
+                                <p class="text-base font-bold text-white">Support dédié</p>
+                                <p class="text-sm text-white/80 leading-relaxed mt-1">
+                                    Notre équipe est disponible pour vous accompagner.
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </aside>
+                <main class="flex items-center justify-center px-5 sm:px-10 py-10">
+                     {% block body %}{% endblock %}
+                </main>
+            </div>

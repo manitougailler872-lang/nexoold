@@ -1,0 +1,45 @@
+{#
+    Illustration décorative : émetteur → destinataire, sur un socle avec écusson.
+    Purement ornementale, donc aria-hidden et absente de l'arbre d'accessibilité.
+#}
+<svg viewBox="0 0 320 220" class="w-full max-w-[300px] mx-auto" fill="none" aria-hidden="true">
+    <defs>
+        <linearGradient id="podium" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#F4F7F5"/>
+            <stop offset="100%" stop-color="#E8EDEA"/>
+        </linearGradient>
+    </defs>
+
+    {# Halo #}
+    <ellipse cx="160" cy="70" rx="120" ry="58" fill="#F4F9F6"/>
+
+    {# Arc de transfert #}
+    <path d="M96 66C118 30 202 30 226 62" stroke="#16A34A" stroke-width="2.4"
+          stroke-linecap="round" stroke-dasharray="0 0"/>
+    <path d="M226 62l-9.5-2.5M226 62l-2 9.5" stroke="#16A34A" stroke-width="2.4"
+          stroke-linecap="round" stroke-linejoin="round"/>
+
+    {# Points décoratifs #}
+    <circle cx="76" cy="52" r="2.6" fill="#BBE7CB"/>
+    <circle cx="248" cy="48" r="2.6" fill="#BBE7CB"/>
+    <circle cx="160" cy="26" r="2.2" fill="#86D3A6"/>
+
+    {# Carte émetteur #}
+    <rect x="66" y="72" width="80" height="80" rx="16" fill="#FFFFFF" stroke="#E8ECEA" stroke-width="1.6"/>
+    <circle cx="106" cy="104" r="11" stroke="#0F7B3D" stroke-width="2.4"/>
+    <path d="M89 130a17 17 0 0134 0" stroke="#0F7B3D" stroke-width="2.4" stroke-linecap="round"/>
+
+    {# Carte destinataire #}
+    <rect x="174" y="72" width="80" height="80" rx="16" fill="#FFFFFF" stroke="#E8ECEA" stroke-width="1.6"/>
+    <path d="M194 104l20-12 20 12" stroke="#0F7B3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M199 108v20M209 108v20M219 108v20M229 108v20M193 133h42"
+          stroke="#0F7B3D" stroke-width="2.4" stroke-linecap="round"/>
+
+    {# Socle #}
+    <ellipse cx="160" cy="176" rx="98" ry="26" fill="url(#podium)"/>
+
+    {# Écusson de sécurité #}
+    <path d="M160 146l22 9v18c0 13.5-9.2 24.2-22 27.6-12.8-3.4-22-14.1-22-27.6v-18l22-9z" fill="#0F7B3D"/>
+    <path d="M151 175.5l6.6 6.6 12-13" stroke="#FFFFFF" stroke-width="3.4"
+          stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

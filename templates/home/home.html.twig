@@ -1,0 +1,1087 @@
+{% extends 'shared/public/base.html.twig' %}
+{% block body %}
+
+        <!-- HERO -->
+        <section class="relative overflow-hidden fade-up" style="animation-delay: 0.23s">
+            <div class="max-w-[1240px]  fadeUp mx-auto px-6 grid lg:grid-cols-2 gap-10 items-center pt-12 lg:pt-16 pb-24">
+                <div>
+                    <h1 class="font-head font-bold text-4xl sm:text-5xl lg:text-6xl leading-[1.08] mb-6">
+                        La banque en ligne simple, rapide et <span class="text-green">sécurisée</span>
+                    </h1>
+                    <p class="text-muted text-lg mb-8 max-w-md">
+                        Gérez vos comptes, cartes, épargnez, investissez et plus encore depuis une seule application.
+                    </p>
+                    <div class="flex flex-wrap gap-4 mb-8">
+                        <a
+                            href="#"
+                            class="bg-green text-white font-semibold px-7 py-3.5 rounded-full hover:bg-[var(--green-700)]-deep transition-colors"
+                            >
+                            Ouvrir un compte
+                            </a
+                        >
+                        <a
+                            href="#services"
+                            class="border border-black/15 font-semibold px-7 py-3.5 rounded-full hover:border-green hover:text-green transition-colors"
+                            >Découvrir nos services</a
+                        >
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="font-head font-bold text-xl"
+                            >4,8<span class="text-muted text-sm font-normal">/5</span></span
+                        >
+                        <span class="text-[#F5B301]">★★★★★</span>
+                        <span class="text-sm text-muted">+ de 20 000 clients nous font confiance</span>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div class="rounded-3xl overflow-hidden aspect-[4/3.4] bg-mint">
+                        <img
+                            src="https://images.unsplash.com/photo-1758876023053-3aa541a0935b?q=75&w=1100&auto=format&fit=crop"
+                            alt="Cliente ScotiaBanque sur mobile"
+                            class="w-full h-full object-cover"
+                        />
+                    </div>
+                    <!-- Dashboard card -->
+                    <div
+                        class="absolute -bottom-8 -left-2 sm:left-auto sm:-right-6 w-[300px] bg-white rounded-2xl border border-black/5 p-5"
+                    >
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-muted text-xs flex items-center gap-1.5"
+                                >Solde total
+                                <svg
+                                    width="13"
+                                    height="13"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z" />
+                                    <circle cx="12" cy="12" r="3" /></svg
+                            ></span>
+                        </div>
+                        <div class="flex items-end justify-between mb-4">
+                            <div>
+                                <p class="font-head font-bold text-2xl leading-none">12 456,80 €</p>
+                                <p class="text-green text-xs font-semibold mt-1">+2,5% ce mois</p>
+                            </div>
+                            <svg viewBox="0 0 120 44" class="w-24 h-11">
+                                <defs>
+                                    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0" stop-color="#2E9E5B" stop-opacity=".25" />
+                                        <stop offset="1" stop-color="#2E9E5B" stop-opacity="0" />
+                                    </linearGradient>
+                                </defs>
+                                <path
+                                    d="M0 34 15 30 30 32 45 22 60 26 75 15 90 19 105 8 120 11 V44 H0 Z"
+                                    fill="url(#g)"
+                                />
+                                <polyline
+                                    points="0,34 15,30 30,32 45,22 60,26 75,15 90,19 105,8 120,11"
+                                    fill="none"
+                                    stroke="#2E9E5B"
+                                    stroke-width="2.5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-sm font-semibold">Comptes</span
+                            ><a href="#" class="text-green text-xs font-medium">Voir tout</a>
+                        </div>
+                        <div class="space-y-2.5 mb-4">
+                            <div class="flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-lg bg-mint flex items-center justify-center text-green"
+                                    ><svg
+                                        width="15"
+                                        height="15"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                    >
+                                        <rect x="2" y="5" width="20" height="14" rx="2" />
+                                        <path d="M2 10h20" /></svg
+                                ></span>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-xs font-medium leading-tight">Compte Scotia</p>
+                                    <p class="text-[10px] text-muted">•••• 1234</p>
+                                </div>
+                                <span class="text-xs font-semibold">4 280,50 €</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span
+                                    class="w-8 h-8 rounded-lg bg-[#E8F0FE] flex items-center justify-center text-[#3B82F6]"
+                                    ><svg
+                                        width="15"
+                                        height="15"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                    >
+                                        <rect x="2" y="5" width="20" height="14" rx="2" />
+                                        <path d="M2 10h20" /></svg
+                                ></span>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-xs font-medium leading-tight">Compte Épargne+</p>
+                                    <p class="text-[10px] text-muted">•••• 5678</p>
+                                </div>
+                                <span class="text-xs font-semibold">6 210,30 €</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-lg bg-mint flex items-center justify-center text-green"
+                                    ><svg
+                                        width="15"
+                                        height="15"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                    >
+                                        <rect x="2" y="5" width="20" height="14" rx="2" />
+                                        <path d="M2 10h20" /></svg
+                                ></span>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-xs font-medium leading-tight">Compte Scotia Pro</p>
+                                    <p class="text-[10px] text-muted">•••• 9012</p>
+                                </div>
+                                <span class="text-xs font-semibold">1 966,00 €</span>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-4 gap-1 border-t border-black/6 pt-3 text-center">
+                            <div class="flex flex-col items-center gap-1 text-muted">
+                                <svg
+                                    width="17"
+                                    height="17"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path d="M17 3l4 4-4 4M21 7H8M7 21l-4-4 4-4M3 17h13" /></svg
+                                ><span class="text-[9px]">Virement</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-1 text-muted">
+                                <svg
+                                    width="17"
+                                    height="17"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <rect x="2" y="5" width="20" height="14" rx="2" />
+                                    <path d="M2 10h20" /></svg
+                                ><span class="text-[9px]">Carte</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-1 text-muted">
+                                <svg
+                                    width="17"
+                                    height="17"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                    <path d="M14 2v6h6M8 13h8M8 17h5" /></svg
+                                ><span class="text-[9px]">RIB</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-1 text-muted">
+                                <svg
+                                    width="17"
+                                    height="17"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <circle cx="5" cy="12" r="1.5" />
+                                    <circle cx="12" cy="12" r="1.5" />
+                                    <circle cx="19" cy="12" r="1.5" /></svg
+                                ><span class="text-[9px]">Plus</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- FEATURES STRIP (overlap) -->
+            <div class="max-w-[1240px] mx-auto px-6 -mt-[20px] relative z-10 pb-16">
+                <div
+                    class="bg-white rounded-2xl border border-black/8 grid grid-cols-2 lg:grid-cols-5 divide-x divide-y lg:divide-y-0 divide-black/6"
+                >
+                    <div class="p-6">
+                        <svg
+                            width="30"
+                            height="30"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="#2E9E5B"
+                            stroke-width="1.6"
+                            class="mb-3"
+                        >
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                            <path d="m9 12 2 2 4-4" />
+                        </svg>
+                        <p class="font-semibold text-sm mb-1">Sécurité renforcée</p>
+                        <p class="text-muted text-xs leading-relaxed">
+                            Vos données protégées par les meilleures technologies.
+                        </p>
+                    </div>
+                    <div class="p-6">
+                        <svg
+                            width="30"
+                            height="30"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="#2E9E5B"
+                            stroke-width="1.6"
+                            class="mb-3"
+                        >
+                            <circle cx="12" cy="12" r="9" />
+                            <path d="M12 7v5l3 2" />
+                        </svg>
+                        <p class="font-semibold text-sm mb-1">Ouverture rapide</p>
+                        <p class="text-muted text-xs leading-relaxed">
+                            Ouvrez votre compte en quelques minutes seulement.
+                        </p>
+                    </div>
+                    <div class="p-6">
+                        <svg
+                            width="30"
+                            height="30"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="#2E9E5B"
+                            stroke-width="1.6"
+                            class="mb-3"
+                        >
+                            <rect x="7" y="2" width="10" height="20" rx="2" />
+                            <path d="M11 18h2" />
+                        </svg>
+                        <p class="font-semibold text-sm mb-1">100% en ligne</p>
+                        <p class="text-muted text-xs leading-relaxed">
+                            Gérez vos finances où que vous soyez, 24h/24 et 7j/7.
+                        </p>
+                    </div>
+                    <div class="p-6">
+                        <svg
+                            width="30"
+                            height="30"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="#2E9E5B"
+                            stroke-width="1.6"
+                            class="mb-3"
+                        >
+                            <rect x="2" y="5" width="20" height="14" rx="2" />
+                            <path d="M2 10h20" />
+                        </svg>
+                        <p class="font-semibold text-sm mb-1">Aucuns frais cachés</p>
+                        <p class="text-muted text-xs leading-relaxed">
+                            Des services transparents et des tarifs parmi les plus compétitifs.
+                        </p>
+                    </div>
+                    <div class="p-6">
+                        <svg
+                            width="30"
+                            height="30"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="#2E9E5B"
+                            stroke-width="1.6"
+                            class="mb-3"
+                        >
+                            <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
+                            <path
+                                d="M21 19a2 2 0 0 1-2 2h-3v-7h3a2 2 0 0 1 2 2zM3 19a2 2 0 0 0 2 2h3v-7H5a2 2 0 0 0-2 2z"
+                            />
+                        </svg>
+                        <p class="font-semibold text-sm mb-1">Service client dédié</p>
+                        <p class="text-muted text-xs leading-relaxed">Notre équipe est à votre écoute à tout moment.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICE CARDS -->
+        <section id="services" class="max-w-[1240px] mx-auto px-6 pb-20 fade-up" style="animation-delay: 0.23s">
+            <div class="max-w-[600px] mx-auto text-center mb-14 reveal">
+                <h2 class="text-3xl sm:text-[36px] font-bold mb-4">Tout ce dont vous avez besoin pour vos finances</h2>
+                <p class="text-muted text-[15.5px]">
+                    Suivez les prix en temps réel et gérez votre portefeuille crypto simplement.
+                </p>
+            </div>
+            <h2 class="font-head font-bold text-3xl sm:text-4xl text-center mb-10"></h2>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <!-- Comptes & Cartes -->
+                <div class="bg-gray50 rounded-2xl p-6 flex flex-col hover:shadow-lg transition-shadow">
+                    <h3 class="font-head font-semibold text-lg mb-2">Comptes & Cartes</h3>
+                    <p class="text-muted text-sm mb-4 flex-1">
+                        Des comptes adaptés à vos besoins et des cartes sans frais cachés.
+                    </p>
+                    <a href="#" class="text-green font-semibold text-sm inline-flex items-center gap-1 mb-4"
+                        >Découvrir →</a
+                    >
+                    <svg viewBox="0 0 200 120" class="w-full">
+                        <rect
+                            x="28"
+                            y="34"
+                            width="118"
+                            height="74"
+                            rx="10"
+                            fill="#1A1D1F"
+                            transform="rotate(-9 87 71)"
+                        />
+                        <rect x="58" y="30" width="118" height="74" rx="10" fill="#2E9E5B" />
+                        <rect x="70" y="46" width="20" height="15" rx="3" fill="#fff" opacity=".85" />
+                        <rect x="70" y="72" width="55" height="5" rx="2" fill="#fff" opacity=".5" />
+                        <text
+                            x="150"
+                            y="96"
+                            fill="#fff"
+                            font-size="13"
+                            font-weight="700"
+                            font-style="italic"
+                            text-anchor="end"
+                        >
+                            VISA
+                        </text>
+                    </svg>
+                </div>
+                <!-- Épargne -->
+                <div class="bg-gray50 rounded-2xl p-6 flex flex-col hover:shadow-lg transition-shadow">
+                    <h3 class="font-head font-semibold text-lg mb-2">Épargne & Placements</h3>
+                    <p class="text-muted text-sm mb-4 flex-1">Faites fructifier votre argent en toute simplicité.</p>
+                    <a href="#" class="text-green font-semibold text-sm inline-flex items-center gap-1 mb-4"
+                        >Découvrir →</a
+                    >
+                    <svg viewBox="0 0 200 120" class="w-full">
+                        <rect x="40" y="66" width="12" height="30" rx="2" fill="#CDEBD9" />
+                        <rect x="56" y="52" width="12" height="44" rx="2" fill="#A9DCBE" />
+                        <path d="M100 90 C82 86 74 70 76 55 C93 57 101 74 101 90Z" fill="#3BB56B" />
+                        <path d="M101 82 C120 77 128 61 126 46 C109 49 101 66 101 82Z" fill="#2E9E5B" />
+                        <path d="M101 90 V60" stroke="#24824A" stroke-width="3" fill="none" />
+                        <path d="M84 100 h34 l-6 14 h-22 z" fill="#2E9E5B" />
+                        <rect x="80" y="94" width="42" height="8" rx="2" fill="#24824A" />
+                    </svg>
+                </div>
+                <!-- Crédits -->
+                <div class="bg-gray50 rounded-2xl p-6 flex flex-col hover:shadow-lg transition-shadow">
+                    <h3 class="font-head font-semibold text-lg mb-2">Crédits</h3>
+                    <p class="text-muted text-sm mb-4 flex-1">
+                        Réalisez vos projets avec nos solutions de crédit adaptées.
+                    </p>
+                    <a href="#" class="text-green font-semibold text-sm inline-flex items-center gap-1 mb-4"
+                        >Découvrir →</a
+                    >
+                    <svg viewBox="0 0 200 120" class="w-full">
+                        <path d="M100 28 L152 66 H48 Z" fill="#2E9E5B" />
+                        <rect x="122" y="34" width="10" height="20" fill="#24824A" />
+                        <rect x="62" y="66" width="76" height="50" fill="#fff" stroke="#1A1D1F" stroke-width="2" />
+                        <rect x="90" y="90" width="20" height="26" fill="#2E9E5B" />
+                        <rect x="70" y="78" width="14" height="14" fill="#CDEBD9" stroke="#1A1D1F" stroke-width="1.5" />
+                        <rect
+                            x="116"
+                            y="78"
+                            width="14"
+                            height="14"
+                            fill="#CDEBD9"
+                            stroke="#1A1D1F"
+                            stroke-width="1.5"
+                        />
+                    </svg>
+                </div>
+                <!-- Crypto -->
+                <div class="bg-gray50 rounded-2xl p-6 flex flex-col hover:shadow-lg transition-shadow">
+                    <div class="flex items-center gap-2 mb-2">
+                        <h3 class="font-head font-semibold text-lg">Investir en crypto</h3>
+                        <span class="bg-mint text-green text-[11px] font-semibold px-2 py-0.5 rounded-full"
+                            >Nouveau</span
+                        >
+                    </div>
+                    <p class="text-muted text-sm mb-4 flex-1">
+                        Achetez, vendez et suivez vos cryptomonnaies en toute sécurité.
+                    </p>
+                    <a href="#" class="text-green font-semibold text-sm inline-flex items-center gap-1 mb-4"
+                        >Découvrir →</a
+                    >
+                    <svg viewBox="0 0 200 120" class="w-full">
+                        <circle cx="88" cy="66" r="34" fill="#F7931A" />
+                        <text x="88" y="80" text-anchor="middle" fill="#fff" font-size="36" font-weight="700">₿</text>
+                        <circle cx="138" cy="48" r="24" fill="#627EEA" />
+                        <text x="138" y="58" text-anchor="middle" fill="#fff" font-size="26" font-weight="700">Ξ</text>
+                        <circle cx="58" cy="94" r="16" fill="#2E9E5B" />
+                        <text x="58" y="101" text-anchor="middle" fill="#fff" font-size="16" font-weight="700">€</text>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3 COMPTES -->
+        <section class="bg-gray50 rounded border-y border-black/5 fade-up" style="animation-delay: 0.23s">
+            <div class="max-w-[1240px] mx-auto px-6 py-16 text-center">
+                <p class="text-green text-xs font-bold tracking-[0.2em] uppercase mb-3">ScotiaBanque en 3 comptes</p>
+                <h2 class="font-head font-bold text-3xl sm:text-4xl mb-3">
+                    Des comptes adaptés à chaque étape de la vie
+                </h2>
+                <p class="text-muted mb-12">+ ou − de 18 ans ? À chacun son compte !</p>
+
+                <div class="grid md:grid-cols-3 gap-5 text-left">
+                    <div class="relative rounded-2xl overflow-hidden p-8 min-h-[250px] bg-[#1B5E3A]">
+                        <h3 class="font-head font-bold text-xl text-white mb-3 relative z-10">LE COMPTE Scotia</h3>
+                        <p class="text-white/85 text-sm mb-6 max-w-[62%] relative z-10">
+                            Parfait pour le quotidien avec l'essentiel des services ScotiaBanque dans mon app.
+                        </p>
+                        <a
+                            href="#"
+                            class="relative z-10 inline-block border-2 border-white/80 text-white text-xs font-bold uppercase tracking-wide rounded-full px-5 py-2.5 hover:bg-white hover:text-[#1B5E3A] transition-colors"
+                            >En savoir plus</a
+                        >
+                        <svg
+                            viewBox="0 0 240 160"
+                            class="absolute right-[-28px] bottom-3 w-52 sm:w-60"
+                            style="transform: rotate(-10deg)"
+                        >
+                            <rect x="18" y="14" width="204" height="132" rx="16" fill="#16522F" />
+                            <path d="M18 104 C90 74 150 62 222 30 L222 146 L18 146 Z" fill="#3AA55C" opacity="0.35" />
+                            <g stroke="#fff" stroke-width="2.6" fill="none" opacity=".92" stroke-linecap="round">
+                                <path d="M150 80 a11 11 0 0 1 0 22" />
+                                <path d="M157 73 a20 20 0 0 1 0 36" />
+                            </g>
+                            <rect x="176" y="82" width="27" height="20" rx="3" fill="#E4C260" />
+                            <path d="M176 92h27M189.5 82v20" stroke="#B8942F" stroke-width="1" />
+                        </svg>
+                    </div>
+                    <div class="relative rounded-2xl overflow-hidden p-8 min-h-[250px] bg-[#F4C430]">
+                        <h3 class="font-head font-bold text-xl text-ink mb-3 relative z-10">LE COMPTE ÉPARGNE+</h3>
+                        <p class="text-ink/80 text-sm mb-6 max-w-[62%] relative z-10">
+                            Le compte d'épargne qui fait fructifier vos projets avec plus de rendement.
+                        </p>
+                        <a
+                            href="#"
+                            class="relative z-10 inline-block border-2 border-ink/80 text-ink text-xs font-bold uppercase tracking-wide rounded-full px-5 py-2.5 hover:bg-ink hover:text-[#F4C430] transition-colors"
+                            >En savoir plus</a
+                        >
+                        <svg
+                            viewBox="0 0 240 160"
+                            class="absolute right-[-28px] bottom-3 w-52 sm:w-60"
+                            style="transform: rotate(-10deg)"
+                        >
+                            <rect x="18" y="14" width="204" height="132" rx="16" fill="#E0AE2A" />
+                            <path d="M18 104 C90 74 150 62 222 30 L222 146 L18 146 Z" fill="#FBD968" opacity="0.35" />
+                            <g stroke="#fff" stroke-width="2.6" fill="none" opacity=".92" stroke-linecap="round">
+                                <path d="M150 80 a11 11 0 0 1 0 22" />
+                                <path d="M157 73 a20 20 0 0 1 0 36" />
+                            </g>
+                            <rect x="176" y="82" width="27" height="20" rx="3" fill="#E4C260" />
+                            <path d="M176 92h27M189.5 82v20" stroke="#B8942F" stroke-width="1" />
+                        </svg>
+                    </div>
+                    <div class="relative rounded-2xl overflow-hidden p-8 min-h-[250px] bg-[#12315A]">
+                        <h3 class="font-head font-bold text-xl text-white mb-3 relative z-10">LE COMPTE Scotia PRO</h3>
+                        <p class="text-white/85 text-sm mb-6 max-w-[62%] relative z-10">
+                            Un compte conçu pour les professionnels et les entreprises qui vont plus loin.
+                        </p>
+                        <a
+                            href="#"
+                            class="relative z-10 inline-block border-2 border-white/80 text-white text-xs font-bold uppercase tracking-wide rounded-full px-5 py-2.5 hover:bg-white hover:text-[#12315A] transition-colors"
+                            >En savoir plus</a
+                        >
+                        <svg
+                            viewBox="0 0 240 160"
+                            class="absolute right-[-28px] bottom-3 w-52 sm:w-60"
+                            style="transform: rotate(-10deg)"
+                        >
+                            <rect x="18" y="14" width="204" height="132" rx="16" fill="#0C2545" />
+                            <path d="M18 104 C90 74 150 62 222 30 L222 146 L18 146 Z" fill="#2A5A8F" opacity="0.35" />
+                            <g stroke="#fff" stroke-width="2.6" fill="none" opacity=".92" stroke-linecap="round">
+                                <path d="M150 80 a11 11 0 0 1 0 22" />
+                                <path d="M157 73 a20 20 0 0 1 0 36" />
+                            </g>
+                            <rect x="176" y="82" width="27" height="20" rx="3" fill="#E4C260" />
+                            <path d="M176 92h27M189.5 82v20" stroke="#B8942F" stroke-width="1" />
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="mt-10">
+                    <a
+                        href="#"
+                        class="inline-block bg-[#1B5E3A] text-white font-semibold px-8 py-3.5 rounded-full hover:bg-[var(--green-700)]-deep transition-colors"
+                        >Comparer les comptes</a
+                    >
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= CRYPTO ================= -->
+        <section id="crypto" class="py-16 bg-bg fade-up" style="animation-delay: 0.23s">
+            <div class="max-w-[1280px] mx-auto px-6 lg:px-8">
+                <div class="max-w-[600px] mx-auto text-center mb-14 reveal">
+                    <h2 class="text-3xl sm:text-[36px] font-bold mb-4">Vos actifs numériques, au même endroit</h2>
+                    <p class="text-muted text-[15.5px]">
+                        Suivez les prix en temps réel et gérez votre portefeuille crypto simplement.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6 mb-8" id="cryptoCards">
+                    <div class="bg-surface border border-line rounded-2xl p-6 reveal">
+                        <div class="text-center text-muted text-sm py-8">Chargement…</div>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-surface2 border border-line rounded-2xl p-6 flex flex-wrap items-center justify-between gap-4 reveal"
+                >
+                    <div class="flex items-center gap-3">
+                        <div class="w-11 h-11 rounded-xl bg-nviolet/10 flex items-center justify-center text-nviolet">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8" />
+                                <path
+                                    d="M9.5 8.5H13.2C14.2 8.5 15 9.3 15 10.3C15 11.3 14.2 12 13.2 12H9.5M9.5 12H13.5C14.5 12 15.3 12.8 15.3 13.8C15.3 14.8 14.5 15.5 13.5 15.5H9.5M11 8.5V6.5M11 17.5V15.5"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                    stroke-linecap="round"
+                                />
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="font-medium">Portefeuille crypto</div>
+                            <div class="text-muted text-[13.5px]">Achetez, suivez et gérez vos actifs numériques.</div>
+                        </div>
+                    </div>
+                    <a
+                        href="{{path('app_investments')}}"
+                        class="inline-flex items-center justify-center px-6 py-3 rounded-lg text-[14.5px] font-semibold bg-gradient-to-b from-brand to-brand2 text-white hover:brightness-110 transition"
+                        >Découvrir la crypto</a
+                    >
+                </div>
+
+                <p class="text-center text-[12.5px] text-muted mt-6">
+                    Investir comporte des risques de perte en capital.
+                </p>
+            </div>
+        </section>
+
+        <!-- DISCOVER CARDS -->
+        <section class="max-w-[1240px] mx-auto px-6 py-8 pb-16 fade-up" style="animation-delay: 0.23s">
+            <h2 class="font-head font-bold text-3xl sm:text-4xl text-center mb-2">Découvrez nos cartes</h2>
+            <p class="text-muted text-center mb-12">Des cartes adaptées à chaque style de vie.</p>
+            <div class="grid md:grid-cols-3 gap-6 items-start">
+                <!-- Premium -->
+                <div class="border border-black/10 rounded-2xl p-6">
+                    <h3 class="font-head font-bold text-xl text-center mb-5">Premium</h3>
+                    <div class="mb-6">
+                        <svg viewBox="0 0 200 120" class="w-full max-w-[220px] mx-auto">
+                            <rect x="0" y="0" width="200" height="120" rx="12" fill="#1A1D1F" />
+                            <path d="M0 92 C70 66 130 58 200 24 L200 120 L0 120 Z" fill="#3a3d40" opacity="0.28" />
+                            <text
+                                x="16"
+                                y="27"
+                                fill="#fff"
+                                font-size="11"
+                                font-weight="700"
+                                font-family="Nunito,sans-serif"
+                            >
+                                &#9670; ScotiaBanque
+                            </text>
+                            <rect x="16" y="50" width="26" height="19" rx="3" fill="#E4C260" />
+                            <path d="M16 59.5h26M29 50v19" stroke="#B8942F" stroke-width="0.8" />
+                            <text
+                                x="184"
+                                y="104"
+                                text-anchor="end"
+                                fill="#fff"
+                                font-size="17"
+                                font-weight="800"
+                                font-style="italic"
+                                font-family="Nunito,sans-serif"
+                            >
+                                VISA
+                            </text>
+                        </svg>
+                    </div>
+                    <ul class="space-y-2.5 mb-6">
+                        <li class="flex items-center gap-2 text-sm">
+                            <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="#2E9E5B"
+                                stroke-width="2.6"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="shrink-0"
+                            >
+                                <path d="M20 6 9 17l-5-5" />
+                            </svg>
+                            Assurance voyage incluse
+                        </li>
+                        <li class="flex items-center gap-2 text-sm">
+                            <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="#2E9E5B"
+                                stroke-width="2.6"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="shrink-0"
+                            >
+                                <path d="M20 6 9 17l-5-5" />
+                            </svg>
+                            Accès salon d&rsquo;aéroport
+                        </li>
+                        <li class="flex items-center gap-2 text-sm">
+                            <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="#2E9E5B"
+                                stroke-width="2.6"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="shrink-0"
+                            >
+                                <path d="M20 6 9 17l-5-5" />
+                            </svg>
+                            Cashback jusqu&rsquo;à 2 %
+                        </li>
+                        <li class="flex items-center gap-2 text-sm">
+                            <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="#2E9E5B"
+                                stroke-width="2.6"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="shrink-0"
+                            >
+                                <path d="M20 6 9 17l-5-5" />
+                            </svg>
+                            Plafonds de paiement élevés
+                        </li>
+                    </ul>
+                    <p class="text-center mb-5">
+                        <span class="font-head font-bold text-2xl">19,99 €</span
+                        ><span class="text-muted text-sm"> / mois</span>
+                    </p>
+                    <a
+                        href="#"
+                        class="block text-center border border-black/15 font-semibold py-3 rounded-full hover:border-green hover:text-green transition-colors"
+                        >Choisir Premium</a
+                    >
+                </div>
+
+                <!-- Gold (vedette) -->
+                <div class="relative border-2 border-green rounded-xl p-6 md:-mt-3 shadow-sm">
+                    <span
+                        class="absolute -top-3 left-1/2 -translate-x-1/2 bg-[var(--green-700)] text-white text-[11px] font-bold uppercase tracking-wide px-3 py-1 rounded-full"
+                        >Carte en vedette</span
+                    >
+                    <h3 class="font-head font-bold text-xl text-center mb-5 mt-1">Gold</h3>
+                    <div class="mb-6">
+                        <svg viewBox="0 0 200 120" class="w-full max-w-[220px] mx-auto">
+                            <rect x="0" y="0" width="200" height="120" rx="12" fill="#1F7A4D" />
+                            <path d="M0 92 C70 66 130 58 200 24 L200 120 L0 120 Z" fill="#3AA55C" opacity="0.28" />
+                            <text
+                                x="16"
+                                y="27"
+                                fill="#fff"
+                                font-size="11"
+                                font-weight="700"
+                                font-family="Nunito,sans-serif"
+                            >
+                                &#9670; ScotiaBanque
+                            </text>
+                            <rect x="16" y="50" width="26" height="19" rx="3" fill="#E4C260" />
+                            <path d="M16 59.5h26M29 50v19" stroke="#B8942F" stroke-width="0.8" />
+                            <text
+                                x="184"
+                                y="104"
+                                text-anchor="end"
+                                fill="#fff"
+                                font-size="17"
+                                font-weight="800"
+                                font-style="italic"
+                                font-family="Nunito,sans-serif"
+                            >
+                                VISA
+                            </text>
+                        </svg>
+                    </div>
+                    <ul class="space-y-2.5 mb-6">
+                        <li class="flex items-center gap-2 text-sm">
+                            <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="#2E9E5B"
+                                stroke-width="2.6"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="shrink-0"
+                            >
+                                <path d="M20 6 9 17l-5-5" />
+                            </svg>
+                            Assurance voyage premium
+                        </li>
+                        <li class="flex items-center gap-2 text-sm">
+                            <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="#2E9E5B"
+                                stroke-width="2.6"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="shrink-0"
+                            >
+                                <path d="M20 6 9 17l-5-5" />
+                            </svg>
+                            Conciergerie 24/7
+                        </li>
+                        <li class="flex items-center gap-2 text-sm">
+                            <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="#2E9E5B"
+                                stroke-width="2.6"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="shrink-0"
+                            >
+                                <path d="M20 6 9 17l-5-5" />
+                            </svg>
+                            Cashback jusqu&rsquo;à 3 %
+                        </li>
+                        <li class="flex items-center gap-2 text-sm">
+                            <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="#2E9E5B"
+                                stroke-width="2.6"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="shrink-0"
+                            >
+                                <path d="M20 6 9 17l-5-5" />
+                            </svg>
+                            Plafonds illimités
+                        </li>
+                    </ul>
+                    <p class="text-center mb-5">
+                        <span class="font-head font-bold text-2xl">9,99 €</span
+                        ><span class="text-muted text-sm"> / mois</span>
+                    </p>
+                    <a
+                        href="#"
+                        class="block text-center bg-[var(--green-700)] text-white font-semibold py-3 rounded-full hover:bg-[var(--green-700)]-deep transition-colors"
+                        >Choisir Gold</a
+                    >
+                </div>
+
+                <!-- Argent -->
+                <div class="border border-black/10 rounded-xl p-6">
+                    <h3 class="font-head font-bold text-xl text-center mb-5">Argent</h3>
+                    <div class="mb-6">
+                        <svg viewBox="0 0 200 120" class="w-full max-w-[220px] mx-auto">
+                            <rect x="0" y="0" width="200" height="120" rx="12" fill="#AEB4BC" />
+                            <path d="M0 92 C70 66 130 58 200 24 L200 120 L0 120 Z" fill="#E5E8EC" opacity="0.28" />
+                            <text
+                                x="16"
+                                y="27"
+                                fill="#2A2D30"
+                                font-size="11"
+                                font-weight="700"
+                                font-family="Nunito,sans-serif"
+                            >
+                                &#9670; ScotiaBanque
+                            </text>
+                            <rect x="16" y="50" width="26" height="19" rx="3" fill="#E4C260" />
+                            <path d="M16 59.5h26M29 50v19" stroke="#B8942F" stroke-width="0.8" />
+                            <text
+                                x="184"
+                                y="104"
+                                text-anchor="end"
+                                fill="#2A2D30"
+                                font-size="17"
+                                font-weight="800"
+                                font-style="italic"
+                                font-family="Nunito,sans-serif"
+                            >
+                                VISA
+                            </text>
+                        </svg>
+                    </div>
+                    <ul class="space-y-2.5 mb-6">
+                        <li class="flex items-center gap-2 text-sm">
+                            <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="#2E9E5B"
+                                stroke-width="2.6"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="shrink-0"
+                            >
+                                <path d="M20 6 9 17l-5-5" />
+                            </svg>
+                            Assurance voyage de base
+                        </li>
+                        <li class="flex items-center gap-2 text-sm">
+                            <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="#2E9E5B"
+                                stroke-width="2.6"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="shrink-0"
+                            >
+                                <path d="M20 6 9 17l-5-5" />
+                            </svg>
+                            Paiements sécurisés
+                        </li>
+                        <li class="flex items-center gap-2 text-sm">
+                            <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="#2E9E5B"
+                                stroke-width="2.6"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="shrink-0"
+                            >
+                                <path d="M20 6 9 17l-5-5" />
+                            </svg>
+                            Cashback jusqu&rsquo;à 1 %
+                        </li>
+                        <li class="flex items-center gap-2 text-sm">
+                            <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="#2E9E5B"
+                                stroke-width="2.6"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="shrink-0"
+                            >
+                                <path d="M20 6 9 17l-5-5" />
+                            </svg>
+                            Plafonds de paiement standard
+                        </li>
+                    </ul>
+                    <p class="text-center mb-5">
+                        <span class="font-head font-bold text-2xl">4,99 €</span
+                        ><span class="text-muted text-sm"> / mois</span>
+                    </p>
+                    <a
+                        href="#"
+                        class="block text-center border border-black/15 font-semibold py-3 rounded-full hover:border-green hover:text-green transition-colors"
+                        >Choisir Argent</a
+                    >
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TRANSFERTS ================= -->
+        <section class="bg-gray50 py-24 bg-surface2 overflow-hidden fade-up" style="animation-delay: 0.23s">
+            <div class="max-w-[1280px] mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal order-2 lg:order-1">
+                    <div class="relative w-[240px] mx-auto rounded-[2rem] p-2.5" style="background: #0b1320">
+                        <div class="rounded-[1.6rem] overflow-hidden bg-white">
+                            <div class="px-4 pt-5 pb-4 border-b border-line">
+                                <div class="text-[11px] text-muted mb-1">Envoyer à</div>
+                                <div class="font-semibold">Awa D.</div>
+                            </div>
+                            <div class="px-4 py-6 text-center">
+                                <div class="text-3xl font-bold font-mono mb-2">250,00 €</div>
+                                <svg
+                                    width="32"
+                                    height="32"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    class="mx-auto text-brand2 animate-pulse"
+                                >
+                                    <path
+                                        d="M4 12H20M14 6L20 12L14 18"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                </svg>
+                            </div>
+                            <div class="px-4 pb-5">
+                                <div
+                                    class="w-full py-3 rounded-lg bg-gradient-to-b from-brand to-brand2 text-white text-center text-[14px] font-semibold"
+                                >
+                                    Envoyer
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal order-1 lg:order-2" style="transition-delay: 0.1s">
+                    <h2 class="text-3xl sm:text-[36px] font-bold mb-4">Envoyez votre argent simplement</h2>
+                    <p class="text-muted text-[16px] mb-8 max-w-[440px]">
+                        Gérez vos transferts et vos bénéficiaires depuis une interface claire.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-3 text-[15.5px]">
+                            <svg
+                                width="18"
+                                height="18"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                class="text-brand2 flex-shrink-0"
+                            >
+                                <path
+                                    d="M5 13L9 17L19 7"
+                                    stroke="currentColor"
+                                    stroke-width="2.2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                /></svg
+                            >Transferts rapides
+                        </li>
+                        <li class="flex items-center gap-3 text-[15.5px]">
+                            <svg
+                                width="18"
+                                height="18"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                class="text-brand2 flex-shrink-0"
+                            >
+                                <path
+                                    d="M5 13L9 17L19 7"
+                                    stroke="currentColor"
+                                    stroke-width="2.2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                /></svg
+                            >Gestion de vos bénéficiaires
+                        </li>
+                        <li class="flex items-center gap-3 text-[15.5px]">
+                            <svg
+                                width="18"
+                                height="18"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                class="text-brand2 flex-shrink-0"
+                            >
+                                <path
+                                    d="M5 13L9 17L19 7"
+                                    stroke="currentColor"
+                                    stroke-width="2.2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                /></svg
+                            >Historique complet
+                        </li>
+                        <li class="flex items-center gap-3 text-[15.5px]">
+                            <svg
+                                width="18"
+                                height="18"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                class="text-brand2 flex-shrink-0"
+                            >
+                                <path
+                                    d="M5 13L9 17L19 7"
+                                    stroke="currentColor"
+                                    stroke-width="2.2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                /></svg
+                            >Suivi des opérations
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECURITE ================= -->
+        <section class="py-24 bg-bg fade-up" style="animation-delay: 0.23s">
+            <div class="max-w-[1280px] mx-auto px-6 lg:px-8">
+                <div class="max-w-[640px] mx-auto text-center mb-14 reveal">
+                    <h2 class="text-3xl sm:text-[36px] font-bold mb-4">La sécurité au cœur de ScotiaBanque</h2>
+                    <p class="text-muted text-[15.5px]">
+                        Des mécanismes concrets pour protéger votre compte et vos opérations.
+                    </p>
+                </div>
+                <div class="grid sm:grid-cols-2 max-w-[680px] mx-auto gap-6">
+                    <div class="reveal bg-surface border border-line rounded-2xl p-7 text-center">
+                        <div
+                            class="w-14 h-14 rounded-xl bg-up/10 flex items-center justify-center text-brand2 mx-auto mb-4"
+                        >
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+                                <rect
+                                    x="5"
+                                    y="11"
+                                    width="14"
+                                    height="9"
+                                    rx="2"
+                                    stroke="currentColor"
+                                    stroke-width="1.8"
+                                />
+                                <path
+                                    d="M8 11V8C8 5.8 9.8 4 12 4C14.2 4 16 5.8 16 8V11"
+                                    stroke="currentColor"
+                                    stroke-width="1.8"
+                                />
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-[17px] mb-2">Authentification renforcée</h3>
+                        <p class="text-muted text-[14px]">Vérification en deux étapes par SMS à chaque connexion.</p>
+                    </div>
+                    <div
+                        class="reveal bg-surface border border-line rounded-2xl p-7 text-center"
+                        style="transition-delay: 0.08s"
+                    >
+                        <div
+                            class="w-14 h-14 rounded-xl bg-up/10 flex items-center justify-center text-brand2 mx-auto mb-4"
+                        >
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M12 2L20 6V12C20 17 16.5 20.5 12 22C7.5 20.5 4 17 4 12V6L12 2Z"
+                                    stroke="currentColor"
+                                    stroke-width="1.8"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-[17px] mb-2">Chiffrement des données</h3>
+                        <p class="text-muted text-[14px]">
+                            Vos informations transitent de façon chiffrée entre votre appareil et nos serveurs.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>  
+{% endblock %}

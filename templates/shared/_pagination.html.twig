@@ -1,0 +1,41 @@
+{#
+    Pagination réutilisable.
+    Paramètres :
+      currentPage  int
+      totalPages   int
+      route        string  nom de route
+      routeParams  hash   paramètres à conserver (filtres, tri…)
+    La fenêtre glissante affiche au plus 5 numéros autour de la page courante,
+    plus la première et la dernière. Sans cela, 42 pages produiraient une barre
+    plus large que le tableau.
+#}
+{% set routeParams = routeParams|default({}) %}
+{% set window = 2 %}
+{% if totalPages > 1 %}
+    <nav class="flex items-center gap-1.5" aria-label="Pagination">
+        <a href="{{ currentPage > 1 ? path(route, routeParams|merge({page: currentPage - 1})) : '#' }}"
+           class="page-link {{ currentPage <= 1 ? 'is-disabled' : '' }}"
+           {{ currentPage <= 1 ? 'aria-disabled="true" tabindex="-1"' : '' }}>
+            <span class="sr-only">Page précédente</span>
+            {{ include('shared/_icon.html.twig', {name: 'chevron-left', class: 'w-4 h-4'}, with_context = false) }}
+        </a>
+        {% for page in 1..totalPages %}
+            {% if page == 1 or page == totalPages or (page >= currentPage - window and page <= currentPage + window) %}
+                <a href="{{ path(route, routeParams|merge({page: page})) }}"
+                   class="page-link {{ page == currentPage ? 'is-current' : '' }}"
+                   {{ page == currentPage ? 'aria-current="page"' : '' }}>
+                    {{ page }}
+                </a>
+            {% elseif page == currentPage - window - 1 or page == currentPage + window + 1 %}
+                <span class="page-ellipsis" aria-hidden="true">…</span>
+            {% endif %}
+        {% endfor %}
+
+        <a href="{{ currentPage < totalPages ? path(route, routeParams|merge({page: currentPage + 1})) : '#' }}"
+           class="page-link {{ currentPage >= totalPages ? 'is-disabled' : '' }}"
+           {{ currentPage >= totalPages ? 'aria-disabled="true" tabindex="-1"' : '' }}>
+            <span class="sr-only">Page suivante</span>
+            {{ include('shared/_icon.html.twig', {name: 'chevron-right', class: 'w-4 h-4'}, with_context = false) }}
+        </a>
+    </nav>
+{% endif %}

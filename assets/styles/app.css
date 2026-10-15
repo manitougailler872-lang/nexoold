@@ -1,0 +1,729 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+        @apply bg-canvas text-ink font-sans;
+    }
+
+    /*
+       Alignement des montants en colonne.
+
+       ⚠️ Nunito n'embarque PAS la fonctionnalité OpenType `tnum` : avec cette
+       police, la déclaration ci-dessous est sans effet et les chiffres restent
+       à chasse proportionnelle. L'alignement des colonnes de montants repose
+       donc sur le `text-align: right` déjà appliqué dans les tableaux, ce qui
+       suffit visuellement dans la très grande majorité des cas.
+
+       La règle est conservée car elle redevient active dès qu'on repasse sur
+       une police qui la supporte (Inter, Roboto, IBM Plex, system-ui…).
+
+       Si l'alignement au pixel devient indispensable (colonnes longues,
+       comparaison chiffre à chiffre), décommentez `.tnum--strict` plus bas et
+       appliquez-la sur les cellules concernées : elle bascule uniquement les
+       chiffres sur la pile système, qui, elle, gère tnum.
+    */
+    .tnum {
+        font-variant-numeric: tabular-nums;
+        font-feature-settings: 'tnum' 1;
+    }
+
+    :focus-visible {
+        @apply outline-2 outline-offset-2 outline-nexo-600;
+    }
+
+    /*
+       L'attribut `hidden` doit toujours l'emporter.
+
+       Le preflight de Tailwind déclare :
+           [hidden]:where(:not([hidden="until-found"])) { display: none }
+       `:where()` a une spécificité NULLE, la règle pèse donc (0,1,0) —
+       exactement autant qu'une classe. Toute classe composant qui impose un
+       display (.modal, .btn, .badge, .nav-item… 41 au total ici) est déclarée
+       plus loin dans le fichier et gagne par ordre d'apparition : l'attribut
+       `hidden` devient sans effet.
+
+       Symptômes observés : la modale ne se fermait jamais, et les boutons
+       Retour / Continuer / Enregistrer de l'assistant restaient tous visibles.
+
+       `!important` est ici le bon outil : il exprime « masqué veut dire
+       masqué », quelle que soit la classe posée à côté.
+    */
+    [hidden]:not([hidden='until-found']) {
+        display: none !important;
+    }
+}
+
+@layer components {
+    /* ---------- Menus déroulants (messages / notifications / profil) ---------- */
+    /*
+       Mobile d'abord : le panneau est une feuille quasi plein écran, ancrée
+       sous la barre supérieure. À partir de `sm`, il redevient un popover
+       classique aligné sur son déclencheur.
+    */
+    .dropdown-panel {
+        @apply fixed left-3 right-3 top-[84px] z-50
+               max-h-[calc(100vh-104px)] overflow-y-auto
+               bg-white border border-line rounded-card shadow-pop
+               sm:absolute sm:left-auto sm:right-0 sm:top-full sm:mt-2
+               sm:w-[360px] sm:max-h-[440px];
+    }
+
+    .dropdown-panel--wide {
+        @apply sm:w-[380px];
+    }
+
+    .dropdown-header {
+        @apply sticky top-0 bg-white border-b border-line
+               px-5 py-3.5 flex items-center justify-between gap-3;
+    }
+
+    .dropdown-footer {
+        @apply sticky bottom-0 bg-white border-t border-line px-5 py-3 text-center;
+    }
+
+    .dropdown-item {
+        @apply flex gap-3.5 px-5 py-3.5 border-b border-line last:border-b-0
+               transition-colors hover:bg-canvas;
+    }
+
+    .dropdown-item--unread {
+        @apply bg-nexo-50/60 hover:bg-nexo-50;
+    }
+
+    /* Ligne du menu profil */
+    .menu-link {
+        @apply flex items-center gap-3 px-5 py-3 text-sm font-medium
+               text-ink-2 transition-colors hover:bg-canvas hover:text-ink;
+    }
+
+    .menu-link--danger {
+        @apply text-debit-fg hover:bg-debit-bg hover:text-debit-fg;
+    }
+
+    /* Pastille de compteur sur les icônes de la barre supérieure */
+    .topbar-badge {
+        @apply absolute top-1.5 right-1.5 min-w-[18px] h-[18px] px-1
+               rounded-full text-white text-2xs font-bold
+               flex items-center justify-center;
+    }
+
+    .topbar-icon {
+        @apply relative w-11 h-11 rounded-lg flex items-center justify-center
+               text-ink-2 hover:bg-canvas transition-colors;
+    }
+
+    /* Structure ---------- */
+    .card {
+        @apply bg-white border border-line rounded-card shadow-card;
+    }
+
+    .card-title {
+        @apply text-2xs font-bold uppercase tracking-[0.08em] text-ink-3;
+    }
+
+    /* ---------- Navigation latérale ---------- */
+    /* Navigation latérale — thème clair (inchangé). */
+    .sidebar {
+        @apply bg-white border-r border-line;
+    }
+
+    .nav-group-title {
+        @apply px-4 mt-6 mb-2 text-2xs font-bold uppercase tracking-[0.08em] text-ink-4;
+    }
+
+    .nav-item {
+        @apply flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium
+               text-ink-2 transition-colors;
+    }
+
+    .nav-item:hover {
+        @apply bg-nexo-50 text-nexo-800;
+    }
+
+    .nav-item.is-active {
+        @apply bg-nexo-900 text-white font-semibold;
+    }
+
+    .nav-item.is-active:hover {
+        @apply bg-nexo-900 text-white;
+    }
+
+    /* ---------- Boutons ---------- */
+    .btn {
+        @apply inline-flex items-center justify-center gap-2 rounded-lg
+               text-sm font-semibold transition-colors;
+    }
+
+    .btn-primary {
+        @apply btn bg-nexo-700 text-white px-5 py-2.5 hover:bg-nexo-800;
+    }
+
+    .btn-ghost {
+        @apply btn border border-line px-5 py-2.5 hover:border-nexo-600 hover:text-nexo-700;
+    }
+
+    .btn-link {
+        @apply inline-flex items-center gap-2 text-sm font-semibold
+               text-nexo-700 hover:text-nexo-900 transition-colors;
+    }
+
+    /* ---------- Badges ---------- */
+    .badge {
+        @apply inline-flex items-center px-2 py-0.5 rounded text-2xs font-bold;
+    }
+
+    .badge-credit {
+        @apply badge bg-credit-bg text-credit-fg;
+    }
+
+    .badge-debit {
+        @apply badge bg-debit-bg text-debit-fg;
+    }
+
+    .badge-neutral {
+        @apply badge bg-gray-100 text-ink-3;
+    }
+
+    /* ---------- Tableaux ---------- */
+    .table-head {
+        @apply text-2xs font-bold uppercase tracking-[0.06em] text-ink-3;
+    }
+
+    .table-row {
+        @apply border-t border-line transition-colors hover:bg-canvas;
+    }
+
+    /* ---------- Pastilles de compte ---------- */
+    .account-avatar {
+        @apply w-9 h-9 rounded-lg flex items-center justify-center
+               text-white text-sm font-bold shrink-0;
+    }
+
+    /* ---------- Actions rapides ---------- */
+    /*
+       Actions rapides.
+
+       Sous lg : lignes horizontales (icône à gauche, libellé à droite), seule
+       disposition lisible pour « Virement compte à compte » sur un téléphone.
+       À partir de lg : tuiles centrées empilées, comme sur la maquette.
+
+       NB : la classe `group` doit rester dans le HTML — Tailwind refuse
+       @apply dessus, car elle n'émet aucune déclaration CSS.
+    */
+    .quick-action {
+        @apply flex items-center gap-3 p-2 -mx-2 rounded-lg text-left
+               transition-colors hover:bg-canvas
+               lg:flex-col lg:items-center lg:text-center lg:gap-2
+               lg:p-0 lg:mx-0 lg:hover:bg-transparent;
+    }
+
+    .quick-action-icon {
+        @apply w-10 h-10 lg:w-11 lg:h-11 rounded-full bg-canvas border border-line
+               flex items-center justify-center shrink-0 transition-colors
+               group-hover:bg-nexo-50 group-hover:border-nexo-200;
+    }
+
+    .quick-action-label {
+        @apply text-sm font-medium leading-tight text-ink-2
+               lg:text-2xs group-hover:text-nexo-800 transition-colors;
+    }
+
+    /* ---------- Pagination ---------- */
+    .page-link {
+        @apply w-9 h-9 inline-flex items-center justify-center rounded-lg
+               border border-line text-sm font-semibold text-ink-2
+               transition-colors hover:border-nexo-600 hover:text-nexo-700;
+    }
+
+    .page-link.is-current {
+        @apply bg-nexo-800 border-nexo-800 text-white hover:text-white;
+    }
+
+    .page-link.is-disabled {
+        @apply opacity-40 pointer-events-none;
+    }
+
+    .page-ellipsis {
+        @apply w-9 h-9 inline-flex items-center justify-center text-sm text-ink-4;
+    }
+
+    /* ---------- Pastille de catégorie / direction ---------- */
+    .chip-icon {
+        @apply w-9 h-9 rounded-xl flex items-center justify-center shrink-0;
+    }
+
+    /* Sens de l'opération : entrant (vert) / sortant (rouge). */
+    .direction-in {
+        @apply chip-icon bg-nexo-50 text-nexo-600;
+    }
+
+    .direction-out {
+        @apply chip-icon bg-debit-bg text-debit-fg;
+    }
+
+    /* ---------- Carte bénéficiaire ---------- */
+    .beneficiary-card {
+        @apply card p-5 flex items-start gap-4 transition-colors hover:border-nexo-200;
+    }
+
+    .bank-logo {
+        @apply w-12 h-12 rounded-xl flex items-center justify-center shrink-0
+               text-white text-2xs font-extrabold tracking-tight overflow-hidden;
+    }
+
+    /* ---------- Champ de recherche de page ---------- */
+    .page-search {
+        @apply w-full h-12 pl-11 pr-4 rounded-xl border border-line bg-white
+               text-sm placeholder:text-ink-4
+               focus:outline-none focus:border-nexo-600 transition-colors;
+    }
+
+    /* ---------- Page virement ---------- */
+    /* Sélecteur enrichi : apparence de carte, comportement de <select>. */
+    .select-card {
+        @apply relative flex items-center gap-3.5 w-full
+               rounded-xl border border-line bg-white px-4 py-3.5
+               transition-colors focus-within:border-nexo-600;
+    }
+
+    .select-card select {
+        @apply absolute inset-0 w-full h-full opacity-0 cursor-pointer;
+    }
+
+    .field-textarea {
+        @apply w-full rounded-xl border border-line bg-white px-4 py-3.5 text-sm
+               placeholder:text-ink-4 resize-y min-h-[104px]
+               focus:outline-none focus:border-nexo-600 transition-colors;
+    }
+
+    /* Carte de choix du type de virement */
+    .transfer-type {
+        @apply flex items-start gap-3 p-4 rounded-xl border border-line
+               cursor-pointer transition-colors h-full hover:border-nexo-400;
+    }
+
+    .peer:checked + .transfer-type {
+        @apply border-nexo-600 bg-nexo-50;
+    }
+
+    .radio-mark {
+        @apply w-[18px] h-[18px] rounded-full border-2 border-line shrink-0 mt-0.5
+               flex items-center justify-center transition-colors;
+    }
+
+    .peer:checked + .transfer-type .radio-mark {
+        @apply border-nexo-600;
+    }
+
+    .peer:checked + .transfer-type .radio-mark::after {
+        content: '';
+        @apply w-2 h-2 rounded-full bg-nexo-600;
+    }
+
+    /* Encart latéral rassurant */
+    .trust-item {
+        @apply flex gap-3.5;
+    }
+
+    .trust-icon {
+        @apply w-10 h-10 rounded-full bg-nexo-50 text-nexo-600
+               flex items-center justify-center shrink-0;
+    }
+
+    /* ---------- Demandes de prêt ---------- */
+    .loan-card {
+        @apply card p-5 sm:p-6 transition-colors hover:border-nexo-200;
+    }
+
+    .loan-icon {
+        @apply w-12 h-12 rounded-xl flex items-center justify-center shrink-0;
+    }
+
+    .loan-metric {
+        @apply text-center sm:text-right;
+    }
+
+    .loan-metric-value {
+        @apply tnum text-[17px] font-extrabold leading-none whitespace-nowrap;
+    }
+
+    .loan-metric-label {
+        @apply text-xs text-ink-3 mt-1.5;
+    }
+
+    .loan-link {
+        @apply inline-flex items-center gap-2 text-sm font-semibold text-ink-2
+               transition-colors hover:text-nexo-700;
+    }
+
+    .badge-dot::before {
+        content: '';
+        @apply w-1.5 h-1.5 rounded-full bg-current mr-1.5 inline-block;
+    }
+
+    /* ---------- Tableau d'amortissement ---------- */
+    /*
+       180 échéances pour un prêt sur 15 ans : le tableau vit dans un
+       conteneur à défilement propre, avec en-tête collant, plutôt que
+       d'allonger la page de plusieurs écrans.
+    */
+    .amort-scroll {
+        @apply max-h-[420px] overflow-y-auto rounded-xl border border-line;
+    }
+
+    .amort-table {
+        @apply w-full text-sm border-collapse;
+    }
+
+    .amort-table thead th {
+        @apply sticky top-0 z-10 bg-canvas px-4 py-3
+               text-2xs font-bold uppercase tracking-[0.06em] text-ink-3
+               border-b border-line;
+    }
+
+    .amort-table tbody td {
+        @apply px-4 py-2.5 border-b border-line;
+    }
+
+    .amort-table tbody tr:last-child td {
+        @apply border-b-0;
+    }
+
+    .amort-table tbody tr.is-paid {
+        @apply text-ink-3;
+    }
+
+    /* ---------- Contrat affiché à l'écran ---------- */
+    .contract-sheet {
+        @apply rounded-xl border border-line bg-white p-6 sm:p-8 text-[13px] leading-relaxed text-ink-2;
+    }
+
+    .contract-sheet h4 {
+        @apply text-[13px] font-extrabold text-ink uppercase tracking-[0.06em] mt-6 mb-2;
+    }
+
+    .contract-sheet h4:first-of-type {
+        @apply mt-0;
+    }
+
+    .contract-sheet p + p {
+        @apply mt-2;
+    }
+
+    /* ---------- Pavé de signature ---------- */
+    .signature-pad {
+        @apply relative rounded-xl border border-line bg-white overflow-hidden;
+    }
+
+    .signature-pad canvas {
+        @apply block w-full touch-none cursor-crosshair;
+    }
+
+    /* Ligne de signature, purement visuelle. */
+    .signature-baseline {
+        @apply absolute left-6 right-6 bottom-12 h-px bg-line pointer-events-none;
+    }
+
+    .signature-hint {
+        @apply absolute inset-0 flex items-center justify-center
+               text-sm text-ink-4 pointer-events-none transition-opacity;
+    }
+
+    .signature-pad.is-signed .signature-hint {
+        @apply opacity-0;
+    }
+
+    /* ---------- Fenêtres modales ---------- */
+    .modal {
+        @apply fixed inset-0 z-[60] flex items-end sm:items-center justify-center
+               p-0 sm:p-6;
+    }
+
+    .modal-backdrop {
+        @apply absolute inset-0 bg-nexo-950/50 backdrop-blur-[2px];
+    }
+
+    /*
+       Mobile : feuille ancrée en bas, hauteur bornée pour laisser voir le
+       contexte derrière. Desktop : boîte centrée.
+    */
+    .modal-panel {
+        @apply relative w-full sm:max-w-[560px] bg-white shadow-pop
+               rounded-t-2xl sm:rounded-2xl
+               max-h-[92vh] sm:max-h-[86vh] flex flex-col;
+    }
+
+    .modal-header {
+        @apply flex items-start justify-between gap-4 px-5 sm:px-6 py-4
+               border-b border-line shrink-0;
+    }
+
+    .modal-body {
+        @apply px-5 sm:px-6 py-5 overflow-y-auto flex-1;
+    }
+
+    .modal-footer {
+        @apply flex flex-wrap items-center gap-3 px-5 sm:px-6 py-4
+               border-t border-line shrink-0;
+    }
+
+    /* ---------- Assistant (étapes) ---------- */
+    .step-dot {
+        @apply w-7 h-7 rounded-full flex items-center justify-center
+               text-2xs font-extrabold shrink-0 transition-colors
+               bg-line text-ink-3;
+    }
+
+    .step-dot.is-done,
+    .step-dot.is-current {
+        @apply bg-nexo-600 text-white;
+    }
+
+    .step-bar {
+        @apply h-px flex-1 bg-line transition-colors;
+    }
+
+    .step-bar.is-done {
+        @apply bg-nexo-600;
+    }
+
+    /* Choix en pastilles (pays) et en cartes (banque) */
+    .choice-chip {
+        @apply flex items-center gap-2.5 px-4 py-2.5 rounded-full border border-line
+               text-sm font-semibold text-ink-2 cursor-pointer transition-colors
+               hover:border-nexo-400;
+    }
+
+    .peer:checked + .choice-chip {
+        @apply border-nexo-600 bg-nexo-50 text-nexo-800;
+    }
+
+    .choice-card {
+        @apply flex items-center gap-3.5 p-3.5 rounded-xl border border-line
+               cursor-pointer transition-colors hover:border-nexo-400;
+    }
+
+    .peer:checked + .choice-card {
+        @apply border-nexo-600 bg-nexo-50;
+    }
+
+    /* ---------- Champs de formulaire ---------- */
+    .field-label {
+        @apply block text-xs font-extrabold text-ink-2 mb-1.5;
+    }
+
+    .field-input {
+        @apply w-full h-11 px-4 rounded-lg border border-line bg-white text-sm
+               placeholder:text-ink-4 transition-colors
+               focus:outline-none focus:border-nexo-600;
+    }
+
+    .field-input.is-invalid {
+        @apply border-debit-fg;
+    }
+
+    .field-error {
+        @apply text-xs font-semibold text-debit-fg mt-1.5;
+    }
+
+    /* Ligne du récapitulatif */
+    .recap-row {
+        @apply flex items-start justify-between gap-4 py-3 border-b border-line last:border-b-0;
+    }
+
+    /* ---------- Listes empilées (substitut mobile des tableaux) ---------- */
+    /*
+       Un tableau à 6 colonnes ne « rétrécit » pas : sous md il est remplacé
+       par une liste de lignes empilées, plutôt que renvoyé dans un défilement
+       horizontal que personne ne découvre.
+    */
+    .stack-row {
+        @apply flex items-start gap-3 py-3.5 border-b border-line last:border-b-0;
+    }
+}
+
+@layer components {
+    .account-card {
+        @apply card p-6 transition-colors hover:border-nexo-200;
+    }
+
+    .currency-mark {
+        @apply w-14 h-14 rounded-xl flex items-center justify-center shrink-0
+               text-white text-[22px] font-extrabold;
+    }
+
+    .usage-tag {
+        @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+               text-[13px] font-semibold;
+    }
+}
+
+@layer components {
+    .wallet-card {
+        @apply relative rounded-2xl overflow-hidden aspect-[1.6/1] p-5
+               flex flex-col text-white;
+    }
+
+    .wallet-brand {
+        @apply text-[17px] font-extrabold tracking-tight;
+    }
+
+    /* Puce de carte dessinée en CSS : pas d'image à charger. */
+    .wallet-chip {
+        @apply w-11 h-8 rounded-md;
+        background: linear-gradient(135deg, #E8D9A8 0%, #C9B27A 45%, #E8D9A8 100%);
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .12);
+    }
+
+    .limit-bar  { @apply h-1.5 rounded-full bg-line overflow-hidden; }
+    .limit-fill { @apply h-full rounded-full; }
+
+    .card-action {
+        @apply flex-1 inline-flex items-center justify-center gap-2 h-11
+               rounded-xl border border-line text-[13px] font-semibold text-ink-2
+               transition-colors hover:border-nexo-600 hover:text-nexo-700;
+    }
+}
+
+@layer components {
+    /* ---------- Cartes bancaires (visuel) ---------- */
+    /*
+       `aspect-[1.62/1]` a été retiré : combiné à min-h, il imposait une hauteur
+       que le contenu ne respectait pas dès que la colonne devenait étroite.
+       La carte se dimensionne désormais sur son contenu, avec un plancher.
+    */
+    .bank-card {
+        @apply relative rounded-2xl p-5 flex flex-col text-white overflow-hidden
+               min-h-[278px];
+    }
+
+    /*
+       Numéro de carte : « 3210 **** **** 4008 » réclame ~230 px à 19 px avec
+       l'interlettrage d'origine. En grille 4 colonnes, la zone utile tombe à
+       233 px — le numéro débordait. Il démarre donc à 17 px et ne reprend sa
+       taille maquette qu'à partir de xl, où la place existe.
+    */
+    .bank-card-pan {
+        @apply tnum text-[17px] xl:text-[19px] font-bold
+               tracking-[0.02em] xl:tracking-[0.05em] whitespace-nowrap;
+    }
+
+    .bank-card-muted {
+        @apply text-white/55;
+    }
+
+    .bank-card-action {
+        @apply flex-1 h-10 inline-flex items-center justify-center
+               text-xs font-bold rounded-lg bg-white text-ink
+               hover:bg-white/90 transition-colors;
+    }
+
+    .bank-card-icon-action {
+        @apply w-10 h-10 inline-flex items-center justify-center rounded-lg
+               bg-white text-ink hover:bg-white/90 transition-colors;
+    }
+
+    /* Vignette « Commander une carte » */
+    .bank-card-empty {
+        @apply rounded-2xl border-2 border-dashed border-nexo-200 bg-nexo-50/40
+               flex flex-col items-center justify-center text-center p-6
+               min-h-[278px]
+               hover:border-nexo-500 hover:bg-nexo-50 transition-colors;
+    }
+
+    /* ---------- Bascule grille / liste ---------- */
+    .view-toggle {
+        @apply w-9 h-9 inline-flex items-center justify-center rounded-md
+               text-ink-3 transition-colors;
+    }
+
+    .view-toggle.is-active {
+        @apply bg-nexo-50 text-nexo-700;
+    }
+
+    /* ---------- Tuiles d'indicateurs ---------- */
+    .stat-tile {
+        @apply flex items-center gap-4 px-6 py-5;
+    }
+
+    .stat-icon {
+        @apply w-12 h-12 rounded-full flex items-center justify-center shrink-0;
+    }
+
+    /* Pastille pleine : icône blanche sur aplat vert. */
+    .stat-icon--solid {
+        @apply bg-nexo-600 text-white;
+    }
+
+    /* Pastille teintée : icône verte sur fond clair. */
+    .stat-icon--tint {
+        @apply bg-nexo-100 text-nexo-700;
+    }
+}
+
+/* ---------------------------------------------------------------------------
+   Variantes de cartes bancaires — CSS ordinaire, HORS @layer.
+
+   Le template compose la classe à l'exécution :
+       class="bank-card bank-card--{{ card.variant }}"
+
+   La chaîne « bank-card--emerald » n'apparaît donc nulle part dans les
+   fichiers scannés par Tailwind. Déclarées dans @layer components, ces règles
+   seraient supprimées du build de production. Hors couche, Tailwind ne purge
+   pas : toutes les variantes sont toujours émises.
+   Alternative équivalente : les inscrire dans `safelist` de tailwind.config.js.
+--------------------------------------------------------------------------- */
+
+/* Vert profond — carte classique */
+.bank-card--emerald {
+    background: linear-gradient(150deg, #12684A 0%, #0C4A34 55%, #082F21 100%);
+}
+
+/* Vert vif — carte Gold / premium */
+.bank-card--emerald-bright {
+    background: linear-gradient(150deg, #2FB86B 0%, #17924F 55%, #0E7038 100%);
+}
+
+/* Vert quasi noir — carte Business */
+.bank-card--emerald-deep {
+    background: linear-gradient(150deg, #0A3527 0%, #062219 55%, #03140E 100%);
+}
+
+/* Variantes historiques, conservées si vous voulez panacher les gammes. */
+.bank-card--dark {
+    background: linear-gradient(150deg, #232E3C 0%, #141B24 55%, #0F1512 100%);
+}
+
+.bank-card--gold {
+    background: linear-gradient(150deg, #F0C14B 0%, #E0A32E 55%, #C9871F 100%);
+}
+
+.bank-card--navy {
+    background: linear-gradient(150deg, #16202E 0%, #0D1520 55%, #070C12 100%);
+}
+
+/* La Gold est claire : le texte repasse en sombre pour rester lisible. */
+.bank-card--gold .bank-card-ink {
+    color: #4A3208;
+}
+
+.bank-card--gold .bank-card-muted {
+    color: #6B4A11;
+}
+
+/* Pastilles de marque dans le tableau des transactions. */
+.brand-chip {
+    background: #10243F;
+}
+
+.brand-chip--mc {
+    background: #14181F;
+}

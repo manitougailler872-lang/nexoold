@@ -1,0 +1,21 @@
+framework:
+    rate_limiter:
+        # Étape 1 — tentatives identifiant + code secret, par adresse IP.
+        login:
+            policy: 'sliding_window'
+            limit: 10
+            interval: '15 minutes'
+
+        # Étape 2 — saisies d'OTP, par utilisateur.
+        # Complète le compteur validationAttemptCount porté par l'entité :
+        # celui-ci borne un cycle d'OTP, le limiteur borne la fenêtre de temps.
+        otp:
+            policy: 'sliding_window'
+            limit: 10
+            interval: '15 minutes'
+
+        # Demandes de renvoi de code : chaque SMS a un coût réel.
+        otp_resend:
+            policy: 'token_bucket'
+            limit: 3
+            rate: { interval: '5 minutes', amount: 1 }

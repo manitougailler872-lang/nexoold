@@ -1,0 +1,238 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+        @apply bg-canvas text-ink font-sans;
+    }
+
+    /*
+       Alignement des montants en colonne.
+
+       ⚠️ Nunito n'embarque PAS la fonctionnalité OpenType `tnum` : avec cette
+       police, la déclaration ci-dessous est sans effet et les chiffres restent
+       à chasse proportionnelle. L'alignement des colonnes de montants repose
+       donc sur le `text-align: right` déjà appliqué dans les tableaux, ce qui
+       suffit visuellement dans la très grande majorité des cas.
+
+       La règle est conservée car elle redevient active dès qu'on repasse sur
+       une police qui la supporte (Inter, Roboto, IBM Plex, system-ui…).
+
+       Si l'alignement au pixel devient indispensable (colonnes longues,
+       comparaison chiffre à chiffre), décommentez `.tnum--strict` plus bas et
+       appliquez-la sur les cellules concernées : elle bascule uniquement les
+       chiffres sur la pile système, qui, elle, gère tnum.
+    */
+    .tnum {
+        font-variant-numeric: tabular-nums;
+        font-feature-settings: 'tnum' 1;
+    }
+
+    :focus-visible {
+        @apply outline-2 outline-offset-2 outline-nexo-600;
+    }
+}
+
+@layer components {
+    /* ---------- Structure ---------- */
+    .card {
+        @apply bg-white border border-line rounded-card shadow-card;
+    }
+
+    .card-title {
+        @apply text-2xs font-bold uppercase tracking-[0.08em] text-ink-3;
+    }
+
+    /* ---------- Navigation latérale ---------- */
+    .nav-group-title {
+        @apply px-4 mt-6 mb-2 text-2xs font-bold uppercase tracking-[0.08em] text-ink-4;
+    }
+
+    .nav-item {
+        @apply flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium
+               text-ink-2 transition-colors;
+    }
+
+    .nav-item:hover {
+        @apply bg-nexo-50 text-nexo-800;
+    }
+
+    .nav-item.is-active {
+        @apply bg-nexo-900 text-white font-semibold;
+    }
+
+    .nav-item.is-active:hover {
+        @apply bg-nexo-900 text-white;
+    }
+
+    /* ---------- Boutons ---------- */
+    .btn {
+        @apply inline-flex items-center justify-center gap-2 rounded-lg
+               text-sm font-semibold transition-colors;
+    }
+
+    .btn-primary {
+        @apply btn bg-nexo-700 text-white px-5 py-2.5 hover:bg-nexo-800;
+    }
+
+    .btn-ghost {
+        @apply btn border border-line px-5 py-2.5 hover:border-nexo-600 hover:text-nexo-700;
+    }
+
+    .btn-link {
+        @apply inline-flex items-center gap-2 text-sm font-semibold
+               text-nexo-700 hover:text-nexo-900 transition-colors;
+    }
+
+    /* ---------- Badges ---------- */
+    .badge {
+        @apply inline-flex items-center px-2 py-0.5 rounded text-2xs font-bold;
+    }
+
+    .badge-credit {
+        @apply badge bg-credit-bg text-credit-fg;
+    }
+
+    .badge-debit {
+        @apply badge bg-debit-bg text-debit-fg;
+    }
+
+    .badge-neutral {
+        @apply badge bg-gray-100 text-ink-3;
+    }
+
+    /* ---------- Tableaux ---------- */
+    .table-head {
+        @apply text-2xs font-bold uppercase tracking-[0.06em] text-ink-3;
+    }
+
+    .table-row {
+        @apply border-t border-line transition-colors hover:bg-canvas;
+    }
+
+    /* ---------- Pastilles de compte ---------- */
+    .account-avatar {
+        @apply w-9 h-9 rounded-lg flex items-center justify-center
+               text-white text-sm font-bold shrink-0;
+    }
+
+    /* ---------- Actions rapides ---------- */
+    /* NB : la classe `group` doit rester dans le HTML — Tailwind refuse
+       @apply sur cette utilitaire, car elle n'émet aucune déclaration CSS. */
+    .quick-action {
+        @apply flex flex-col items-center gap-2 text-center;
+    }
+
+    .quick-action-icon {
+        @apply w-11 h-11 rounded-full bg-canvas border border-line
+               flex items-center justify-center transition-colors
+               group-hover:bg-nexo-50 group-hover:border-nexo-200;
+    }
+}
+
+@layer components {
+    /* ---------- Cartes bancaires (visuel) ---------- */
+    .bank-card {
+        @apply relative rounded-2xl p-5 flex flex-col text-white overflow-hidden
+               aspect-[1.62/1] min-h-[290px];
+    }
+
+    .bank-card-muted {
+        @apply text-white/55;
+    }
+
+    .bank-card-action {
+        @apply flex-1 h-10 inline-flex items-center justify-center
+               text-xs font-bold rounded-lg bg-white text-ink
+               hover:bg-white/90 transition-colors;
+    }
+
+    .bank-card-icon-action {
+        @apply w-10 h-10 inline-flex items-center justify-center rounded-lg
+               bg-white text-ink hover:bg-white/90 transition-colors;
+    }
+
+    /* Vignette « Commander une carte » */
+    .bank-card-empty {
+        @apply rounded-2xl border-2 border-dashed border-nexo-200 bg-nexo-50/40
+               flex flex-col items-center justify-center text-center p-6
+               aspect-[1.62/1] min-h-[290px]
+               hover:border-nexo-500 hover:bg-nexo-50 transition-colors;
+    }
+
+    /* ---------- Bascule grille / liste ---------- */
+    .view-toggle {
+        @apply w-9 h-9 inline-flex items-center justify-center rounded-md
+               text-ink-3 transition-colors;
+    }
+
+    .view-toggle.is-active {
+        @apply bg-nexo-50 text-nexo-700;
+    }
+
+    /* ---------- Tuiles d'indicateurs ---------- */
+    .stat-tile {
+        @apply flex items-center gap-4 px-6 py-5;
+    }
+
+    .stat-icon {
+        @apply w-12 h-12 rounded-full flex items-center justify-center shrink-0;
+    }
+}
+
+/* ---------------------------------------------------------------------------
+   Variantes de cartes bancaires — CSS ordinaire, HORS @layer.
+
+   Le template compose la classe à l'exécution :
+       class="bank-card bank-card--{{ card.variant }}"
+
+   La chaîne « bank-card--dark » n'apparaît donc nulle part dans les fichiers
+   scannés par Tailwind. Déclarées dans @layer components, ces règles seraient
+   supprimées du build de production (elles l'ont effectivement été au premier
+   essai : seule --gold survivait, car le mot « gold » figure dans un test Twig).
+
+   Hors couche, Tailwind ne purge pas : les trois variantes sont toujours émises.
+   Alternative équivalente : les inscrire dans `safelist` de tailwind.config.js.
+--------------------------------------------------------------------------- */
+.bank-card--dark {
+    background: linear-gradient(150deg, #232E3C 0%, #141B24 55%, #0F1512 100%);
+}
+
+.bank-card--gold {
+    background: linear-gradient(150deg, #F0C14B 0%, #E0A32E 55%, #C9871F 100%);
+}
+
+.bank-card--navy {
+    background: linear-gradient(150deg, #16202E 0%, #0D1520 55%, #070C12 100%);
+}
+
+/* La Gold est claire : le texte repasse en sombre pour rester lisible. */
+.bank-card--gold .bank-card-ink {
+    color: #4A3208;
+}
+
+.bank-card--gold .bank-card-muted {
+    color: #6B4A11;
+}
+
+/* ---------------------------------------------------------------------------
+   Repli optionnel pour l'alignement strict des chiffres.
+
+   À activer seulement si le rendu proportionnel de Nunito gêne réellement.
+   Contrepartie assumée : les montants ne sont plus en Nunito, la différence
+   se remarque sur les gros montants du tableau de bord.
+--------------------------------------------------------------------------- */
+/*
+.tnum--strict {
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum' 1;
+}
+*/

@@ -1,0 +1,916 @@
+  /* ---------------------------------------------------------------------------
+        Hors @layer : classes composées dynamiquement côté Twig, invisibles au
+        scanner de Tailwind. Dans @layer, elles seraient supprimées au build.
+        --------------------------------------------------------------------------- */
+        .wallet-card--platinum {
+        background:
+                repeating-linear-gradient(115deg, rgba(255,255,255,.05) 0 2px, transparent 2px 9px),
+                linear-gradient(140deg, #EC111A 0%, #C8101E 55%, #7D0A12 100%);
+        }
+        .wallet-card--gold {
+            background:
+                repeating-linear-gradient(200deg, rgba(255,255,255,.07) 0 3px, transparent 3px 14px),
+                linear-gradient(140deg, #E9B33C 0%, #D9992A 55%, #C4841D 100%);
+        }
+        .wallet-card--black {
+            background:
+                repeating-linear-gradient(60deg, rgba(255,255,255,.04) 0 2px, transparent 2px 11px),
+                linear-gradient(140deg, #2A2F36 0%, #16191E 55%, #0A0C0F 100%);
+          }
+          .alert-warning {
+                display: flex;
+                gap: .75rem;
+                border-radius: .75rem;
+                border-width: 1px;
+
+                --tw-border-opacity: 1;
+                border-color: rgb(253 230 138 / var(--tw-border-opacity, 1));
+
+                --tw-bg-opacity: 1;
+                background-color: rgb(255 251 235 / var(--tw-bg-opacity, 1));
+
+                padding: 1rem;
+            }
+            /* ========================================
+   BASE
+======================================== */
+
+.tnum {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
+}
+
+
+/* ========================================
+   DROPDOWN
+======================================== */
+
+.dropdown-panel {
+    position: fixed;
+    left: .75rem;
+    right: .75rem;
+    top: 84px;
+    z-index: 50;
+    max-height: calc(100vh - 104px);
+    overflow-y: auto;
+    border-radius: 14px;
+    border-width: 1px;
+    border-color: rgb(232 236 234);
+    background-color: rgb(255 255 255);
+    box-shadow: 0 12px 32px -12px rgba(125, 10, 18, .20);
+}
+
+@media (min-width: 640px) {
+    .dropdown-panel {
+        position: absolute;
+        left: auto;
+        right: 0;
+        top: 100%;
+        margin-top: .5rem;
+        max-height: 440px;
+        width: 360px;
+    }
+
+    .dropdown-panel--wide {
+        width: 380px;
+    }
+}
+
+.dropdown-header {
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem;
+    border-bottom: 1px solid rgb(232 236 234);
+    padding: .875rem 1.25rem;
+    background-color: #fff;
+}
+
+.dropdown-footer {
+    position: sticky;
+    bottom: 0;
+    border-top: 1px solid rgb(232 236 234);
+    padding: .75rem 1.25rem;
+    text-align: center;
+    background-color: #fff;
+}
+
+.dropdown-item {
+    display: flex;
+    gap: .875rem;
+    border-bottom: 1px solid rgb(232 236 234);
+    padding: .875rem 1.25rem;
+    transition: color .15s, background-color .15s, border-color .15s;
+}
+
+.dropdown-item:last-child {
+    border-bottom-width: 0;
+}
+
+.dropdown-item:hover {
+    background-color: rgb(247 249 248);
+}
+
+.dropdown-item--unread {
+    background-color: rgba(255, 245, 245, .6);
+}
+
+.dropdown-item--unread:hover {
+    background-color: rgb(255 245 245);
+}
+
+
+/* ========================================
+   MENU
+======================================== */
+
+.menu-link {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    padding: .75rem 1.25rem;
+    font-size: .875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+    color: rgb(75 85 99);
+    transition: color .15s, background-color .15s;
+}
+
+.menu-link:hover {
+    background-color: rgb(247 249 248);
+    color: rgb(17 24 39);
+}
+
+.menu-link--danger {
+    color: rgb(185 28 28);
+}
+
+.menu-link--danger:hover {
+    background-color: rgb(254 226 226);
+    color: rgb(185 28 28);
+}
+
+
+/* ========================================
+   TOP BAR
+======================================== */
+
+.topbar-badge {
+    position: absolute;
+    top: .375rem;
+    right: .375rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 18px;
+    min-width: 18px;
+    border-radius: 9999px;
+    padding: 0 .25rem;
+    font-size: .6875rem;
+    line-height: 1rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.topbar-icon {
+    position: relative;
+    display: flex;
+    height: 2.75rem;
+    width: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: .5rem;
+    color: rgb(75 85 99);
+    transition: color .15s, background-color .15s;
+}
+
+.topbar-icon:hover {
+    background-color: rgb(247 249 248);
+}
+
+
+/* ========================================
+   CARDS
+======================================== */
+
+.card {
+    border-radius: 14px;
+    border: 1px solid rgb(232 236 234);
+    background-color: #fff;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, .04);
+}
+
+.card-title {
+    font-size: .6875rem;
+    line-height: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: rgb(107 114 128);
+}
+
+
+/* ========================================
+   SIDEBAR / NAVIGATION
+======================================== */
+
+.sidebar {
+    border-right: 1px solid rgb(232 236 234);
+    background-color: #fff;
+}
+
+.nav-group-title {
+    margin-top: 1.5rem;
+    margin-bottom: .5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-size: .6875rem;
+    line-height: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: rgb(156 163 175);
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    border-radius: .5rem;
+    padding: .625rem 1rem;
+    font-size: .875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+    color: rgb(75 85 99);
+    transition: color .15s, background-color .15s;
+}
+
+.nav-item:hover {
+    background-color: rgb(255 245 245);
+    color: rgb(162 13 24);
+}
+
+.nav-item.is-active {
+    font-weight: 600;
+    background-color: rgb(125 10 18);
+    color: #fff;
+}
+
+.nav-item.is-active:hover {
+    background-color: rgb(125 10 18);
+    color: #fff;
+}
+
+
+/* ========================================
+   BUTTONS
+======================================== */
+
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    border-radius: .5rem;
+    padding: .625rem 1.25rem;
+    font-size: .875rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+    background-color: rgb(200 16 30);
+    color: #fff;
+    transition: color .15s, background-color .15s;
+}
+
+.btn-primary:hover {
+    background-color: rgb(162 13 24);
+}
+
+.btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    border-radius: .5rem;
+    border: 1px solid rgb(232 236 234);
+    padding: .625rem 1.25rem;
+    font-size: .875rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+    transition: color .15s, border-color .15s;
+}
+
+.btn-ghost:hover {
+    border-color: rgb(236 17 26);
+    color: rgb(200 16 30);
+}
+
+.btn-link {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: .875rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+    color: rgb(200 16 30);
+    transition: color .15s;
+}
+
+.btn-link:hover {
+    color: rgb(125 10 18);
+}
+
+
+/* ========================================
+   BADGES
+======================================== */
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    border-radius: .25rem;
+    padding: .125rem .5rem;
+    font-size: .6875rem;
+    line-height: 1rem;
+    font-weight: 700;
+}
+
+.badge-credit {
+    display: inline-flex;
+    align-items: center;
+    border-radius: .25rem;
+    padding: .125rem .5rem;
+    font-size: .6875rem;
+    line-height: 1rem;
+    font-weight: 700;
+    background-color: rgb(220 252 231);
+    color: rgb(21 128 61);
+}
+
+.badge-debit {
+    display: inline-flex;
+    align-items: center;
+    border-radius: .25rem;
+    padding: .125rem .5rem;
+    font-size: .6875rem;
+    line-height: 1rem;
+    font-weight: 700;
+    background-color: rgb(254 226 226);
+    color: rgb(185 28 28);
+}
+
+.badge-neutral {
+    display: inline-flex;
+    align-items: center;
+    border-radius: .25rem;
+    padding: .125rem .5rem;
+    font-size: .6875rem;
+    line-height: 1rem;
+    font-weight: 700;
+    background-color: rgb(243 244 246);
+    color: rgb(107 114 128);
+}
+
+
+/* ========================================
+   TABLE
+======================================== */
+
+.table-head {
+    font-size: .6875rem;
+    line-height: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: rgb(107 114 128);
+}
+
+.table-row {
+    border-top: 1px solid rgb(232 236 234);
+    transition: background-color .15s;
+}
+
+.table-row:hover {
+    background-color: rgb(247 249 248);
+}
+
+
+/* ========================================
+   ACCOUNT
+======================================== */
+
+.account-avatar {
+    display: flex;
+    height: 2.25rem;
+    width: 2.25rem;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border-radius: .5rem;
+    font-size: .875rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+
+/* ========================================
+   QUICK ACTIONS
+======================================== */
+
+.quick-action {
+    margin-left: -.5rem;
+    margin-right: -.5rem;
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    border-radius: .5rem;
+    padding: .5rem;
+    text-align: left;
+    transition: background-color .15s;
+}
+
+.quick-action:hover {
+    background-color: rgb(247 249 248);
+}
+
+.quick-action-icon {
+    display: flex;
+    height: 2.5rem;
+    width: 2.5rem;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    border: 1px solid rgb(232 236 234);
+    background-color: rgb(247 249 248);
+}
+
+.group:hover .quick-action-icon {
+    border-color: rgb(248 199 202);
+    background-color: rgb(255 245 245);
+}
+
+.quick-action-label {
+    font-size: .875rem;
+    line-height: 1.25;
+    font-weight: 500;
+    color: rgb(75 85 99);
+}
+
+.group:hover .quick-action-label {
+    color: rgb(162 13 24);
+}
+
+@media (min-width: 1024px) {
+    .quick-action {
+        margin-left: 0;
+        margin-right: 0;
+        flex-direction: column;
+        align-items: center;
+        gap: .5rem;
+        padding: 0;
+        text-align: center;
+    }
+
+    .quick-action:hover {
+        background-color: transparent;
+    }
+
+    .quick-action-icon {
+        height: 2.75rem;
+        width: 2.75rem;
+    }
+
+    .quick-action-label {
+        font-size: .6875rem;
+        line-height: 1rem;
+    }
+}
+
+
+/* ========================================
+   STACK ROW
+======================================== */
+
+.stack-row {
+    display: flex;
+    align-items: flex-start;
+    gap: .75rem;
+    border-bottom: 1px solid rgb(232 236 234);
+    padding-top: .875rem;
+    padding-bottom: .875rem;
+}
+
+.stack-row:last-child {
+    border-bottom-width: 0;
+}
+
+
+/* ========================================
+   BANK CARDS
+======================================== */
+
+.bank-card {
+    position: relative;
+    display: flex;
+    min-height: 278px;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 1rem;
+    padding: 1.25rem;
+    color: #fff;
+}
+
+.bank-card-pan {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
+    white-space: nowrap;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: .02em;
+}
+
+@media (min-width: 1280px) {
+    .bank-card-pan {
+        font-size: 19px;
+        letter-spacing: .05em;
+    }
+}
+
+.bank-card-muted {
+    color: rgba(255, 255, 255, .55);
+}
+
+.bank-card-action {
+    display: inline-flex;
+    height: 2.5rem;
+    flex: 1 1 0%;
+    align-items: center;
+    justify-content: center;
+    border-radius: .5rem;
+    background-color: #fff;
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 700;
+    color: rgb(17 24 39);
+}
+
+.bank-card-action:hover {
+    background-color: rgba(255, 255, 255, .9);
+}
+
+.bank-card-icon-action {
+    display: inline-flex;
+    height: 2.5rem;
+    width: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: .5rem;
+    background-color: #fff;
+    color: rgb(17 24 39);
+}
+
+.bank-card-icon-action:hover {
+    background-color: rgba(255, 255, 255, .9);
+}
+
+.bank-card-empty {
+    display: flex;
+    min-height: 278px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
+    border: 2px dashed rgb(248 199 202);
+    background-color: rgba(255, 245, 245, .4);
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.bank-card-empty:hover {
+    border-color: rgb(238 45 54);
+    background-color: rgb(255 245 245);
+}
+
+
+/* Variantes cartes */
+
+.bank-card--emerald {
+    background: linear-gradient(150deg, #EC111A, #C8101E 55%, #7D0A12);
+}
+
+.bank-card--emerald-bright {
+    background: linear-gradient(150deg, #F15D65, #EC111A 55%, #C8101E);
+}
+
+.bank-card--emerald-deep {
+    background: linear-gradient(150deg, #7D0A12, #5D0A10 55%, #3D0508);
+}
+
+.bank-card--dark {
+    background: linear-gradient(150deg, #232e3c, #141b24 55%, #460509);
+}
+
+.bank-card--gold {
+    background: linear-gradient(150deg, #f0c14b, #e0a32e 55%, #c9871f);
+}
+
+.bank-card--navy {
+    background: linear-gradient(150deg, #16202e, #0d1520 55%, #070c12);
+}
+
+.bank-card--gold .bank-card-ink {
+    color: #4a3208;
+}
+
+.bank-card--gold .bank-card-muted {
+    color: #6b4a11;
+}
+
+
+/* ========================================
+   VIEW TOGGLE
+======================================== */
+
+.view-toggle {
+    display: inline-flex;
+    height: 2.25rem;
+    width: 2.25rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: .375rem;
+    color: rgb(107 114 128);
+}
+
+.view-toggle.is-active {
+    background-color: rgb(255 245 245);
+    color: rgb(200 16 30);
+}
+
+
+/* ========================================
+   STATISTICS
+======================================== */
+
+.stat-tile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+}
+
+.stat-icon {
+    display: flex;
+    height: 3rem;
+    width: 3rem;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+}
+
+.stat-icon--solid {
+    background-color: rgb(236 17 26);
+    color: #fff;
+}
+
+.stat-icon--tint {
+    background-color: rgb(253 235 236);
+    color: rgb(200 16 30);
+}
+
+/* ==========================================================
+   CUSTOM CSS UNIQUEMENT
+   ========================================================== */
+
+
+/* ----------------------------------------------------------
+   CARTES BANCAIRES
+---------------------------------------------------------- */
+
+.bank-card--emerald {
+    background: linear-gradient(
+        150deg,
+        #EC111A 0%,
+        #C8101E 55%,
+        #7D0A12 100%
+    );
+}
+
+.bank-card--emerald-bright {
+    background: linear-gradient(
+        150deg,
+        #F15D65 0%,
+        #EC111A 55%,
+        #C8101E 100%
+    );
+}
+
+.bank-card--emerald-deep {
+    background: linear-gradient(
+        150deg,
+        #7D0A12 0%,
+        #5D0A10 55%,
+        #3D0508 100%
+    );
+}
+
+.bank-card--dark {
+    background: linear-gradient(
+        150deg,
+        #232E3C 0%,
+        #141B24 55%,
+        #460509 100%
+    );
+}
+
+.bank-card--gold {
+    background: linear-gradient(
+        150deg,
+        #F0C14B 0%,
+        #E0A32E 55%,
+        #C9871F 100%
+    );
+}
+
+.bank-card--navy {
+    background: linear-gradient(
+        150deg,
+        #16202E 0%,
+        #0D1520 55%,
+        #070C12 100%
+    );
+}
+
+
+/* Texte spécifique pour la carte Gold */
+
+.bank-card--gold .bank-card-ink {
+    color: #4A3208;
+}
+
+.bank-card--gold .bank-card-muted {
+    color: #6B4A11;
+}
+
+
+/* ----------------------------------------------------------
+   WALLET CARDS
+---------------------------------------------------------- */
+
+.wallet-card--platinum {
+    background:
+        repeating-linear-gradient(
+            115deg,
+            rgba(255, 255, 255, .05) 0 2px,
+            transparent 2px 9px
+        ),
+        linear-gradient(
+            140deg,
+            #EC111A,
+            #C8101E 55%,
+            #7D0A12
+        );
+}
+
+.wallet-card--gold {
+    background:
+        repeating-linear-gradient(
+            200deg,
+            rgba(255, 255, 255, .07) 0 3px,
+            transparent 3px 14px
+        ),
+        linear-gradient(
+            140deg,
+            #E9B33C,
+            #D9992A 55%,
+            #C4841D
+        );
+}
+
+.wallet-card--black {
+    background:
+        repeating-linear-gradient(
+            60deg,
+            rgba(255, 255, 255, .04) 0 2px,
+            transparent 2px 11px
+        ),
+        linear-gradient(
+            140deg,
+            #2A2F36,
+            #16191E 55%,
+            #0A0C0F
+        );
+}
+
+
+/* ----------------------------------------------------------
+   BRAND CHIPS
+---------------------------------------------------------- */
+
+.brand-chip {
+    background: #10243F;
+}
+
+.brand-chip--mc {
+    background: #14181F;
+}
+
+
+/* ========================================
+   BRAND
+======================================== */
+
+.brand-chip {
+    background: #10243f;
+}
+
+.brand-chip--mc {
+    background: #14181f;
+}
+.opportunity-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 14px;
+    border-width: 1px;
+    border-color: rgb(232 236 234);
+    background-color: rgb(255 255 255);
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+    transition-duration: .15s;
+}
+
+.opportunity-card:hover {
+    border-color: rgb(244 154 159);
+}
+
+.opportunity-card--package {
+    border-color: rgb(191 219 254);
+}
+
+.opportunity-head {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    border-bottom-width: 1px;
+    padding: .625rem 1rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 600;
+}
+
+.opportunity-head--single {
+    border-color: rgb(253 235 236);
+    background-color: rgb(255 245 245);
+    color: rgb(162 13 24);
+}
+
+.opportunity-head--package {
+    border-color: rgb(219 234 254);
+    background-color: rgb(239 246 255);
+    color: rgb(30 64 175);
+}
+.asset-mark {
+    display: flex;
+    height: 2rem;
+    width: 2rem;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 800;
+    color: rgb(255 255 255);
+}
+
+.asset-stack {
+    display: flex;
+    align-items: center;
+}
+
+.asset-stack > * + * {
+    margin-left: -.5rem;
+}
+
+.asset-stack .asset-mark {
+    box-shadow: 0 0 0 2px rgb(255 255 255);
+}
+
+
+::-webkit-scrollbar{width:8px;height:8px;} ::-webkit-scrollbar-thumb{background:#E8EAF0;border-radius:100px;}
+  .nav-item{transition:background-color .22s ease, color .22s ease;}
+  .nav-item.active{background:#EFF6FF;color:#0A0A0A;}
+  .nav-item.active svg{color:#0A0A0A;}
+  .qa-btn{transition:transform .2s ease, box-shadow .2s ease;}
+  .qa-btn:hover{transform:translateY(-2px) scale(1.03);}
+  .fade-up{opacity:0;transform:translateY(16px);animation:fadeUp .5s ease forwards;}
+  @keyframes fadeUp{to{opacity:1;transform:translateY(0);}}
+  .skel{background:linear-gradient(90deg,#EEF1F5 25%,#E4E8EE 37%,#EEF1F5 63%);background-size:400% 100%;animation:skel 1.4s ease infinite;border-radius:8px;}
+  @keyframes skel{0%{background-position:100% 50%;}100%{background-position:0 50%;}}
+  @media (prefers-reduced-motion: reduce){ .fade-up{animation:none;opacity:1;transform:none;} .skel{animation:none;} }
+  #sidebarNav{transition:transform .3s ease;}
+  .toast{animation:toastIn .3s ease;}
+  @keyframes toastIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}

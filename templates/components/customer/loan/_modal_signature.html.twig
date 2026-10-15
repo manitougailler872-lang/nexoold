@@ -1,0 +1,201 @@
+{#
+    Signature électronique d'un contrat de prêt — 3 étapes.
+
+    Le contenu du contrat est injecté par le JS depuis les data-* du bouton
+    « Signer le contrat » : une seule modale sert toutes les demandes de la page.
+#}
+<div id="loan-signature-modal" class="modal" hidden
+     role="dialog" aria-modal="true" aria-labelledby="sign-modal-title">
+
+    <div class="modal-backdrop" data-modal-close></div>
+
+    <div class="modal-panel sm:max-w-[560px]">
+
+        {# ---------- En-tête + progression ---------- #}
+        <div class="modal-header flex-col items-stretch gap-5">
+            <div class="flex items-start justify-between gap-4">
+                <h2 id="sign-modal-title" class="text-base font-extrabold">Signer le contrat</h2>
+                <button type="button" data-modal-close
+                        class="w-8 h-8 rounded-lg flex items-center justify-center text-ink-3
+                               hover:bg-canvas transition-colors shrink-0">
+                    <span class="sr-only">Fermer</span>
+                    {{ include('shared/_icon.html.twig', {name: 'close', class: 'w-4 h-4'}, with_context = false) }}
+                </button>
+            </div>
+
+            <ol class="flex items-start justify-between max-w-[400px] mx-auto w-full">
+                {% for step in [
+                    {n: 1, label: 'Contrat'},
+                    {n: 2, label: 'Signature'},
+                    {n: 3, label: 'Confirmation'}
+                ] %}
+                    {% if not loop.first %}
+                        <li class="step-bar mt-3.5 mx-1" data-sign-bar="{{ step.n - 1 }}" aria-hidden="true"></li>
+                    {% endif %}
+                    <li class="flex flex-col items-center gap-2 shrink-0">
+                        <span class="step-dot {{ step.n == 1 ? 'is-current' : '' }}" data-sign-dot="{{ step.n }}">
+                            <span data-dot-number>{{ step.n }}</span>
+                            <span data-dot-check hidden>
+                                {{ include('shared/_icon.html.twig', {name: 'check', class: 'w-3.5 h-3.5'}, with_context = false) }}
+                            </span>
+                        </span>
+                        <span class="text-xs font-bold text-ink-3">{{ step.label }}</span>
+                    </li>
+                {% endfor %}
+            </ol>
+        </div>
+
+        <form method="post" action="" class="flex flex-col flex-1 min-h-0">
+            <input type="hidden" name="_token" value="{{ csrf_token('sign-loan') }}">
+            <input type="hidden" name="loanId" value="">
+            <input type="hidden" name="signature" value="">
+
+            <div class="modal-body">
+
+                {# ================= ÉTAPE 1 — CONTRAT ================= #}
+                <section data-sign-step="1" aria-labelledby="sign-step1">
+                    <h3 id="sign-step1" class="text-sm font-extrabold">Récapitulatif du contrat</h3>
+                    <p class="text-xs text-ink-3 mt-1.5">
+                        Relisez les conditions avant de signer.
+                    </p>
+
+                    <dl class="mt-5">
+                        {% for row in [
+                            {key: 'type',      label: 'Type de prêt'},
+                            {key: 'reference', label: 'Référence', mono: true},
+                            {key: 'amount',    label: 'Montant emprunté', mono: true},
+                            {key: 'duration',  label: 'Durée', mono: true},
+                            {key: 'monthly',   label: 'Mensualité', mono: true},
+                            {key: 'rate',      label: 'Taux annuel', mono: true}
+                        ] %}
+                            <div class="recap-row">
+                                <dt class="text-xs font-bold text-ink-3 shrink-0">{{ row.label }}</dt>
+                                <dd class="text-sm font-semibold text-right {{ row.mono ?? false ? 'tnum' : '' }}"
+                                    data-contract="{{ row.key }}">—</dd>
+                            </div>
+                        {% endfor %}
+                    </dl>
+
+                    <label class="flex items-start gap-3 mt-5 cursor-pointer">
+                        <input type="checkbox" name="acceptTerms"
+                               class="w-[18px] h-[18px] mt-0.5 shrink-0 rounded border-line
+                                      text-nexo-600 focus:ring-nexo-600">
+                        <span class="text-xs text-ink-2 leading-relaxed">
+                            J'ai lu et j'accepte les conditions générales du contrat, le tableau
+                            d'amortissement et le taux annuel effectif global qui y figurent.
+                        </span>
+                    </label>
+
+                    <p class="field-error mt-3" data-sign-error="1" hidden></p>
+                </section>
+
+                {# ================= ÉTAPE 2 — SIGNATURE ================= #}
+                <section data-sign-step="2" aria-labelledby="sign-step2" hidden>
+                    <h3 id="sign-step2" class="sr-only">Signature</h3>
+
+                    <p class="text-sm text-ink-2 leading-relaxed">
+                        Veuillez signer ci-dessous pour valider votre contrat de prêt.<br>
+                        Utilisez votre souris, trackpad ou doigt.
+                    </p>
+
+                    <div class="signature-pad mt-4">
+                        {# `touch-action: none` (classe CSS) empêche le navigateur
+                           mobile de faire défiler la page pendant le tracé. #}
+                        <canvas height="180" style="height: 180px"
+                                role="img" aria-label="Zone de signature manuscrite"></canvas>
+
+                        <span class="signature-baseline" aria-hidden="true"></span>
+                        <span class="signature-hint">Signez ici</span>
+
+                        <button type="button" data-sign-clear
+                                class="absolute bottom-3 right-3 inline-flex items-center gap-2
+                                       text-xs font-semibold text-ink-3 hover:text-ink transition-colors">
+                            {{ include('shared/_icon.html.twig', {name: 'refresh', class: 'w-3.5 h-3.5'}, with_context = false) }}
+                            Effacer
+                        </button>
+                    </div>
+
+                    {#
+                        Repli accessible.
+
+                        Un pavé de signature est inutilisable au clavier et par
+                        lecteur d'écran. La saisie du nom complet a la même valeur
+                        juridique dès lors que l'intention de signer est établie
+                        (règlement eIDAS, signature électronique simple).
+                    #}
+                    <details class="mt-4">
+                        <summary class="text-xs font-semibold text-nexo-700 cursor-pointer">
+                            Je ne peux pas dessiner ma signature
+                        </summary>
+                        <div class="mt-3">
+                            <label for="typed-signature" class="field-label">Saisissez votre nom complet</label>
+                            <input type="text" id="typed-signature" name="typedSignature"
+                                   class="field-input" autocomplete="name" placeholder="Barry Armstrong">
+                        </div>
+                    </details>
+
+                    <div class="flex items-start gap-2.5 mt-4">
+                        {{ include('shared/_icon.html.twig', {name: 'shield', class: 'w-4 h-4 text-nexo-600 shrink-0 mt-0.5'}, with_context = false) }}
+                        <p class="text-xs text-ink-3 leading-relaxed">
+                            Votre signature électronique a la même valeur légale qu'une signature manuscrite.
+                        </p>
+                    </div>
+
+                    <p class="field-error mt-3" data-sign-error="2" hidden></p>
+                </section>
+
+                {# ================= ÉTAPE 3 — CONFIRMATION ================= #}
+                <section data-sign-step="3" aria-labelledby="sign-step3" hidden>
+                    <div class="text-center">
+                        <span class="inline-flex w-14 h-14 rounded-full bg-nexo-100 text-nexo-700
+                                     items-center justify-center mx-auto">
+                            {{ include('shared/_icon.html.twig', {name: 'check-circle', class: 'w-7 h-7'}, with_context = false) }}
+                        </span>
+
+                        <h3 id="sign-step3" class="text-base font-extrabold mt-4">Signature enregistrée</h3>
+                        <p class="text-sm text-ink-3 mt-2 max-w-sm mx-auto leading-relaxed">
+                            Vérifiez votre signature ci-dessous, puis confirmez l'envoi.
+                            Une copie du contrat signé vous sera adressée par e-mail.
+                        </p>
+                    </div>
+
+                    <div class="mt-5 rounded-xl border border-line bg-canvas p-5 min-h-[110px]
+                                flex items-center justify-center"
+                         data-signature-preview></div>
+
+                    <dl class="mt-5">
+                        <div class="recap-row">
+                            <dt class="text-xs font-bold text-ink-3">Contrat</dt>
+                            <dd class="text-sm font-semibold text-right" data-contract="type">—</dd>
+                        </div>
+                        <div class="recap-row">
+                            <dt class="text-xs font-bold text-ink-3">Référence</dt>
+                            <dd class="text-sm font-semibold text-right tnum" data-contract="reference">—</dd>
+                        </div>
+                    </dl>
+                </section>
+            </div>
+
+            {# ---------- Pied ---------- #}
+            <div class="modal-footer">
+                <button type="button" data-sign-cancel class="btn-ghost">Annuler</button>
+
+                <button type="button" data-sign-back class="btn-ghost ml-auto" hidden>Précédent</button>
+
+                <button type="button" data-sign-next class="btn-primary ml-auto">
+                    Continuer
+                    {{ include('shared/_icon.html.twig', {name: 'arrow-right', class: 'w-4 h-4'}, with_context = false) }}
+                </button>
+
+                <button type="button" data-sign-validate class="btn-primary" hidden>
+                    Signer et valider
+                </button>
+
+                <button type="submit" data-sign-finish class="btn-primary ml-auto" hidden>
+                    {{ include('shared/_icon.html.twig', {name: 'check-circle', class: 'w-[18px] h-[18px]'}, with_context = false) }}
+                    Confirmer et envoyer
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

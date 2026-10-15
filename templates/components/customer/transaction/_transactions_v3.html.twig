@@ -1,0 +1,148 @@
+
+    <div class="card">
+
+        {# ---------- Sous xl : liste empilée ----------
+           Sept colonnes ne tiennent pas dans les 648 px disponibles à 1024
+           (la navigation latérale en consomme 272). Le tableau n'apparaît
+           qu'à partir de 1280.
+        #}
+        <ul class="xl:hidden divide-y divide-line">
+            {% for transaction in transactions %}
+                {% set style = categoryStyles[transaction.category]|default({icon: 'info', bg: 'bg-gray-100', fg: 'text-ink-3'}) %}
+                {% set isCredit = transaction.amount > 0 %}
+
+                <li class="p-5 flex items-start gap-3.5">
+                    <span class="{{ isCredit ? 'direction-in' : 'direction-out' }}">
+                        {{ include('shared/_icon.html.twig', {
+                            name: isCredit ? 'arrow-down' : 'arrow-up',
+                            class: 'w-[18px] h-[18px]'
+                        }, with_context = false) }}
+                    </span>
+
+                    <div class="min-w-0 flex-1">
+                        <p class="text-sm font-bold break-words">{{ transaction.label }}</p>
+                        <p class="text-xs text-ink-3 mt-0.5 break-words">{{ transaction.counterparty }}</p>
+
+                        <div class="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-ink-3 mt-2">
+                            <span class="tnum">{{ transaction.date|date('d M Y') }} · {{ transaction.date|date('H:i') }}</span>
+                            <span aria-hidden="true">•</span>
+                            <span>{{ transaction.category }}</span>
+                            <span aria-hidden="true">•</span>
+                            <span class="tnum">{{ transaction.reference }}</span>
+                        </div>
+                    </div>
+
+                    <div class="text-right shrink-0">
+                        <p class="tnum text-sm font-bold whitespace-nowrap
+                                  {{ isCredit ? 'text-credit-fg' : 'text-debit-fg' }}">
+                            {{ isCredit ? '+' : '−' }} {{ transaction.amount|abs|format_currency('EUR', locale: 'fr_FR') }}
+                        </p>
+                        <span class="badge-credit mt-2">{{ transaction.status }}</span>
+                    </div>
+                </li>
+            {% else %}
+                <li class="p-10 text-center text-sm text-ink-3">Aucune transaction sur la période.</li>
+            {% endfor %}
+        </ul>
+
+        {# ---------- À partir de xl : tableau complet ---------- #}
+        <table class="hidden xl:table w-full text-sm">
+            <caption class="sr-only">Liste des opérations</caption>
+            <thead>
+                <tr class="table-head text-left border-b border-line">
+                    <th scope="col" class="px-5 py-4 font-bold">Transaction</th>
+                    <th scope="col" class="px-5 py-4 font-bold">
+                        <a href="{{ path('app_transactions', {sort: sortDirection == 'asc' ? 'desc' : 'asc'}) }}"
+                           class="inline-flex items-center gap-1.5 hover:text-ink transition-colors">
+                            Date
+                            <span class="{{ sortDirection == 'asc' ? '' : 'rotate-180' }} transition-transform">
+                                {{ include('shared/_icon.html.twig', {name: 'arrow-up', class: 'w-3.5 h-3.5'}, with_context = false) }}
+                            </span>
+                        </a>
+                    </th>
+                    <th scope="col" class="px-5 py-4 font-bold">Catégorie</th>
+                    <th scope="col" class="px-5 py-4 font-bold text-right">Montant</th>
+                    <th scope="col" class="px-5 py-4 font-bold">Statut</th>
+                    <th scope="col" class="px-5 py-4 font-bold">Référence</th>
+                    <th scope="col" class="px-5 py-4"><span class="sr-only">Actions</span></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for transaction in transactions %}
+                    {% set style = categoryStyles[transaction.category]|default({icon: 'info', bg: 'bg-gray-100', fg: 'text-ink-3'}) %}
+                    {% set isCredit = transaction.amount > 0 %}
+                    <tr class="table-row">
+                        <td class="px-5 py-4">
+                            <div class="flex items-center gap-3.5">
+                                <span class="{{ isCredit ? 'direction-in' : 'direction-out' }}">
+                                    {{ include('shared/_icon.html.twig', {
+                                        name: isCredit ? 'arrow-down' : 'arrow-up',
+                                        class: 'w-[18px] h-[18px]'
+                                    }, with_context = false) }}
+                                </span>
+                                <div class="min-w-0">
+                                    <p class="font-bold">{{ transaction.label }}</p>
+                                    <p class="text-xs text-ink-3 mt-0.5">{{ transaction.counter }}</p>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td class="px-5 py-4 tnum text-ink-2 whitespace-nowrap">
+                            {{ transaction.date|date('d M Y') }}
+                            <span class="block text-xs text-ink-3 mt-0.5">{{ transaction.date|date('H:i') }}</span>
+                        </td>
+
+                        <td class="px-5 py-4">
+                            <div class="flex items-center gap-2.5">
+                                <span class="chip-icon {{ style.bg }} {{ style.fg }}">
+                                    {{ include('shared/_icon.html.twig', {name: style.icon, class: 'w-[18px] h-[18px]'}, with_context = false) }}
+                                </span>
+                                <span class="whitespace-nowrap">{{ transaction.category }}</span>
+                            </div>
+                        </td>
+
+                        <td class="px-5 py-4 text-right tnum font-bold whitespace-nowrap
+                                   {{ isCredit ? 'text-credit-fg' : 'text-debit-fg' }}">
+                            {{ isCredit ? '+' : '−' }} {{ transaction.amount|abs|format_currency('EUR', locale: 'fr_FR') }}
+                        </td>
+
+                        <td class="px-5 py-4">
+                            <span class="badge-credit inline-flex items-center gap-1.5">
+                                {{ include('shared/_icon.html.twig', {name: 'check-circle', class: 'w-3.5 h-3.5'}, with_context = false) }}
+                                {{ transaction.status }}
+                            </span>
+                        </td>
+                        <td class="px-5 py-4 tnum text-ink-3 whitespace-nowrap">{{ transaction.reference }}</td>
+                        <td class="px-5 py-4 text-right">
+                            <button type="button"
+                                    class="w-8 h-8 rounded-lg inline-flex items-center justify-center text-ink-4
+                                           hover:bg-canvas hover:text-ink-2 transition-colors">
+                                <span class="sr-only">Actions sur l'opération {{ transaction.reference }}</span>
+                                {{ include('shared/_icon.html.twig', {name: 'dots-v', class: 'w-4 h-4'}, with_context = false) }}
+                            </button>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="7" class="px-5 py-10 text-center text-ink-3">
+                            Aucune transaction sur la période.
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {# ---------- Pied : compteur + pagination ---------- #}
+        <div class="flex flex-wrap items-center justify-between gap-4 px-5 py-4 border-t border-line">
+            <p class="text-sm text-ink-3">
+                Affichage de {{ rangeStart }} à {{ rangeEnd }} sur {{ totalItems }} transactions
+            </p>
+            {{ include('shared/_pagination.html.twig', {
+                currentPage: currentPage,
+                totalPages: totalPages,
+                route: 'app_customer_transactions',
+                routeParams: {sort: sortDirection}
+            }, with_context = false) }}
+        </div>
+    </div>

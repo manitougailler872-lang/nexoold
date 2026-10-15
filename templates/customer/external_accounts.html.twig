@@ -1,0 +1,138 @@
+{% extends 'shared/_base.html.twig' %}
+{% block content %}
+     {# ---------- En-tête ---------- #}
+    <div class="flex flex-wrap items-start justify-between gap-4 mb-6">
+        <div>
+            <h1 class="text-[22px] font-extrabold tracking-tight">Bénéficiaires</h1>
+            <p class="text-sm text-ink-3 mt-1">
+                Gérez vos bénéficiaires pour effectuer vos virements en toute simplicité.
+            </p>
+        </div>
+        <button type="button" data-modal-open="beneficiary-add-modal"
+                class="btn-primary w-full sm:w-auto justify-center">
+            {{ include('shared/_icon.html.twig', {name: 'add', class: 'w-[18px] h-[18px]'}, with_context = false) }}
+            Nouveau bénéficiaire
+        </button>
+    </div>
+
+    {# ---------- Recherche ----------
+       Soumission en GET : le terme reste dans l'URL, donc la page est
+       partageable et le retour navigateur conserve la recherche.
+    #}
+    <form action="{{ path('app_customer_external_accounts') }}" method="get" role="search" class="mb-7">
+        <label for="beneficiary-search" class="sr-only">Rechercher un bénéficiaire</label>
+        <div class="relative max-w-[540px]">
+            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-ink-4 pointer-events-none">
+                {{ include('shared/_icon.html.twig', {name: 'search', class: 'w-[18px] h-[18px]'}, with_context = false) }}
+            </span>
+            <input id="beneficiary-search" type="search" name="q" value="{{ query|default('') }}"
+                   placeholder="Rechercher un bénéficiaire..." class="page-search">
+        </div>
+    </form>
+
+    {# ---------- Titre de liste + filtre ---------- #}
+    <div class="flex flex-wrap items-center justify-between gap-4 mb-5">
+        <h2 class="text-lg font-extrabold tracking-tight">Liste des bénéficiaires</h2>
+        <form action="{{ path('app_customer_external_accounts') }}" method="get" class="w-full sm:w-auto">
+            {% if query|default('') %}
+                <input type="hidden" name="q" value="{{ query }}">
+            {% endif %}
+            <label for="status-filter" class="sr-only">Filtrer par statut</label>
+            <select id="status-filter" name="status" onchange="this.form.submit()"
+                           class="w-full sm:w-[220px] h-12 pl-4 pr-9 rounded-xl border border-line bg-white
+                           text-sm font-medium focus:outline-none focus:border-nexo-600 transition-colors">
+                        {% for value, label in {'': 'Tous', 'validated': 'Vérifiés', 'pending': 'En attente'} %}
+                            <option value="{{ value }}" {{ statusFilter|default('') == value ? 'selected' : '' }}>
+                                {{ label }}
+                            </option>
+                        {% endfor %}
+            </select>
+        </form>
+    </div>
+
+    {# ---------- Grille des bénéficiaires ----------
+       Deux colonnes seulement à partir de xl : à 1024, la zone utile tombe à
+       688 px, et un IBAN formaté (27 caractères + espaces) ne tient pas dans
+       une demi-colonne sans être tronqué.
+    #}
+    {% if externalAccounts|length > 0 %}
+        <div class="grid grid-cols-1 xl:grid-cols-2 gap-4">
+            {% for beneficiary in externalAccounts %}
+                <article class="beneficiary-card fade-up" style="animation-delay: 0.23s">
+                    {{ include('components/customer/external/_bank_logo.html.twig', {bank: beneficiary.bank}, with_context = false) }}
+
+                    <div class="min-w-0 flex-1">
+                        <div class="flex items-start justify-between gap-3">
+                            <h3 class="text-sm font-extrabold break-words">
+                                {{ beneficiary.name }}
+                            </h3>
+                            <div class="flex items-center gap-2 shrink-0">
+                                <span class="{{ beneficiary.verified ? 'badge-credit' : 'badge bg-amber-100 text-amber-700' }}">
+                                    {{ beneficiary.verified ? 'Vérifié' : 'En attente' }}
+                                </span>
+                                {% include 'components/customer/external/_actions_menu.html.twig' %}
+                            </div>
+                        </div>
+                        {#
+                            L'IBAN passe à la ligne plutôt que d'être tronqué :
+                            un IBAN coupé n'est pas vérifiable par le client,
+                            or c'est précisément ce qu'il vient contrôler ici.
+                        #}
+                        <p class="tnum text-sm text-ink-2 mt-1.5 break-all">{{ beneficiary.iban }}</p>
+                        <p class="text-xs text-ink-3 mt-2">Banque : {{ beneficiary.bank }}</p>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="card p-12 text-center">
+            <span class="inline-flex w-14 h-14 rounded-full bg-nexo-50 text-nexo-700 items-center justify-center mx-auto">
+                {{ include('shared/_icon.html.twig', {name: 'users', class: 'w-6 h-6'}, with_context = false) }}
+            </span>
+            <p class="text-base font-extrabold mt-4">Aucun bénéficiaire</p>
+            <p class="text-sm text-ink-3 mt-2 max-w-sm mx-auto">
+                {% if query|default('') %}
+                    Aucun résultat pour « {{ query }} ». Essayez un autre nom ou un IBAN.
+                {% else %}
+                    Ajoutez un bénéficiaire pour effectuer vos premiers virements.
+                {% endif %}
+            </p>
+            <button type="button" data-modal-open="beneficiary-add-modal" class="btn-primary mt-6">
+                {{ include('shared/_icon.html.twig', {name: 'plus', class: 'w-[18px] h-[18px]'}, with_context = false) }}
+                Nouveau bénéficiaire
+            </button>
+        </div>
+    {% endif %}
+
+    {# ---------- Pied : compteur + pagination ---------- #}
+    {% if externalAccounts|length > 0 %}
+        <div class="flex flex-wrap items-center justify-between gap-4 mt-7">
+            <p class="text-sm text-ink-3">
+                Affichage {{ rangeStart }} à {{ rangeEnd }} sur {{ totalItems }} bénéficiaires
+            </p>
+
+            {{ include('shared/_pagination.html.twig', {
+                currentPage: currentPage,
+                totalPages: totalPages,
+                route: 'app_customer_external_accounts',
+                routeParams: {q: query|default(''), status: statusFilter|default('')}
+            }, with_context = false) }}
+        </div>
+    {% endif %}
+
+    {# ---------- Modales ----------
+       Une seule instance de chaque, remplie par le JS depuis les data-*
+       du déclencheur : six lignes ne produisent pas six modales.
+    #}
+    {% include 'components/customer/external/_modal_view.html.twig' %}
+    {% include 'components/customer/external/_modal_delete.html.twig' %}
+    {% include 'components/customer/external/_modal_wizard.html.twig' %}
+
+    {# Arrivée depuis /beneficiaires/nouveau : on ouvre l'assistant d'emblée. #}
+    {% if app.request.query.get('add') %}
+        <script type="module">
+            import { openModal } from '{{ asset('assets/js/modal.js') }}';
+            openModal(document.getElementById('beneficiary-add-modal'));
+        </script>
+    {% endif %}
+{% endblock %}

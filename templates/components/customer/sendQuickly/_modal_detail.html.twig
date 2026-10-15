@@ -1,0 +1,66 @@
+{#
+    Détail d'un virement.
+
+    Une seule modale pour toute la page, remplie par le JS depuis les data-*
+    du déclencheur : dix lignes ne produisent pas dix modales.
+#}
+<div id="transfer-detail-modal" class="modal" hidden
+     role="dialog" aria-modal="true" aria-labelledby="transfer-detail-title">
+    <div class="modal-backdrop" data-modal-close></div>
+        <div class="modal-panel sm:max-w-[520px]">
+            <div class="modal-header">
+                <div class="min-w-0">
+                    <h2 id="transfer-detail-title" class="text-base font-extrabold">Détail du virement</h2>
+                    <p class="text-xs text-ink-3 mt-1 tnum" data-t-field="reference">—</p>
+                </div>
+
+                <button type="button" data-modal-close
+                        class="w-8 h-8 rounded-lg flex items-center justify-center text-ink-3
+                            hover:bg-canvas transition-colors shrink-0">
+                    <span class="sr-only">Fermer</span>
+                    {{ include('shared/_icon.html.twig', {name: 'close', class: 'w-4 h-4'}, with_context = false) }}
+                </button>
+            </div>
+
+            <div class="modal-body">
+                {# ---------- Montant + statut ---------- #}
+                <div class="text-center pb-5 border-b border-line">
+                    <span class="inline-flex w-12 h-12 rounded-full bg-nexo-900 text-white text-sm font-bold
+                                items-center justify-center mx-auto" data-t-field="initials">—</span>
+
+                    <p class="tnum text-[26px] font-extrabold mt-3 leading-none" data-t-field="amount">—</p>
+                    <p class="text-sm text-ink-3 mt-2" data-t-field="beneficiary">—</p>
+
+                    <span class="badge-credit mt-3 inline-block" data-t-badge>—</span>
+                </div>
+
+                <dl>
+                    {% for row in [
+                        {key: 'date',      label: 'Date',            mono: true},
+                        {key: 'iban',      label: 'IBAN bénéficiaire', mono: true},
+                        {key: 'account',   label: 'Compte débité'},
+                        {key: 'type',      label: 'Type de virement'},
+                        {key: 'reason',    label: 'Motif'}
+                    ] %}
+                        <div class="recap-row">
+                            <dt class="text-xs font-bold text-ink-3 shrink-0">{{ row.label }}</dt>
+                            <dd class="text-sm font-semibold text-right break-all {{ row.mono ?? false ? 'tnum' : '' }}"
+                                data-t-field="{{ row.key }}">—</dd>
+                        </div>
+                    {% endfor %}
+                </dl>
+            </div>
+
+            <div class="modal-footer">
+                {# Le justificatif n'existe que pour un virement réellement exécuté. #}
+                <a href="#" data-t-receipt class="btn-primary flex-1 sm:flex-none justify-center" hidden>
+                    {{ include('shared/_icon.html.twig', {name: 'export', class: 'w-[18px] h-[18px] rotate-180'}, with_context = false) }}
+                    Télécharger le justificatif
+                </a>
+
+                <button type="button" data-modal-close class="btn-ghost flex-1 sm:flex-none justify-center">
+                    Fermer
+                </button>
+            </div>
+        </div>
+</div>

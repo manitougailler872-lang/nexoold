@@ -1,0 +1,22 @@
+{
+    "name": "nexotrade-front",
+    "version": "1.0.0",
+    "private": true,
+    "description": "Front-end NexoTrade — Tailwind CSS (CLI, sans bundler)",
+    "license": "UNLICENSED",
+    "devDependencies": {
+        "tailwindcss": "^3.4.14"
+    },
+    "dependencies": {
+        "chart.js": "^4.4.6"
+    },
+    "scripts": {
+        "vendor": "node bin/copy-vendor.mjs",
+        "css:dev": "tailwindcss -i assets/styles/app.css -o public/build/app.css",
+        "css:watch": "tailwindcss -i assets/styles/app.css -o public/build/app.css --watch",
+        "css:build": "tailwindcss -i assets/styles/app.css -o public/build/app.css --minify",
+        "dev": "npm run vendor && npm run css:dev",
+        "watch": "npm run vendor && npm run css:watch",
+        "build": "npm run vendor && npm run css:build"
+    }
+}

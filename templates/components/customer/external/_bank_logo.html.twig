@@ -1,0 +1,28 @@
+{#
+    Marque de banque.
+
+    Ce sont des repères stylisés (aplat de couleur + initiales), PAS les
+    logos officiels : reproduire une marque déposée dans un produit tiers
+    demande une autorisation. Branchez ici vos propres fichiers dès que vous
+    disposez des droits, par exemple :
+
+        {% if bank.logo %}
+            <img src="{{ asset('uploads/banks/' ~ bank.logo) }}" alt="" class="w-full h-full object-contain">
+        {% endif %}
+
+    L'entité Banque du modèle NexoTrade prévoit déjà un champ `logo`.
+#}
+{% set palette = {
+    'BNP Paribas':      {bg: '#00915A', label: 'BNP'},
+    'Crédit Agricole':  {bg: '#00915A', label: 'CA'},
+    'Société Générale': {bg: '#E4002B', label: 'SG'},
+    'La Banque Postale':{bg: '#003B7E', label: 'LBP'},
+    'Crédit Mutuel':    {bg: '#005DA9', label: 'CM'},
+    'Caisse d\'Épargne':{bg: '#B2151B', label: 'CE'}
+} %}
+{% set style = palette[bank]|default({bg: '#0F7B3D', label: bank|slice(0, 2)|upper}) %}
+
+<span class="bank-logo" style="background-color: {{ style.bg }}" aria-hidden="true">
+    {{ style.label }}
+</span>
+<span class="sr-only">{{ bank }}</span>

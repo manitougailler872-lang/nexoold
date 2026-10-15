@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NexoTrade — Créer un compte</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          bg: '#FFFFFF', surface: '#FFFFFF', surface2: '#F5F5F5', line: '#E2E8E4',
+          brand: '#0A0A0A', brand2: '#171717', ink: '#10201A', muted: '#5C6F66'
+        },
+        fontFamily: { sans: ['Space Grotesk','sans-serif'], mono: ['JetBrains Mono','monospace'] },
+        keyframes: { stepIn: { '0%': { opacity: 0, transform: 'translateX(18px)' }, '100%': { opacity: 1, transform: 'translateX(0)' } } },
+        animation: { stepIn: 'stepIn .4s ease' }
+      }
+    }
+  }
+</script>
+</head>
+<body class="bg-bg text-ink font-sans antialiased">
+
+<div class="grid lg:grid-cols-2 min-h-screen">
+
+  <!-- LEFT: illustrated brand panel -->
+  <aside class="hidden lg:flex flex-col relative overflow-hidden p-[52px] text-[#F1F8F4]" style="background:linear-gradient(160deg,#141414 0%,#262626 45%,#0A0A0A 100%);">
+    <div class="absolute -top-40 -right-40 w-[480px] h-[480px] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.10),transparent_70%)]"></div>
+    <div class="absolute -bottom-52 -left-36 w-[520px] h-[520px] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.07),transparent_70%)]"></div>
+
+    <div class="relative z-10 flex justify-between items-start">
+      <span class="inline-flex items-center gap-2 text-[13.5px] uppercase tracking-wider border border-white/25 px-3.5 py-1.5 rounded-full bg-white/5">Espace prévoyance & prêt</span>
+    </div>
+
+    <div class="relative z-10 mt-14 max-w-[400px]">
+      <h2 class="text-[32px] font-medium leading-tight mb-4">Protégez votre avenir, à votre rythme.</h2>
+      <p class="text-[16px] text-white/78">Créez votre compte NexoTrade pour accéder à vos solutions d'assurance prévoyance, de financement et de gestion d'actifs, réunies au même endroit.</p>
+    </div>
+
+    <div class="relative z-10 my-11 flex justify-center">
+      <svg viewBox="0 0 300 340" fill="none" class="w-full max-w-[300px]" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="150" cy="320" rx="110" ry="14" fill="rgba(0,0,0,0.12)"/>
+        <path d="M60 340V230C60 175 100 140 150 140C200 140 240 175 240 230V340" fill="#000000"/>
+        <path d="M75 340V235C75 188 108 158 150 158C192 158 225 188 225 235V340" fill="#F1F8F4" fill-opacity="0.95"/>
+        <circle cx="150" cy="86" r="58" fill="#F1F8F4"/>
+        <path d="M96 78C96 48 120 26 150 26C180 26 204 48 204 78V90C204 92 202 92 200 90C196 74 178 66 150 66C122 66 104 74 100 90C98 92 96 92 96 90V78Z" fill="#000000"/>
+        <circle cx="128" cy="90" r="5" fill="#000000"/>
+        <circle cx="172" cy="90" r="5" fill="#000000"/>
+        <path d="M136 108C142 114 158 114 164 108" stroke="#000000" stroke-width="3" stroke-linecap="round"/>
+        <path d="M150 140V158" stroke="#000000" stroke-width="2"/>
+        <circle cx="230" cy="210" r="26" fill="#F5C518"/>
+        <path d="M220 210L227 217L241 202" stroke="#000000" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <div class="relative z-10 flex flex-col gap-3 mt-auto">
+      <div class="bg-white/8 border border-white/18 backdrop-blur rounded-xl px-[18px] py-4 flex items-center gap-3.5">
+        <div class="w-9 h-9 rounded-lg bg-white/12 flex items-center justify-center flex-shrink-0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L20 6V12C20 17 16.5 20.5 12 22C7.5 20.5 4 17 4 12V6L12 2Z" stroke="#F1F8F4" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+        <div><b class="block text-base">Assurance prévoyance</b><span class="text-[13.5px] text-white/70">Protection adaptée à votre foyer</span></div>
+      </div>
+      <div class="bg-white/8 border border-white/18 backdrop-blur rounded-xl px-[18px] py-4 flex items-center gap-3.5">
+        <div class="w-9 h-9 rounded-lg bg-white/12 flex items-center justify-center flex-shrink-0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="2" y="6" width="20" height="13" rx="2" stroke="#F1F8F4" stroke-width="1.8"/><path d="M2 10H22" stroke="#F1F8F4" stroke-width="1.8"/></svg></div>
+        <div><b class="block text-base">Prêt personnel</b><span class="text-[13.5px] text-white/70">Réponse de principe rapide</span></div>
+      </div>
+    </div>
+
+    <div class="relative z-10 flex gap-9 mt-9 pt-7 border-t border-white/16">
+      <div><b class="block font-mono text-[22px]">50K+</b><span class="text-sm text-white/65">Comptes vérifiés</span></div>
+      <div><b class="block font-mono text-[22px]">4,8/5</b><span class="text-sm text-white/65">Satisfaction client</span></div>
+      <div><b class="block font-mono text-[22px]">24/7</b><span class="text-sm text-white/65">Support dédié</span></div>
+    </div>
+  </aside>
+
+  <!-- RIGHT: multi-step form -->
+  <main class="flex flex-col items-center px-6 pt-12 pb-16">
+    <div class="w-full max-w-[460px]">
+
+      <div class="flex items-center justify-center gap-2 text-xl font-semibold mb-10">
+        <svg class="w-6 h-6" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13 1L24 7V19L13 25L2 19V7L13 1Z" stroke="#0A0A0A" stroke-width="1.4"/><path d="M13 8L18 11V17L13 20L8 17V11L13 8Z" fill="#0A0A0A"/></svg>
+        NexoTrade
+      </div>
+
+      <div class="flex items-center justify-center mb-9">
+        <div class="w-[38px] h-[38px] rounded-full flex items-center justify-center font-mono text-base font-semibold transition-all duration-300 bg-gradient-to-b from-brand to-brand2 text-bg scale-105 shadow-[0_0_0_5px_rgba(10,10,10,0.14)]" id="dot-1"><span>1</span></div>
+        <div class="w-16 h-0.5 bg-line mx-1.5 relative overflow-hidden" id="line-1"><div class="absolute inset-0 bg-brand2 w-0 transition-all duration-500"></div></div>
+        <div class="w-[38px] h-[38px] rounded-full flex items-center justify-center font-mono text-base font-semibold transition-all duration-300 bg-surface2 border-2 border-line text-muted" id="dot-2"><span>2</span></div>
+        <div class="w-16 h-0.5 bg-line mx-1.5 relative overflow-hidden" id="line-2"><div class="absolute inset-0 bg-brand2 w-0 transition-all duration-500"></div></div>
+        <div class="w-[38px] h-[38px] rounded-full flex items-center justify-center font-mono text-base font-semibold transition-all duration-300 bg-surface2 border-2 border-line text-muted" id="dot-3"><span>3</span></div>
+      </div>
+
+      <form id="signupForm" onsubmit="event.preventDefault(); alert('Formulaire de démonstration — aucune donnée n\'est envoyée.');">
+        <div class="relative overflow-hidden">
+
+          <!-- STEP 1 -->
+          <div class="step-panel animate-stepIn" data-step="1">
+            <div class="text-center mb-7"><h1 class="text-[23px] font-medium mb-1.5">Informations personnelles</h1><p class="text-[14.5px] text-muted">Étape 1 sur 3</p></div>
+            <div class="grid grid-cols-2 gap-4 mb-[18px]">
+              <div><label for="fname" class="block text-[14px] text-muted mb-1.5">Prénom</label><input type="text" id="fname" placeholder="Votre prénom" required class="w-full bg-surface2 border border-line rounded-lg px-3.5 py-3 text-[15.5px]"></div>
+              <div><label for="lname" class="block text-[14px] text-muted mb-1.5">Nom</label><input type="text" id="lname" placeholder="Votre nom" required class="w-full bg-surface2 border border-line rounded-lg px-3.5 py-3 text-[15.5px]"></div>
+            </div>
+            <div class="grid grid-cols-2 gap-4 mb-[18px]">
+              <div><label for="gender" class="block text-[14px] text-muted mb-1.5">Genre</label><select id="gender" class="w-full bg-surface2 border border-line rounded-lg px-3.5 py-3 text-[15.5px]"><option>Femme</option><option>Homme</option><option>Autre</option></select></div>
+              <div><label for="dob" class="block text-[14px] text-muted mb-1.5">Date de naissance</label><input type="date" id="dob" required class="w-full bg-surface2 border border-line rounded-lg px-3.5 py-3 text-[15.5px]"></div>
+            </div>
+            <div class="grid grid-cols-2 gap-4 mb-[18px]">
+              <div><label for="marital" class="block text-[14px] text-muted mb-1.5">Situation familiale</label><select id="marital" class="w-full bg-surface2 border border-line rounded-lg px-3.5 py-3 text-[15.5px]"><option>Célibataire</option><option>Marié(e)</option><option>Pacsé(e)</option><option>Divorcé(e)</option></select></div>
+              <div><label for="profession" class="block text-[14px] text-muted mb-1.5">Profession</label><input type="text" id="profession" placeholder="Votre profession" class="w-full bg-surface2 border border-line rounded-lg px-3.5 py-3 text-[15.5px]"></div>
+            </div>
+            <div class="flex justify-end mt-2"><button type="button" onclick="goTo(2)" class="px-6 py-3 rounded-lg text-[15.5px] font-semibold bg-gradient-to-b from-brand to-brand2 text-bg hover:brightness-110 transition">Suivant</button></div>
+          </div>
+
+          <!-- STEP 2 -->
+          <div class="step-panel hidden" data-step="2">
+            <div class="text-center mb-7"><h1 class="text-[23px] font-medium mb-1.5">Coordonnées</h1><p class="text-[14.5px] text-muted">Étape 2 sur 3</p></div>
+            <div class="mb-[18px]"><label for="country" class="block text-[14px] text-muted mb-1.5">Pays</label><select id="country" class="w-full bg-surface2 border border-line rounded-lg px-3.5 py-3 text-[15.5px]"><option>Sélectionner un pays</option><option>Bénin</option><option>France</option><option>Côte d'Ivoire</option><option>Sénégal</option><option>Togo</option></select></div>
+            <div class="mb-[18px]"><label for="phone" class="block text-[14px] text-muted mb-1.5">Numéro de téléphone</label><input type="tel" id="phone" placeholder="+229 00 00 00 00" class="w-full bg-surface2 border border-line rounded-lg px-3.5 py-3 text-[15.5px]"></div>
+            <div class="grid grid-cols-2 gap-4 mb-[18px]">
+              <div><label for="region" class="block text-[14px] text-muted mb-1.5">Région</label><input type="text" id="region" placeholder="Ex : Littoral" class="w-full bg-surface2 border border-line rounded-lg px-3.5 py-3 text-[15.5px]"></div>
+              <div><label for="city" class="block text-[14px] text-muted mb-1.5">Ville</label><input type="text" id="city" placeholder="Ex : Cotonou" class="w-full bg-surface2 border border-line rounded-lg px-3.5 py-3 text-[15.5px]"></div>
+            </div>
+            <div class="grid grid-cols-2 gap-4 mb-[18px]">
+              <div><label for="postal" class="block text-[14px] text-muted mb-1.5">Code postal</label><input type="text" id="postal" placeholder="00000" class="w-full bg-surface2 border border-line rounded-lg px-3.5 py-3 text-[15.5px]"></div>
+              <div><label for="address" class="block text-[14px] text-muted mb-1.5">Adresse</label><input type="text" id="address" placeholder="Rue, quartier" class="w-full bg-surface2 border border-line rounded-lg px-3.5 py-3 text-[15.5px]"></div>
+            </div>
+            <div class="flex justify-between mt-2">
+              <button type="button" onclick="goTo(1)" class="px-6 py-3 rounded-lg text-[15.5px] font-semibold bg-surface2 border border-line hover:border-brand transition">Précédent</button>
+              <button type="button" onclick="goTo(3)" class="px-6 py-3 rounded-lg text-[15.5px] font-semibold bg-gradient-to-b from-brand to-brand2 text-bg hover:brightness-110 transition">Suivant</button>
+            </div>
+          </div>
+
+          <!-- STEP 3 -->
+          <div class="step-panel hidden" data-step="3">
+            <div class="text-center mb-7"><h1 class="text-[23px] font-medium mb-1.5">Informations du compte</h1><p class="text-[14.5px] text-muted">Étape 3 sur 3</p></div>
+            <div class="mb-[18px]"><label for="email" class="block text-[14px] text-muted mb-1.5">Adresse e-mail</label><input type="email" id="email" placeholder="vous@exemple.com" required class="w-full bg-surface2 border border-line rounded-lg px-3.5 py-3 text-[15.5px]"></div>
+            <div class="mb-[18px]">
+              <label for="pw" class="block text-[14px] text-muted mb-1.5">Mot de passe</label>
+              <div class="relative"><input type="password" id="pw" placeholder="••••••••" class="w-full bg-surface2 border border-line rounded-lg px-3.5 py-3 text-[15.5px]"><button type="button" onclick="togglePw('pw', this)" class="absolute right-3.5 top-1/2 -translate-y-1/2 text-[13.5px] text-brand2">Afficher</button></div>
+              <div class="text-[12.5px] text-muted mt-1.5">8 caractères minimum.</div>
+            </div>
+            <div class="mb-[18px]">
+              <label for="pw2" class="block text-[14px] text-muted mb-1.5">Confirmation du mot de passe</label>
+              <div class="relative"><input type="password" id="pw2" placeholder="••••••••" class="w-full bg-surface2 border border-line rounded-lg px-3.5 py-3 text-[15.5px]"><button type="button" onclick="togglePw('pw2', this)" class="absolute right-3.5 top-1/2 -translate-y-1/2 text-[13.5px] text-brand2">Afficher</button></div>
+            </div>
+            <div class="grid grid-cols-2 gap-4 mb-[18px]">
+              <div><label for="currency" class="block text-[14px] text-muted mb-1.5">Devise</label><select id="currency" class="w-full bg-surface2 border border-line rounded-lg px-3.5 py-3 text-[15.5px]"><option>Sélectionner</option><option>EUR</option><option>USD</option><option>XOF</option></select></div>
+              <div><label for="acctype" class="block text-[14px] text-muted mb-1.5">Type de compte</label><select id="acctype" class="w-full bg-surface2 border border-line rounded-lg px-3.5 py-3 text-[15.5px]"><option>Sélectionner</option><option>Particulier</option><option>Professionnel</option></select></div>
+            </div>
+            <div class="mb-[18px]">
+              <label class="block text-[14px] text-muted mb-1.5">Pièce d'identité</label>
+              <div class="flex items-center gap-3"><button type="button" onclick="document.getElementById('idfile').click()" class="bg-surface2 border border-line rounded-lg px-4 py-2.5 text-[14.5px] whitespace-nowrap">Choisir un fichier</button><span class="text-[14px] text-muted truncate" id="idfileName">Aucun fichier choisi</span><input type="file" id="idfile" hidden onchange="updateFileName('idfile','idfileName')"></div>
+              <div class="text-[12.5px] text-muted mt-1.5">Carte d'identité, passeport ou permis de conduire.</div>
+            </div>
+            <div class="mb-2">
+              <label class="block text-[14px] text-muted mb-1.5">Justificatif de domicile</label>
+              <div class="flex items-center gap-3"><button type="button" onclick="document.getElementById('addrfile').click()" class="bg-surface2 border border-line rounded-lg px-4 py-2.5 text-[14.5px] whitespace-nowrap">Choisir un fichier</button><span class="text-[14px] text-muted truncate" id="addrfileName">Aucun fichier choisi</span><input type="file" id="addrfile" hidden onchange="updateFileName('addrfile','addrfileName')"></div>
+              <div class="text-[12.5px] text-muted mt-1.5">Facture récente (électricité, gaz, téléphone) ou justificatif d'adresse.</div>
+            </div>
+            <div class="flex justify-between mt-4">
+              <button type="button" onclick="goTo(2)" class="px-6 py-3 rounded-lg text-[15.5px] font-semibold bg-surface2 border border-line hover:border-brand transition">Précédent</button>
+              <button type="submit" class="px-6 py-3 rounded-lg text-[15.5px] font-semibold bg-gradient-to-b from-brand to-brand2 text-bg hover:brightness-110 transition">Créer mon compte</button>
+            </div>
+          </div>
+
+        </div>
+      </form>
+
+      <div class="text-center mt-7 text-[14.5px] text-muted">Déjà un compte ? <a href="nexotrade-login.html" class="text-brand2 font-semibold hover:underline">Se connecter</a></div>
+    </div>
+  </main>
+
+</div>
+
+<script>
+  let current = 1;
+
+  function goTo(step){
+    document.querySelectorAll('.step-panel').forEach(p => p.classList.add('hidden'));
+    const panel = document.querySelector(`.step-panel[data-step="${step}"]`);
+    panel.classList.remove('hidden');
+    panel.classList.remove('animate-stepIn'); void panel.offsetWidth; panel.classList.add('animate-stepIn');
+
+    for(let i = 1; i <= 3; i++){
+      const dot = document.getElementById('dot-' + i);
+      dot.className = 'w-[38px] h-[38px] rounded-full flex items-center justify-center font-mono text-base font-semibold transition-all duration-300';
+      if(i < step){ dot.className += ' bg-brand2 text-bg'; dot.innerHTML = '✓'; }
+      else if(i === step){ dot.className += ' bg-gradient-to-b from-brand to-brand2 text-bg scale-105 shadow-[0_0_0_5px_rgba(10,10,10,0.14)]'; dot.innerHTML = '<span>' + i + '</span>'; }
+      else { dot.className += ' bg-surface2 border-2 border-line text-muted'; dot.innerHTML = '<span>' + i + '</span>'; }
+    }
+    document.querySelector('#line-1 > div').style.width = step > 1 ? '100%' : '0%';
+    document.querySelector('#line-2 > div').style.width = step > 2 ? '100%' : '0%';
+
+    current = step;
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  function togglePw(inputId, btn){
+    const input = document.getElementById(inputId);
+    const show = input.type === 'password';
+    input.type = show ? 'text' : 'password';
+    btn.textContent = show ? 'Masquer' : 'Afficher';
+  }
+
+  function updateFileName(inputId, labelId){
+    const input = document.getElementById(inputId);
+    document.getElementById(labelId).textContent = input.files.length ? input.files[0].name : 'Aucun fichier choisi';
+  }
+</script>
+
+</body>
+</html>

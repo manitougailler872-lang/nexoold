@@ -1,0 +1,38 @@
+<div class="bg-surface border border-line rounded-[22px] p-6 fade-up" style="animation-delay: 0.35s">
+    <div class="flex items-center justify-between mb-4">
+        <h3 class="font-semibold text-[15.5px]">Marchés</h3>
+        <span class="text-[10.5px] px-2 py-0.5 rounded-full bg-slate-100 text-muted">NASDAQ / S&P — démonstration</span>
+    </div>
+    <div class="space-y-3" id="marketsOvList">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div
+                    class="w-8 h-8 rounded-lg bg-panel flex items-center justify-center text-[10px] font-bold text-muted"
+                >
+                    NDX
+                </div>
+                <span class="font-medium text-[13.5px]">NASDAQ</span>
+            </div>
+            <svg width="60" height="24" viewBox="0 0 60 24">
+                <polyline points="0,18 12,14 24,16 36,8 48,11 60,4" fill="none" stroke="#16A34A" stroke-width="1.6" />
+            </svg>
+            <span class=" text-[13px] text-up">+0,84%</span>
+        </div>
+        <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div
+                    class="w-8 h-8 rounded-lg bg-panel flex items-center justify-center text-[10px] font-bold text-muted"
+                >
+                    SPX
+                </div>
+                <span class="font-medium text-[13.5px]">S&P 500</span>
+            </div>
+            <svg width="60" height="24" viewBox="0 0 60 24">
+                <polyline points="0,10 12,14 24,9 36,16 48,12 60,18" fill="none" stroke="#DC2626" stroke-width="1.6" />
+            </svg>
+            <span class=" text-[13px] text-down">−0,22%</span>
+        </div>
+    </div>
+    <div class="space-y-3 mt-3 pt-3 border-t border-line" id="marketsCryptoRows"></div>
+    <a href="nexotrade-dash-crypto.html" class="inline-block text-nblue text-[13.5px] font-medium hover:underline mt-4" >Voir les marchés →</a>
+</div>

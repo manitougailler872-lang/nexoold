@@ -1,0 +1,63 @@
+ <header class="bg-white border-b border-black/6 sticky top-0 z-30">
+    <div class="max-w-[1240px] mx-auto px-6 h-[72px] flex items-center justify-between gap-6">
+        <a href="{{path('app_home')}}" class="flex items-center gap-2.5 shrink-0">
+            <svg width="30" height="30" viewBox="0 0 32 32" fill="none">
+                <path
+                    d="M16 3c2 4 6 6 10 6-2 4-2 9 0 13-4 0-8 2-10 6-2-4-6-6-10-6 2-4 2-9 0-13 4 0 8-2 10-6z"
+                    fill="#16A34A"
+                />
+                <circle cx="16" cy="16" r="4" fill="#fff" />
+            </svg>
+            <span class="font-head font-bold text-xl tracking-tight"
+                >Nexo Banque</span></span
+            >
+        </a>
+        <nav class="hidden lg:flex items-center gap-3 text-sm font-medium">
+            <a href="{{path('app_services')}}" class="flex items-center gap-1 hover:text-green transition-colors"
+                >Services<span class="text-muted text-xs">▾</span></a
+            >
+            <a href="{{path('app_loans')}}" class="flex items-center gap-1 hover:text-green transition-colors"
+                >Prêts  et Crédits <span class="text-muted text-xs">▾</span></a
+            >
+            <a href="{{path('app_services')}}" class="flex items-center gap-1 hover:text-green transition-colors"
+                >Donation<span class="text-muted text-xs">▾</span></a
+            >
+            <a href="{{path('app_heritages')}}" class="flex items-center gap-1 hover:text-green transition-colors"
+                >Mon Patrimoine<span class="text-muted text-xs">▾</span></a
+            >
+            <span class="w-px h-5 bg-black/10"></span>
+            <a href="{{path('app_investments')}}" class="flex items-center gap-2 hover:text-green transition-colors"
+                >Investissement<span
+                    class="bg-mint text-green text-[11px] font-semibold px-2 py-0.5 rounded-full"
+                    >Nouveau</span
+                ></a
+            >
+            <a href="{{path('app_investments')}}" class="flex items-center gap-2 hover:text-green transition-colors"
+                >Remboursement<span
+                    class="bg-mint text-green text-[11px] font-semibold px-2 py-0.5 rounded-full"
+                    >Nouveau</span
+                ></a
+            >
+        </nav>
+        <div class="flex justify-end items-center gap-3 shrink-0">
+            {% if app.user is not empty %}
+                <a
+                    href="{{path('app_login')}}"
+                    class="bg-green text-white flex text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-green-deep transition-colors"
+                    >    
+                        <span>&nbsp;Bienvenue&nbsp;{{app.user.customer.firstname|capitalize}}</span>
+                    </a
+                >
+            {% else %}
+                <a
+                        href="{{path('app_login')}}"
+                        class="bg-green text-white flex text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-green-deep transition-colors"
+                        >    
+                            {{ include('shared/_icon.html.twig', {name: 'cadenas', class: 'w-[18px] h-[18px]'}, with_context = false) }}
+                            <span>Espace client</span>
+                        </a
+                    >
+            {% endif %}
+        </div>
+    </div>
+</header>

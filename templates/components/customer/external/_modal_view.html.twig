@@ -1,0 +1,51 @@
+{# Modale « Visualiser » — remplie par le JS depuis les data-* du déclencheur. #}
+<div id="beneficiary-view-modal" class="modal" hidden
+     role="dialog" aria-modal="true" aria-labelledby="view-modal-title">
+
+    <div class="modal-backdrop" data-modal-close></div>
+
+    <div class="modal-panel">
+        <div class="modal-header">
+            <div>
+                <h2 id="view-modal-title" class="text-base font-extrabold">Détail du bénéficiaire</h2>
+                <p class="text-xs text-ink-3 mt-1">Coordonnées enregistrées pour vos virements.</p>
+            </div>
+            <button type="button" data-modal-close
+                    class="w-8 h-8 rounded-lg flex items-center justify-center text-ink-3
+                           hover:bg-canvas transition-colors shrink-0">
+                <span class="sr-only">Fermer</span>
+                {{ include('shared/_icon.html.twig', {name: 'close', class: 'w-4 h-4'}, with_context = false) }}
+            </button>
+        </div>
+
+        <div class="modal-body">
+            <dl>
+                {% for row in [
+                    {key: 'name',    label: 'Titulaire'},
+                    {key: 'iban',    label: 'IBAN',      mono: true},
+                    {key: 'bic',     label: 'BIC / SWIFT', mono: true},
+                    {key: 'bank',    label: 'Banque'},
+                    {key: 'country', label: 'Pays'},
+                    {key: 'status',  label: 'Statut'},
+                    {key: 'created', label: 'Ajouté le'}
+                ] %}
+                    <div class="recap-row">
+                        <dt class="text-xs font-bold text-ink-3 shrink-0">{{ row.label }}</dt>
+                        <dd class="text-sm font-semibold text-right break-all {{ row.mono ?? false ? 'tnum' : '' }}"
+                            data-field="{{ row.key }}">—</dd>
+                    </div>
+                {% endfor %}
+            </dl>
+        </div>
+
+        <div class="modal-footer">
+            <a href="#" data-action="edit" class="btn-primary flex-1 sm:flex-none justify-center">
+                {{ include('shared/_icon.html.twig', {name: 'pencil', class: 'w-[18px] h-[18px]'}, with_context = false) }}
+                Éditer
+            </a>
+            <button type="button" data-modal-close class="btn-ghost flex-1 sm:flex-none justify-center">
+                Fermer
+            </button>
+        </div>
+    </div>
+</div>

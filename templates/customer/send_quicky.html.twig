@@ -1,0 +1,544 @@
+{% extends 'shared/_base.html.twig' %}
+{% block content %}
+    <div class="grid lg:grid-cols-[minmax(0,380px)_minmax(0,1fr)] gap-5 items-start">
+    <aside class="card p-7 hidden lg:block">
+        <svg viewBox="0 0 320 220" class="w-full max-w-[300px] mx-auto" fill="none" aria-hidden="true">
+            <defs>
+                <linearGradient id="podium" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#F4F7F5" />
+                    <stop offset="100%" stop-color="#E8EDEA" />
+                </linearGradient>
+            </defs>
+
+            <ellipse cx="160" cy="70" rx="120" ry="58" fill="#F4F9F6" />
+
+            <path
+                d="M96 66C118 30 202 30 226 62"
+                stroke="#16A34A"
+                stroke-width="2.4"
+                stroke-linecap="round"
+                stroke-dasharray="0 0"
+            />
+            <path
+                d="M226 62l-9.5-2.5M226 62l-2 9.5"
+                stroke="#16A34A"
+                stroke-width="2.4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+
+            <circle cx="76" cy="52" r="2.6" fill="#BBE7CB" />
+            <circle cx="248" cy="48" r="2.6" fill="#BBE7CB" />
+            <circle cx="160" cy="26" r="2.2" fill="#86D3A6" />
+
+            <rect x="66" y="72" width="80" height="80" rx="16" fill="#FFFFFF" stroke="#E8ECEA" stroke-width="1.6" />
+            <circle cx="106" cy="104" r="11" stroke="#0F7B3D" stroke-width="2.4" />
+            <path d="M89 130a17 17 0 0134 0" stroke="#0F7B3D" stroke-width="2.4" stroke-linecap="round" />
+
+            <rect x="174" y="72" width="80" height="80" rx="16" fill="#FFFFFF" stroke="#E8ECEA" stroke-width="1.6" />
+            <path
+                d="M194 104l20-12 20 12"
+                stroke="#0F7B3D"
+                stroke-width="2.4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+            <path
+                d="M199 108v20M209 108v20M219 108v20M229 108v20M193 133h42"
+                stroke="#0F7B3D"
+                stroke-width="2.4"
+                stroke-linecap="round"
+            />
+
+            <ellipse cx="160" cy="176" rx="98" ry="26" fill="url(#podium)" />
+
+            <path d="M160 146l22 9v18c0 13.5-9.2 24.2-22 27.6-12.8-3.4-22-14.1-22-27.6v-18l22-9z" fill="#0F7B3D" />
+            <path
+                d="M151 175.5l6.6 6.6 12-13"
+                stroke="#FFFFFF"
+                stroke-width="3.4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+        </svg>
+        <h2 class="text-[22px] font-extrabold leading-snug mt-8">
+            Vos virements,<br /><span class="text-nexo-600">100% sécurisés</span>
+        </h2>
+        <p class="text-sm text-ink-3 leading-relaxed mt-3">
+            Nous utilisons des technologies de pointe pour garantir la sécurité de vos transactions.
+        </p>
+        <ul class="mt-7 pt-7 border-t border-line space-y-6">
+            <li class="trust-item">
+                <span class="trust-icon"
+                    ><svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none">
+                        <path
+                            d="M12 3l7.2 3v6c0 4.5-3.1 8-7.2 9.2C7.9 20 4.8 16.5 4.8 12V6L12 3z"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linejoin="round"
+                        />
+                        <path
+                            d="M9.2 12.2l2 2 3.6-3.9"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        /></svg
+                ></span>
+                <div>
+                    <p class="text-sm font-bold">Sécurité garantie</p>
+                    <p class="text-[13px] text-ink-3 leading-relaxed mt-1">
+                        Tous vos virements sont protégés par un chiffrement de niveau bancaire.
+                    </p>
+                </div>
+            </li>
+            <li class="trust-item">
+                <span class="trust-icon"
+                    ><svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none">
+                        <path
+                            d="M13 2.5L5 13.2h6l-1 8.3 8-10.7h-6l1-8.3z"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linejoin="round"
+                        /></svg
+                ></span>
+                <div>
+                    <p class="text-sm font-bold">Rapidité</p>
+                    <p class="text-[13px] text-ink-3 leading-relaxed mt-1">
+                        Vos bénéficiaires reçoivent les fonds en un rien de temps.
+                    </p>
+                </div>
+            </li>
+            <li class="trust-item">
+                <span class="trust-icon"
+                    ><svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.8" />
+                        <path
+                            d="M8.6 12.3l2.4 2.4 4.4-4.9"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        /></svg
+                ></span>
+                <div>
+                    <p class="text-sm font-bold">Simplicité</p>
+                    <p class="text-[13px] text-ink-3 leading-relaxed mt-1">
+                        Effectuez vos virements en quelques clics, 24h/24 et 7j/7.
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </aside>
+
+    <div>
+        <div class="flex items-start gap-3 mb-5">
+       
+            <div>
+                <h1 class="text-[22px] font-extrabold tracking-tight">Virement Bancaire</h1>
+                <p class="text-sm text-ink-3 mt-1">
+                    Remplissez les informations ci-dessous pour effectuer votre virement en toute sécurité.
+                </p>
+            </div>
+        </div>
+
+        <form
+            method="post"
+            action="#"
+            data-transfer-form
+            data-available-balance="8925.40"
+            class="card p-5 sm:p-6 space-y-6"
+        >
+            <div>
+                <label for="t-account" class="field-label">Compte débiteur (NexoTrade)</label>
+                <div class="select-card">
+                    <span class="chip-icon bg-nexo-50 text-nexo-700"
+                        ><svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none">
+                            <path
+                                d="M3.8 9.5L12 4.5l8.2 5"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                            <path
+                                d="M6 10.5v7M10 10.5v7M14 10.5v7M18 10.5v7M4 19.5h16"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                            /></svg
+                    ></span>
+                    <span class="min-w-0 flex-1"
+                        ><span class="block text-sm font-bold truncate">Compte principal</span
+                        ><span class="block text-xs text-ink-3 tnum mt-0.5">•••• 9012 · EUR</span></span
+                    >
+                    <span class="text-right shrink-0 hidden sm:block"
+                        ><span class="block text-2xs font-bold uppercase tracking-[0.06em] text-ink-3"
+                            >Solde disponible</span
+                        ><span class="block tnum text-sm font-extrabold mt-0.5">8 925,40 €</span></span
+                    >
+                    <svg class="w-4 h-4 text-ink-3 shrink-0" viewBox="0 0 24 24" fill="none">
+                        <path
+                            d="M6 9l6 6 6-6"
+                            stroke="currentColor"
+                            stroke-width="2.2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                    </svg>
+                    <select id="t-account" name="debitAccount" aria-label="Compte débiteur">
+                        <option value="1" data-balance="8925.4" selected>Compte principal — 8 925,40 €</option>
+                        <option value="2" data-balance="32230.3">Compte Épargne+ — 32 230,30 €</option>
+                        <option value="3" data-balance="14999.99">Compte NexoPro — 14 999,99 €</option>
+                    </select>
+                </div>
+                <p class="sm:hidden text-xs text-ink-3 mt-2">
+                    Solde disponible : <span class="tnum font-bold text-ink">8 925,40 €</span>
+                </p>
+            </div>
+
+            <div>
+                <label for="t-beneficiary" class="field-label">Bénéficiaire</label>
+                <div class="select-card">
+                    <span
+                        class="w-10 h-10 rounded-full bg-nexo-900 text-white text-2xs font-extrabold flex items-center justify-center shrink-0"
+                        data-beneficiary-initials
+                        >JD</span
+                    >
+                    <span class="min-w-0 flex-1"
+                        ><span class="block text-sm font-bold truncate" data-beneficiary-name>John Doe</span
+                        ><span class="block text-xs text-ink-3 tnum mt-0.5 truncate" data-beneficiary-iban
+                            >FR85 3000 4008 2800 0100 1234 567</span
+                        ></span
+                    >
+                    <svg class="w-4 h-4 text-ink-3 shrink-0" viewBox="0 0 24 24" fill="none">
+                        <path
+                            d="M6 9l6 6 6-6"
+                            stroke="currentColor"
+                            stroke-width="2.2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                    </svg>
+                    <select id="t-beneficiary" name="beneficiary" aria-label="Bénéficiaire">
+                        <option value="1" data-initials="JD" data-iban="FR85 3000 4008 2800 0100 1234 567">
+                            John Doe
+                        </option>
+                        <option value="2" data-initials="MS" data-iban="FR14 2004 1010 0505 0001 3M02 606">
+                            Marie Smith
+                        </option>
+                        <option value="3" data-initials="LB" data-iban="FR82 1027 8060 3400 0201 2340 123">
+                            Lucas Bernard
+                        </option>
+                        <option value="4" data-initials="AD" data-iban="FR15 3000 6000 0112 3456 7890 123">
+                            Alexandre Dubois
+                        </option>
+                        <option value="5" data-initials="SC" data-iban="FR59 1695 8000 0102 3456 7890 145">
+                            Sophie Cartier
+                        </option>
+                        <option value="6" data-initials="ET" data-iban="FR64 3000 2070 1200 0007 8945 612">
+                            Entreprise Tech Solutions
+                        </option>
+                    </select>
+                </div>
+                <button
+                    type="button"
+                    data-modal-open="beneficiary-add-modal"
+                    class="mt-3 inline-flex items-center gap-2 rounded-lg border border-nexo-200 bg-nexo-50 px-4 py-2.5 text-sm font-bold text-nexo-700 hover:bg-nexo-100 transition-colors"
+                >
+                    <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none">
+                        <path
+                            d="M12 5.5v13M5.5 12h13"
+                            stroke="currentColor"
+                            stroke-width="2.1"
+                            stroke-linecap="round"
+                        /></svg
+                    >Nouveau bénéficiaire
+                </button>
+            </div>
+
+            <div>
+                <label for="t-amount" class="field-label">Montant</label>
+                <div class="flex">
+                    <input
+                        id="t-amount"
+                        name="amount"
+                        type="text"
+                        inputmode="decimal"
+                        value="1 250,00"
+                        placeholder="0,00"
+                        autocomplete="off"
+                        class="field-input h-12 rounded-r-none flex-1 tnum text-base font-semibold"
+                    />
+                    <label for="t-currency" class="sr-only">Devise</label>
+                    <select
+                        id="t-currency"
+                        name="currency"
+                        class="h-12 pl-4 pr-9 rounded-lg rounded-l-none border border-l-0 border-line bg-white text-sm font-bold focus:outline-none focus:border-nexo-600 transition-colors"
+                    >
+                        <option>EUR</option>
+                        <option>USD</option>
+                    </select>
+                </div>
+                <p class="text-xs text-ink-3 mt-2" data-amount-words>Montant en toutes lettres : —</p>
+                <p class="field-error mt-1.5" data-balance-error hidden></p>
+            </div>
+
+            <div>
+                <label for="t-reason" class="field-label"
+                    >Motif <span class="font-medium text-ink-4">(optionnel)</span></label
+                >
+                <textarea
+                    id="t-reason"
+                    name="reason"
+                    maxlength="140"
+                    rows="3"
+                    class="field-textarea"
+                    placeholder="Paiement facture, loyer..."
+                >
+Paiement facture</textarea
+                >
+                <p class="text-xs text-ink-4 text-right mt-1.5 tnum" data-reason-counter>0 / 140</p>
+            </div>
+
+            <fieldset>
+                <legend class="field-label">Type de virement</legend>
+                <div class="grid sm:grid-cols-3 gap-3 mt-2">
+                    <div>
+                        <input
+                            type="radio"
+                            name="transferType"
+                            id="ty-immediate"
+                            value="immediate"
+                            class="peer sr-only"
+                            checked
+                        />
+                        <label for="ty-immediate" class="transfer-type"
+                            ><span class="radio-mark"></span>
+                            <span class="min-w-0"
+                                ><span class="flex items-center gap-2"
+                                    ><span class="chip-icon w-8 h-8 bg-canvas text-ink-2"
+                                        ><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none">
+                                            <path
+                                                d="M13 2.5L5 13.2h6l-1 8.3 8-10.7h-6l1-8.3z"
+                                                stroke="currentColor"
+                                                stroke-width="1.8"
+                                                stroke-linejoin="round"
+                                            /></svg></span
+                                    ><span class="text-sm font-bold leading-tight">Virement immédiat</span></span
+                                >
+                                <span class="badge-credit mt-2">Recommandé</span>
+                                <span class="block text-xs text-ink-3 leading-relaxed mt-2"
+                                    >Le virement est exécuté immédiatement.</span
+                                ></span
+                            ></label
+                        >
+                    </div>
+                    <div>
+                        <input
+                            type="radio"
+                            name="transferType"
+                            id="ty-scheduled"
+                            value="scheduled"
+                            class="peer sr-only"
+                        />
+                        <label for="ty-scheduled" class="transfer-type"
+                            ><span class="radio-mark"></span>
+                            <span class="min-w-0"
+                                ><span class="flex items-center gap-2"
+                                    ><span class="chip-icon w-8 h-8 bg-canvas text-ink-2"
+                                        ><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none">
+                                            <rect
+                                                x="3.5"
+                                                y="5.5"
+                                                width="17"
+                                                height="15"
+                                                rx="2.4"
+                                                stroke="currentColor"
+                                                stroke-width="1.8"
+                                            />
+                                            <path
+                                                d="M3.5 10h17M8 3.5v4M16 3.5v4"
+                                                stroke="currentColor"
+                                                stroke-width="1.8"
+                                                stroke-linecap="round"
+                                            /></svg></span
+                                    ><span class="text-sm font-bold leading-tight">Virement différé</span></span
+                                >
+
+                                <span class="block text-xs text-ink-3 leading-relaxed mt-2"
+                                    >Le virement sera exécuté à une date future.</span
+                                ></span
+                            ></label
+                        >
+                    </div>
+                    <div>
+                        <input
+                            type="radio"
+                            name="transferType"
+                            id="ty-recurring"
+                            value="recurring"
+                            class="peer sr-only"
+                        />
+                        <label for="ty-recurring" class="transfer-type"
+                            ><span class="radio-mark"></span>
+                            <span class="min-w-0"
+                                ><span class="flex items-center gap-2"
+                                    ><span class="chip-icon w-8 h-8 bg-canvas text-ink-2"
+                                        ><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none">
+                                            <rect
+                                                x="3.5"
+                                                y="5.5"
+                                                width="17"
+                                                height="15"
+                                                rx="2.4"
+                                                stroke="currentColor"
+                                                stroke-width="1.8"
+                                            />
+                                            <path
+                                                d="M3.5 10h17M8 3.5v4M16 3.5v4"
+                                                stroke="currentColor"
+                                                stroke-width="1.8"
+                                                stroke-linecap="round"
+                                            /></svg></span
+                                    ><span class="text-sm font-bold leading-tight">Virement programmé</span></span
+                                >
+
+                                <span class="block text-xs text-ink-3 leading-relaxed mt-2"
+                                    >Répétez ce virement automatiquement.</span
+                                ></span
+                            ></label
+                        >
+                    </div>
+                </div>
+                <div class="mt-4" data-execution-date hidden>
+                    <label for="t-date" class="field-label">Date d'exécution</label>
+                    <input
+                        id="t-date"
+                        name="executionDate"
+                        type="date"
+                        value="2026-09-12"
+                        class="field-input h-12 max-w-[260px] tnum"
+                    />
+                </div>
+            </fieldset>
+
+            <div class="rounded-xl bg-nexo-50 border border-nexo-100 p-4 flex gap-3">
+                <svg class="w-[18px] h-[18px] text-nexo-700 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.8" />
+                    <path d="M12 11v5.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                    <circle cx="12" cy="7.9" r="1" fill="currentColor" />
+                </svg>
+                <p class="text-xs text-ink-2 leading-relaxed">
+                    Veuillez vérifier attentivement les informations avant de confirmer votre virement. Un virement
+                    exécuté vers un IBAN erroné est difficile à récupérer.
+                </p>
+            </div>
+
+            <button
+                type="submit"
+                data-transfer-submit
+                class="btn-primary w-full justify-center h-12 text-[15px] disabled:opacity-60 disabled:pointer-events-none"
+            >
+                Confirmer le virement
+                <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none">
+                    <path
+                        d="M5 12h14M13 6l6 6-6 6"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                </svg>
+            </button>
+        </form>
+    </div>
+</div>
+<div
+    id="transfer-progress-overlay"
+    class="progress-overlay"
+    hidden
+    data-duration="60"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="progress-title"
+>
+    <div class="progress-card">
+        <div class="spinner" aria-hidden="true"></div>
+        <h2 id="progress-title" class="text-lg font-extrabold mt-5">Traitement de votre virement</h2>
+        <p class="text-sm text-ink-3 mt-2 leading-relaxed">
+            Ne fermez pas cette page. Vous recevrez un code de validation à la fin du traitement.
+        </p>
+        <div class="mt-6">
+            <div
+                class="progress-track"
+                role="progressbar"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="0"
+                aria-labelledby="progress-title"
+            >
+                <div class="progress-fill" style="width: 0%" data-progress-fill></div>
+            </div>
+            <div class="flex items-center justify-between gap-3 mt-2.5 text-xs text-ink-3">
+                <span class="tnum font-bold text-ink" data-progress-percent>0 %</span>
+                <span class="tnum" data-progress-remaining aria-live="polite">Préparation…</span>
+            </div>
+        </div>
+        <ol class="mt-6 space-y-3">
+            <li class="progress-step" data-progress-step>
+                <span class="progress-step-mark"
+                    ><svg class="w-3 h-3" viewBox="0 0 24 24" fill="none">
+                        <path
+                            d="M5 12.5l4.5 4.5L19 7"
+                            stroke="currentColor"
+                            stroke-width="2.4"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        /></svg></span
+                >Vérification du solde et des plafonds
+            </li>
+            <li class="progress-step" data-progress-step>
+                <span class="progress-step-mark"
+                    ><svg class="w-3 h-3" viewBox="0 0 24 24" fill="none">
+                        <path
+                            d="M5 12.5l4.5 4.5L19 7"
+                            stroke="currentColor"
+                            stroke-width="2.4"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        /></svg></span
+                >Contrôles de conformité
+            </li>
+            <li class="progress-step" data-progress-step>
+                <span class="progress-step-mark"
+                    ><svg class="w-3 h-3" viewBox="0 0 24 24" fill="none">
+                        <path
+                            d="M5 12.5l4.5 4.5L19 7"
+                            stroke="currentColor"
+                            stroke-width="2.4"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        /></svg></span
+                >Enregistrement de l'ordre
+            </li>
+            <li class="progress-step" data-progress-step>
+                <span class="progress-step-mark"
+                    ><svg class="w-3 h-3" viewBox="0 0 24 24" fill="none">
+                        <path
+                            d="M5 12.5l4.5 4.5L19 7"
+                            stroke="currentColor"
+                            stroke-width="2.4"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        /></svg></span
+                >Envoi du code de validation
+            </li>
+        </ol>
+        <button type="button" data-progress-cancel class="btn-ghost w-full justify-center mt-6 h-10 text-sm">
+            Annuler
+        </button>
+    </div>
+</div>
+
+{% endblock %}

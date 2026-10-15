@@ -1,0 +1,129 @@
+<article class="account-card rounded-md">
+    <div class="flex items-start gap-4">
+        <span class="currency-mark bg-[#1B5E3A]">{{account.devise.symbol}}</span>
+        <div class="min-w-0 flex-1">
+            <h2 class="text-base font-extrabold break-words">{{account.label}}</h2>
+            <p class="text-[13px] text-ink-3 tnum mt-1 break-all">{{account.ibanFormatted}}</p>
+            <span class="badge-credit mt-2.5">Actif</span>
+        </div>
+        <div class="relative shrink-0" data-dropdown>
+            <button
+                type="button"
+                data-dropdown-trigger
+                class="w-8 h-8 rounded-lg flex items-center justify-center text-ink-4 hover:bg-canvas hover:text-ink-2 transition-colors"
+            >
+                <span class="sr-only">Actions sur Compte épargne GBP</span
+                ><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="5.5" r="1.6" fill="currentColor" />
+                    <circle cx="12" cy="12" r="1.6" fill="currentColor" />
+                    <circle cx="12" cy="18.5" r="1.6" fill="currentColor" />
+                </svg>
+            </button>
+            <div data-dropdown-panel class="dropdown-panel sm:w-[230px] py-1.5" hidden>
+                <a href="#" class="menu-link"
+                    ><svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none">
+                        <path
+                            d="M4 8h13l-3.2-3.2M20 16H7l3.2 3.2"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                    </svg>
+                    Voir les opérations</a
+                ><a href="#" class="menu-link"
+                    ><svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none">
+                        <path
+                            d="M12 15V4m0 11l-3.6-3.6M12 15l3.6-3.6"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                        <path
+                            d="M4.5 16v2.5a1.5 1.5 0 001.5 1.5h12a1.5 1.5 0 001.5-1.5V16"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                        />
+                    </svg>
+                    Effectuer un virement</a
+                ><a href="#" class="menu-link"
+                    ><svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none">
+                        <path
+                            d="M13.8 3.5v4.7h4.7"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linejoin="round"
+                        />
+                        <path
+                            d="M18.5 8.8V19a1.8 1.8 0 01-1.8 1.8H7.3A1.8 1.8 0 015.5 19V5.3a1.8 1.8 0 011.8-1.8h6.5l4.7 5.3z"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linejoin="round"
+                        />
+                    </svg>
+                    Télécharger le RIB</a
+                >
+            </div>
+        </div>
+    </div>
+    <div class="flex items-end justify-between gap-4 mt-6">
+        <div class="min-w-0">
+            <p class="card-title">Solde disponible</p>
+            <p class="tnum text-[26px] font-extrabold mt-2 leading-none whitespace-nowrap" data-maskable>
+                {{account.amount}} €
+            </p>
+        </div>
+        <div class="text-right shrink-0">
+            <svg
+                class="w-[92px] h-11"
+                viewBox="0 0 92 44"
+                preserveAspectRatio="none"
+                role="img"
+                aria-label="Tendance du solde sur le mois"
+            >
+                <path
+                    d="M2 34 L14 36 L26 28 L38 31 L50 22 L62 25 L74 14 L90 10"
+                    fill="none"
+                    stroke="#7C3AED"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+            </svg>
+            <span class="badge mt-1.5 tnum" style="background-color: #f3e8ff; color: #7c3aed">+1,02%</span>
+            <p class="text-xs text-ink-3 mt-1">ce mois-ci</p>
+        </div>
+    </div>
+    <div class="grid grid-cols-2 gap-4 mt-6 pt-5 border-t border-line">
+        <div>
+            <p class="card-title">Bloqué</p>
+            <p class="tnum text-[15px] font-extrabold mt-2" data-maskable> {{account.blockedAmount}} €</p>
+            <p class="text-xs text-ink-3 mt-1.5 tnum">0,00% du solde</p>
+        </div>
+        <div class="border-l border-line pl-4">
+            <p class="card-title">Usage</p>
+            <span class="usage-tag bg-purple-50 text-purple-600 mt-2"
+                ><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none">
+                    <path
+                        d="M4 17l5-5 3.5 3.5L20 8"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                    <path
+                        d="M15 8h5v5"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                </svg>
+                Épargne</span
+            >
+            <p class="text-xs text-ink-3 mt-1.5">Compte d'épargne</p>
+        </div>
+    </div>
+</article

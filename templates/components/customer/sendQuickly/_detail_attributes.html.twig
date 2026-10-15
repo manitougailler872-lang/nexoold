@@ -1,0 +1,14 @@
+{#- Attributs data-* du virement, partagés par la liste et le tableau. -#}
+{#- Sortie sur une seule ligne : ces attributs sont injectés dans une balise. -#}
+data-t-reference="{{ transfer.reference }}"
+data-t-date="{{ transfer.date|date('d/m/Y') }}"
+data-t-beneficiary="{{ transfer.beneficiaryName }}"
+data-t-iban="{{ transfer.beneficiaryIban }}"
+data-t-initials="{{ transfer.beneficiaryInitials }}"
+data-t-account="{{ transfer.debitAccountLabel }} •••• {{ transfer.debitAccountLast4 }}"
+data-t-amount="{{ transfer.amount|format_currency(transfer.currency, locale: 'fr_FR') }}"
+data-t-reason="{{ transfer.reason }}"
+data-t-type="{{ type.label }}"
+data-t-status="{{ status.label }}"
+data-t-status-class="{{ status.class }}"
+data-t-receipt=""
