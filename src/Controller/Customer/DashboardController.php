@@ -63,7 +63,7 @@ final class DashboardController extends AbstractController
                     'textColor' => $transaction->getTransType()->getTextIconColor(),
                     'category' => $transaction->getCategory()?->getLabel(),
                     'iconSvg' => $transaction->getTransType()->getIconSvg(),
-                    'operation' => $transaction->getOperation()->getLabel2(),
+                    'operation' => $transaction->getOperation()->getLabel3(),
                     'amount' => $transaction->getAmount(),
                     'status' => $transaction->getStatus()->label(),
                 ];

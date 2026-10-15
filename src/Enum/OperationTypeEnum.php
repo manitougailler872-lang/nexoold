@@ -21,6 +21,14 @@ enum OperationTypeEnum: string
         };
     }
 
+    public function getLabel3(): OperationTypeEnum
+    {
+        return match ($this) {
+            self::DEBIT => OperationTypeEnum::DEBIT,
+            self::CREDIT => OperationTypeEnum::CREDIT
+        };
+    }
+
     public function getChoices():array {
         $out = [];
         foreach(self::cases() as $case){
