@@ -74,14 +74,20 @@ final class NexoTradeExtension extends AbstractExtension
         $unreadMessages = $connectedUser->getCustomer()->getMessages()->filter(fn($message) => !$message->getRead())->count();
         $principalAccount = $connectedUser->getCustomer()->getAccounts()->filter( fn ($account) => $account->getPrincipal())[0];
         $messages = $alerts =  [];
-        foreach($customer->getMessages() as $message){
+        $filteredData = $customer->getMessages()->toArray();
+        usort(
+            $filteredData,
+            fn($a, $b) => $b->getDate() <=> $a->getDate()
+        );
+        $messages = [];
+        foreach ($filteredData as $message) {
             $messages[] = [
-                'sender' => $message->getTitle(),
-                'initials' => strtoupper(substr($message->getLabel(),0,2)),
-                'subject' => $message->getSubTitle(),
-                'excerpt' => $message->getDescription(),
-                'date' =>  $message->getDate(),
-                'read' => $message->getRead(),
+                'sender'   => $message->getTitle(),
+                'initials' => strtoupper(substr($message->getLabel(), 0, 2)),
+                'subject'  => $message->getSubTitle(),
+                'excerpt'  => $message->getDescription(),
+                'date'     => $message->getDate(),
+                'read'     => $message->getRead(),
             ];
         }
         foreach($customer->getAlerts() as $alert){
