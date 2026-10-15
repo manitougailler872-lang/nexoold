@@ -86,8 +86,13 @@
                     <td class="py-3.5 text-center">
                         <span class="inline-flex text-nexo-600"
                             > <span class="w-1.5 h-1.5 rounded-full text-brand2"></span>
-                  <span class="px-2.5 py-1 rounded text-[12.5px] font-medium   {% if transaction['status'] == 'VALIDATED' %} bg-up/10 text-brand2 {% else %} bg-amber-100 text-amber-400 {% endif %} ">
-                      {{transaction['status']}}
+                  <span class="px-2.5 py-1 rounded text-[12.5px] font-medium
+                        {% if transaction['status'] == 'VALIDATED' %}
+                            bg-emerald-100 text-emerald-700
+                        {% else %}
+                            bg-amber-100 text-amber-700
+                        {% endif %}">
+                        {{ transaction['status'] }}
                     </span></span>
                     </td>
                 </tr>
