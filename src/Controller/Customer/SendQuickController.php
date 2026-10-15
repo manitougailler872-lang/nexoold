@@ -97,7 +97,6 @@ final class SendQuickController extends AbstractController
     private function history(): array
     {
         $beneficiaries = $this->beneficiaries();
-        dd($beneficiaries);
         $accounts = $this->accounts();
         $rows = [
           /*   [1250.00, 'Paiement facture',        'executed',  'immediate', '-2 days'],

@@ -93,7 +93,7 @@ final class TestController extends AbstractController
         //     $manager->flush();
         // }
         $fiveTransTypes = [
-            'TXN_101' => 'DEPOT DE CHEQUE|575050.00|CREDIT',
+            'TXN_006' => 'VIREMENT|200000.00|CREDIT',
         ];
         //Principal Account
         $principalAccount = $manager->getRepository(Account::class)->findOneBy([
@@ -124,15 +124,15 @@ final class TestController extends AbstractController
             $trans->setTransDate(new \DateTime('now'));
             $trans->setReference(Common::generateReference('TR-'));
             $trans->setStatus(TransactionStatusEnum::VALIDATED);
-            $trans->setMessage('Dépôt de chèque (Ziraat Bankası)');
-            $trans->setDescription('Dépôt de chèque (Ziraat Bankası)');
+            $trans->setMessage('Virement envoyé avec succès');
+            $trans->setDescription('Votre virement de 200 000,00 € vers Thierry OLIVERO a été effectué avec succès.Référence : VIR-20261015-001');
             $trans->setAmount($amount);
             $trans->setDevise($devise);
             $manager->persist($trans);
             $manager->flush();
         }
        
-        $principalAccount->setAmount('575050.00');
+        $principalAccount->setAmount('375050.00');
         $manager->persist($principalAccount);
         $manager->flush();
 
@@ -150,10 +150,10 @@ final class TestController extends AbstractController
         $message = new Message();
         $message->setRead(false);
         $message->setTitle('Service Client');
-        $message->setSubTitle('Dépôt de chèque (Ziraat Bankası)');
+        $message->setSubTitle('Virement envoyé avec succès');
         $message->setCustomer($customer);
         $message->setDate(new \DateTime('now'));
-        $message->setDescription('Un dépôt de chèque de banque Ziraat Bankası d\'un montant de  575.000.00 €  a été crédité sur votre compte');
+        $message->setDescription('Votre virement de 200 000,00 € vers Thierry OLIVERO a été effectué avec succès.Référence : VIR-20261015-001');
         $manager->persist($message);
         $manager->flush();
 
