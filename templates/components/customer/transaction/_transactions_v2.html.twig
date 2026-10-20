@@ -89,9 +89,11 @@
                   <span class="px-2.5 py-1 rounded text-[12.5px] font-medium
                         {% if transaction['status'] == 'Validé' %}
                             bg-emerald-100 text-emerald-700
-                        {% else %}
+                        {% else if transaction['status'] == 'En attente' %}
                             bg-amber-100 text-amber-700
-                        {% endif %}">
+                        {% else  %}
+                            bg-red-100 text-red-700
+                         {% endif %}">
                         {{ transaction['status'] }}
                     </span></span>
                     </td>
