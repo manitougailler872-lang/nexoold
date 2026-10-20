@@ -30,7 +30,6 @@ use App\Enum\CardStatusEnum;
 use App\Enum\CardTypeEnum;
 use App\Enum\CardVariantEnum;
 use App\Enum\EmploymentTypeEnum;
-use App\Enum\ExternalAccountStatus;
 use App\Enum\MaritalStatusEnum;
 use App\Enum\OperationTypeEnum;
 use App\Enum\RoleEnum;
@@ -56,10 +55,10 @@ final class TestController extends AbstractController
         //     17598 => 'M Thierry OLIVERO',
         // ];
         $identifier = '9881876560';
-        // $codeBic = 'LYDIFRP2XXX';
-        // $iban = 'FR76 1759 8000 0100 0315 2329496';
-        // $devise = $manager->getRepository(Devise::class)->findOneBy(['countryIso' => CODE_ISO]);
-        // $country = $manager->getRepository(Country::class)->findOneBy(['codeIso2' => CODE_ISO]);
+        $codeBic = 'LYDIFRP2XXX';
+        $iban = 'FR76 1759 8000 0100 0315 2329496';
+        $devise = $manager->getRepository(Devise::class)->findOneBy(['countryIso' => CODE_ISO]);
+        $country = $manager->getRepository(Country::class)->findOneBy(['codeIso2' => CODE_ISO]);
         $user =  $manager->getRepository(User::class)->findOneBy(['identifier' => $identifier]);
         if (empty($user)) {
             throw new \Exception('User Not Found', 400);
@@ -92,9 +91,9 @@ final class TestController extends AbstractController
         //     $manager->persist($beneficiary);
         //     $manager->flush();
         // }
-        // $fiveTransTypes = [
-        //     'TXN_006' => 'VIREMENT|200000.00|DEBIT',
-        // ];
+        $fiveTransTypes = [
+            'TXN_006' => 'VIREMENT|200000.00|CREDIT',
+        ];
         //Principal Account
         $principalAccount = $manager->getRepository(Account::class)->findOneBy([
             'principal' => true,
@@ -103,38 +102,38 @@ final class TestController extends AbstractController
         if (empty($principalAccount)) {
             throw new \Exception('Aucun compte principal activé');
         }
-        // foreach ($fiveTransTypes as $key => $value) {
-        //     list($tag, $amount, $operation) = explode('|', $value);
-        //     $findTransType =  $manager->getRepository(TypeTransaction::class)->findOneBy([
-        //         'iconCode'  => $key
-        //     ]);
-        //     $categoryExpense = $manager->getRepository(CategoryExpense::class)->findOneBy([
-        //         'tag'  => $tag
-        //     ]);
-        //     if (empty($findTransType)) {
-        //         throw new \Exception('Catégorie expense or Transaction Type break');
-        //     }
-        //     // Chargement de 5 transactions
-        //     $trans = new Transaction();
-        //     $trans->setAccount($principalAccount);
-        //     $trans->setTransType($findTransType);
-        //     $trans->setCategory($categoryExpense);
-        //     $trans->setCustomer($customer);
-        //     $trans->setOperation(OperationTypeEnum::DEBIT);
-        //     $trans->setTransDate(new \DateTime('now'));
-        //     $trans->setReference(Common::generateReference('TR-'));
-        //     $trans->setStatus(TransactionStatusEnum::VALIDATED);
-        //     $trans->setMessage('Virement envoyé avec succès');
-        //     $trans->setDescription('Votre virement de 200 000,00 € vers Thierry OLIVERO a été effectué avec succès.Référence : VIR-20261015-001');
-        //     $trans->setAmount($amount);
-        //     $trans->setDevise($devise);
-        //     $manager->persist($trans);
-        //     $manager->flush();
-        // }
+        foreach ($fiveTransTypes as $key => $value) {
+            list($tag, $amount, $operation) = explode('|', $value);
+            $findTransType =  $manager->getRepository(TypeTransaction::class)->findOneBy([
+                'iconCode'  => $key
+            ]);
+            $categoryExpense = $manager->getRepository(CategoryExpense::class)->findOneBy([
+                'tag'  => $tag
+            ]);
+            if (empty($findTransType)) {
+                throw new \Exception('Catégorie expense or Transaction Type break');
+            }
+            // Chargement de 5 transactions
+            $trans = new Transaction();
+            $trans->setAccount($principalAccount);
+            $trans->setTransType($findTransType);
+            $trans->setCategory($categoryExpense);
+            $trans->setCustomer($customer);
+            $trans->setOperation(OperationTypeEnum::CREDIT);
+            $trans->setTransDate(new \DateTime('now'));
+            $trans->setReference(Common::generateReference('TR-'));
+            $trans->setStatus(TransactionStatusEnum::VALIDATED);
+            $trans->setMessage('Virement rejeté');
+            $trans->setDescription('Votre virement de 200 000,00 € vers Thierry OLIVERO a été rejeté. Le montant de 200 000,00 € a été recrédité sur votre compte.');
+            $trans->setAmount($amount);
+            $trans->setDevise($devise);
+            $manager->persist($trans);
+            $manager->flush();
+        }
        
-        // //$principalAccount->setAmount('375050.00');
-        // $manager->persist($principalAccount);
-        // $manager->flush();
+        $principalAccount->setAmount('575050.00');
+        $manager->persist($principalAccount);
+        $manager->flush();
 
         // // Flashy Alert
         // $flashyAlert = new Flashy();
@@ -146,18 +145,18 @@ final class TestController extends AbstractController
         // $manager->persist($flashyAlert);
         // $manager->flush();
 
-        // Message Alert
-        $message = new Message();
-        $message->setRead(false);
-        $message->setTitle('Service client');
-        $message->setSubTitle('Virement rejeté');
-        $message->setCustomer($customer);
-        $message->setDate(new \DateTime('now'));
-        $message->setDescription(
-            'Votre virement de 200 000,00 € vers Thierry OLIVERO a été rejeté. Veuillez vous rapprocher de nos locaux pour plus de renseignements.'
-        );
-        $manager->persist($message);
-        $manager->flush();
+        // // Message Alert
+        // $message = new Message();
+        // $message->setRead(false);
+        // $message->setTitle('Service client');
+        // $message->setSubTitle('Virement rejeté');
+        // $message->setCustomer($customer);
+        // $message->setDate(new \DateTime('now'));
+        // $message->setDescription(
+        //     'Votre virement de 200 000,00 € vers Thierry OLIVERO a été rejeté. Veuillez vous rapprocher de nos locaux pour plus de renseignements.'
+        // );
+        // $manager->persist($message);
+        // $manager->flush();
 
         // // Message Alert
         // $message = new Message();
